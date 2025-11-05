@@ -80,7 +80,7 @@ export function getSshDirectory(): string {
 }
 
 // Get config directory with XDG support on Linux
-export function getConfigDirectory(appName: string = "github-switch"): string {
+export function getConfigDirectory(appName: string = "ghe"): string {
     if (platform.isWindows) {
         // Windows: Use %APPDATA%
         const appData =

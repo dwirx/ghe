@@ -15,7 +15,7 @@ function getPackageJson() {
     } catch (error) {
         // Fallback to hardcoded values if package.json can't be read
         return {
-            name: "ghux",
+            name: "ghe",
             version: "1.0.0",
         };
     }
@@ -113,7 +113,7 @@ function showUpdateNotification(update: UpdateInfo) {
         `${colors.secondary("pnpm add -g " + name)}`,
         `${colors.secondary("bun install -g " + name)}`,
         ``,
-        `${colors.text("Changelog:")} ${colors.accent("https://github.com/dwirx/ghux/releases")}`,
+        `${colors.text("Changelog:")} ${colors.accent("https://github.com/dwirx/ghe/releases")}`,
     ].join("\n");
 
     showBox(message, {

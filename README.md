@@ -1,4 +1,4 @@
-# 🎯 GhUx - Beautiful GitHub Account Switcher
+# 🎯 GHE - Beautiful GitHub Account Switcher
 
 ## 🚀 Quick Start
 
@@ -6,18 +6,18 @@
 
 ```bash
 # Start interactive mode
-ghux
+ghe
 
 # Clone repository with account selection
-ghux https://github.com/user/repo.git
-ghux git@github.com:user/repo.git
-ghux https://github.com/user/repo.git myproject
+ghe https://github.com/user/repo.git
+ghe git@github.com:user/repo.git
+ghe https://github.com/user/repo.git myproject
 
 # Check version
-ghux --version
+ghe --version
 
 # Get help
-ghux --help
+ghe --help
 ```
 
 This will launch the interactive menu where you can:
@@ -29,7 +29,7 @@ This will launch the interactive menu where you can:
 
 ### First Time Setup
 
-1. Run `ghux` in your terminal
+1. Run `ghe` in your terminal
 2. Choose "➕ Add account"
 3. Enter your GitHub account details
 4. Choose authentication method (SSH or Token)
@@ -38,7 +38,7 @@ This will launch the interactive menu where you can:
 ### Switching Accounts
 
 1. Navigate to any Git repository
-2. Run `ghux`
+2. Run `ghe`
 3. Choose "🔄 Switch account for current repo"
 4. Select your desired account
 5. Done! Your repository now uses the selected account">
@@ -56,21 +56,21 @@ This will launch the interactive menu where you can:
 ### 🚀 One-line Install (Recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/dwirx/ghux/main/install-curl.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dwirx/ghe/main/install-curl.sh | bash
 ```
 
 ### 📦 Package Managers
 
 **NPM/Yarn/PNPM**
 ```bash
-npm install -g ghux
-yarn global add ghux
-pnpm add -g ghux
+npm install -g ghe
+yarn global add ghe
+pnpm add -g ghe
 ```
 
 **Bun (Recommended)**
 ```bash
-bun install -g ghux
+bun install -g ghe
 ```
 
 > 🐚 **Shell Compatibility**: Works with bash, zsh, fish, and other POSIX-compatible shells. Automatically detects and uses the best runtime (Bun → Node.js → fallback).
@@ -79,9 +79,9 @@ bun install -g ghux
 
 **Windows (PowerShell)**
 ```powershell
-npm install -g ghux
+npm install -g ghe
 # Or with Bun
-bun install -g ghux
+bun install -g ghe
 
 # Run Windows compatibility test
 powershell -File test-windows.ps1
@@ -89,53 +89,53 @@ powershell -File test-windows.ps1
 
 **Homebrew (macOS/Linux)**
 ```bash
-brew tap dwirx/ghux
+brew tap dwirx/ghe
 ```
 
 **Arch Linux (AUR)**
 ```bash
-yay -S ghux-bin
-paru -S ghux-bin
+yay -S ghe-bin
+paru -S ghe-bin
 ```
 
 **Scoop (Windows)**
 ```powershell
-scoop bucket add dwirx https://github.com/dwirx/scoop-ghux
-scoop install ghux
+scoop bucket add dwirx https://github.com/dwirx/scoop-ghe
+scoop install ghe
 ```
 
 ### 📥 Manual Download
 
-Download pre-built binaries from [GitHub Releases](https://github.com/dwirx/ghux/releases/latest):
+Download pre-built binaries from [GitHub Releases](https://github.com/dwirx/ghe/releases/latest):
 
-- **Linux x64**: `ghux`
-- **Linux ARM64**: `ghux-linux-arm64`  
-- **Windows x64**: `ghux.exe`
-- **macOS Intel**: `ghux-macos`
-- **macOS Apple Silicon**: `ghux-macos-arm64`
+- **Linux x64**: `ghe`
+- **Linux ARM64**: `ghe-linux-arm64`  
+- **Windows x64**: `ghe.exe`
+- **macOS Intel**: `ghe-macos`
+- **macOS Apple Silicon**: `ghe-macos-arm64`
 
 ```bash
 # Make executable and move to PATH
-chmod +x ghux
-sudo mv ghux /usr/local/bin/
+chmod +x ghe
+sudo mv ghe /usr/local/bin/
 ```
 
 > 📋 See [INSTALL.md](INSTALL.md) for all installation methods and troubleshooting.
 
 ### 📥 Manual Download
 
-Download pre-built binaries from [GitHub Releases](https://github.com/dwirx/ghux/releases/latest):
+Download pre-built binaries from [GitHub Releases](https://github.com/dwirx/ghe/releases/latest):
 
-- **Linux x64**: `ghux`
-- **Linux ARM64**: `ghux-linux-arm64`
-- **Windows x64**: `ghux.exe`
-- **macOS Intel**: `ghux-macos`
-- **macOS Apple Silicon**: `ghux-macos-arm64`
+- **Linux x64**: `ghe`
+- **Linux ARM64**: `ghe-linux-arm64`
+- **Windows x64**: `ghe.exe`
+- **macOS Intel**: `ghe-macos`
+- **macOS Apple Silicon**: `ghe-macos-arm64`
 
 ```bash
 # Make executable and move to PATH
-chmod +x ghux
-sudo mv ghux /usr/local/bin/
+chmod +x ghe
+sudo mv ghe /usr/local/bin/
 ```
 
 > 📋 See [INSTALL.md](INSTALL.md) for all installation methods and troubleshooting.
@@ -183,55 +183,55 @@ sudo mv ghux /usr/local/bin/
 **Download from any URL:**
 ```bash
 # Download a PDF
-ghux dl https://example.com/document.pdf
+ghe dl https://example.com/document.pdf
 
 # Download Linux ISO
-ghux dl https://releases.ubuntu.com/22.04/ubuntu.iso
+ghe dl https://releases.ubuntu.com/22.04/ubuntu.iso
 
 # Download installer
-ghux dl https://omarchy.org/install -o install.sh
+ghe dl https://omarchy.org/install -o install.sh
 
 # Download with custom name and directory
-ghux dl https://example.com/file.pdf -o my-document.pdf -d ~/Downloads/
+ghe dl https://example.com/file.pdf -o my-document.pdf -d ~/Downloads/
 ```
 
 **Download from Git repositories:**
 ```bash
 # Download single file from GitHub
-ghux dl https://github.com/user/repo/blob/main/README.md
+ghe dl https://github.com/user/repo/blob/main/README.md
 
 # Download from different branch
-ghux dl github.com/user/repo/file.md --branch develop
+ghe dl github.com/user/repo/file.md --branch develop
 
 # Download all markdown files
-ghux dl github.com/user/repo --pattern "*.md"
+ghe dl github.com/user/repo --pattern "*.md"
 
 # Download entire directory
-ghux dl-dir https://github.com/user/repo/tree/main/src
+ghe dl-dir https://github.com/user/repo/tree/main/src
 
 # Download latest release
-ghux dl-release github.com/user/repo
+ghe dl-release github.com/user/repo
 ```
 
 **Advanced usage:**
 ```bash
 # Download with authentication
-ghux dl https://api.example.com/file.pdf -H "Authorization: Bearer TOKEN"
+ghe dl https://api.example.com/file.pdf -H "Authorization: Bearer TOKEN"
 
 # Download multiple files
-ghux dl url1 url2 url3
+ghe dl url1 url2 url3
 
 # Download from file list
-ghux dl -f urls.txt -d ~/Downloads/
+ghe dl -f urls.txt -d ~/Downloads/
 
 # Preview before download
-ghux dl https://example.com/large-file.iso --info
+ghe dl https://example.com/large-file.iso --info
 ```
 
 #### Alternative Command
 ```bash
-# ghux dlx is an alias for explicit universal download
-ghux dlx <url>  # Same as 'ghux dl', works identically
+# ghe dlx is an alias for explicit universal download
+ghe dlx <url>  # Same as 'ghe dl', works identically
 ```
 
 📖 **Documentation:**
@@ -239,7 +239,7 @@ ghux dlx <url>  # Same as 'ghux dl', works identically
 - [DLX_UNIVERSAL_DOWNLOAD.md](DLX_UNIVERSAL_DOWNLOAD.md) - Complete universal download guide
 - [DOWNLOAD_FEATURE.md](DOWNLOAD_FEATURE.md) - Advanced Git repository features
 
-> 📋 **Update Notifications**: GhUx automatically checks for updates once per day and shows a notification when a new version is available. You can also manually check for updates from the main menu. See [UPDATE_CHECKER.md](UPDATE_CHECKER.md) for details.
+> 📋 **Update Notifications**: GHE automatically checks for updates once per day and shows a notification when a new version is available. You can also manually check for updates from the main menu. See [UPDATE_CHECKER.md](UPDATE_CHECKER.md) for details.
 
 ## 🛠️ Development Setup
 
@@ -256,8 +256,8 @@ ghux dlx <url>  # Same as 'ghux dl', works identically
 
 ```bash
 # Clone repository
-git clone https://github.com/dwirx/ghux.git
-cd ghux
+git clone https://github.com/dwirx/ghe.git
+cd ghe
 
 # Install dependencies
 bun install
@@ -292,22 +292,22 @@ Anda akan melihat menu interaktif di terminal.
 
 ## 🚀 Clone Repository with Account Selection
 
-GhUx dapat langsung clone repository dengan pemilihan account secara otomatis:
+GHE dapat langsung clone repository dengan pemilihan account secara otomatis:
 
 ```bash
 # Clone dengan HTTPS
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 
 # Clone dengan SSH
-ghux git@github.com:user/repo.git
+ghe git@github.com:user/repo.git
 
 # Clone ke direktori tertentu
-ghux https://github.com/user/repo.git myproject
+ghe https://github.com/user/repo.git myproject
 
 # Mendukung berbagai format URL
-ghux https://github.com/user/repo     # Tanpa .git
-ghux git@github.com:user/repo         # SSH tanpa .git
-ghux https://github.com/user/repo#    # Dengan trailing #
+ghe https://github.com/user/repo     # Tanpa .git
+ghe git@github.com:user/repo         # SSH tanpa .git
+ghe https://github.com/user/repo#    # Dengan trailing #
 ```
 
 ### Cara Kerja Clone dengan Account
@@ -320,7 +320,7 @@ ghux https://github.com/user/repo#    # Dengan trailing #
 6. **Set Git Identity** - Otomatis set `user.name` dan `user.email` di repo yang di-clone
 7. **Log Activity** - Catat aktivitas clone untuk tracking
 
-### Keuntungan Clone dengan GhUx
+### Keuntungan Clone dengan GHE
 
 - ✅ **Tidak perlu setup manual** - Auth sudah di-setup sebelum clone
 - ✅ **Git identity otomatis** - `user.name` dan `user.email` langsung ter-set
@@ -330,15 +330,15 @@ ghux https://github.com/user/repo#    # Dengan trailing #
 
 ### Clone Tanpa Account
 
-Jika belum ada account terkonfigurasi, GhUx tetap bisa clone repository seperti `git clone` biasa:
+Jika belum ada account terkonfigurasi, GHE tetap bisa clone repository seperti `git clone` biasa:
 
 ```bash
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 # > No accounts configured. Cloning without account setup...
 # > Proceed with clone? (Y/n)
 ```
 
-Setelah clone, Anda bisa masuk ke direktori tersebut dan jalankan `ghux` untuk mengatur account.
+Setelah clone, Anda bisa masuk ke direktori tersebut dan jalankan `ghe` untuk mengatur account.
 
 ## Konsep Singkat
 
@@ -459,8 +459,8 @@ Host github.com
 
 Contributions are welcome! Please check our [Contributing Guidelines](CONTRIBUTING.md) and feel free to:
 
-- Report bugs by opening an [issue](https://github.com/dwirx/ghux/issues)
-- Request features through [discussions](https://github.com/dwirx/ghux/discussions)
+- Report bugs by opening an [issue](https://github.com/dwirx/ghe/issues)
+- Request features through [discussions](https://github.com/dwirx/ghe/discussions)
 - Submit pull requests with improvements
 
 ## 📄 License
@@ -479,6 +479,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ by [bangunx](https://github.com/bangunx)**
 
-⭐ If you find GhUx useful, please give it a star on GitHub!
+⭐ If you find GHE useful, please give it a star on GitHub!
 
 </div>

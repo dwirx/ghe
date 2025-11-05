@@ -47,10 +47,10 @@ fi
 # 2. Check package name
 echo -e "${BLUE}[2/10]${NC} Checking package name..."
 PKG_NAME=$(node -p "require('./package.json').name" 2>/dev/null || echo "")
-if [ "$PKG_NAME" = "ghux" ]; then
-    check_item "Package name is 'ghux'" "PASS"
+if [ "$PKG_NAME" = "ghe" ]; then
+    check_item "Package name is 'ghe'" "PASS"
 else
-    check_item "Package name is 'ghux' (found: $PKG_NAME)" "FAIL"
+    check_item "Package name is 'ghe' (found: $PKG_NAME)" "FAIL"
 fi
 
 # 3. Check version consistency
@@ -68,7 +68,7 @@ fi
 # 4. Check repository URL
 echo -e "${BLUE}[4/10]${NC} Checking repository URL..."
 REPO_URL=$(node -p "require('./package.json').repository?.url" 2>/dev/null || echo "")
-if [[ "$REPO_URL" == *"dwirx/ghux"* ]]; then
+if [[ "$REPO_URL" == *"dwirx/ghe"* ]]; then
     check_item "Repository URL correct" "PASS"
 else
     check_item "Repository URL (found: $REPO_URL)" "FAIL"
@@ -77,8 +77,8 @@ fi
 # 5. Check binary name
 echo -e "${BLUE}[5/10]${NC} Checking binary configuration..."
 BIN_NAME=$(node -p "Object.keys(require('./package.json').bin || {})[0]" 2>/dev/null || echo "")
-if [ "$BIN_NAME" = "ghux" ]; then
-    check_item "Binary name is 'ghux'" "PASS"
+if [ "$BIN_NAME" = "ghe" ]; then
+    check_item "Binary name is 'ghe'" "PASS"
 else
     check_item "Binary name (found: $BIN_NAME)" "FAIL"
 fi
@@ -126,7 +126,7 @@ fi
 # 10. Check if version already published
 echo -e "${BLUE}[10/10]${NC} Checking NPM registry..."
 if command -v npm &> /dev/null; then
-    if npm view ghux@$VERSION_FILE version &> /dev/null; then
+    if npm view ghe@$VERSION_FILE version &> /dev/null; then
         check_item "Version $VERSION_FILE not yet on NPM" "FAIL"
         echo -e "${YELLOW}  → Version already published, bump version!${NC}"
     else
@@ -169,14 +169,14 @@ if [ $CHECKS_FAILED -eq 0 ]; then
     echo "  npm publish --access public"
     echo ""
     echo -e "${YELLOW}Method 4: GitHub Actions Manual Trigger${NC}"
-    echo "  1. Go to: https://github.com/dwirx/ghux/actions"
-    echo "  2. Select 'Publish ghux to npm'"
+    echo "  1. Go to: https://github.com/dwirx/ghe/actions"
+    echo "  2. Select 'Publish ghe to npm'"
     echo "  3. Click 'Run workflow'"
     echo ""
     echo "After publish, verify with:"
-    echo "  npm view ghux"
-    echo "  npm install -g ghux"
-    echo "  ghux --version"
+    echo "  npm view ghe"
+    echo "  npm install -g ghe"
+    echo "  ghe --version"
     echo ""
     exit 0
 else

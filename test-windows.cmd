@@ -1,11 +1,11 @@
 @echo off
-REM Windows Compatibility Test Script for GhSwitch (ghux)
+REM Windows Compatibility Test Script for GhSwitch (ghe)
 REM Compatible with Windows Command Prompt (CMD)
 
 setlocal enabledelayedexpansion
 
 echo ================================================================
-echo   GhSwitch (ghux) - Windows Compatibility Test Suite
+echo   GhSwitch (ghe) - Windows Compatibility Test Suite
 echo ================================================================
 echo.
 
@@ -177,7 +177,7 @@ if !errorlevel! equ 0 (
 )
 
 echo   Testing: Set User-Only Permissions...
-set TEST_FILE=%TEMP%\ghux-test-permissions.txt
+set TEST_FILE=%TEMP%\ghe-test-permissions.txt
 echo test > "!TEST_FILE!" 2>nul
 if exist "!TEST_FILE!" (
     icacls "!TEST_FILE!" /inheritance:r >nul 2>&1
@@ -266,8 +266,8 @@ if exist "!SSH_CONFIG!" (
 where ssh-keygen >nul 2>&1
 if !errorlevel! equ 0 (
     echo   Testing: SSH Key Generation...
-    set TEST_KEY=%TEMP%\ghux-test-key
-    ssh-keygen -t ed25519 -f "!TEST_KEY!" -N "" -C "test@ghux" >nul 2>&1
+    set TEST_KEY=%TEMP%\ghe-test-key
+    ssh-keygen -t ed25519 -f "!TEST_KEY!" -N "" -C "test@ghe" >nul 2>&1
     if exist "!TEST_KEY!" (
         echo     [OK] ssh-keygen works
         set /a TESTS_PASSED+=1
@@ -285,8 +285,8 @@ echo.
 echo 9. GhSwitch Installation
 echo ---------------------------------------------------------
 
-echo   Testing: ghux Command...
-where ghux >nul 2>&1
+echo   Testing: ghe Command...
+where ghe >nul 2>&1
 if !errorlevel! equ 0 (
     echo     [OK] Installed globally
     set /a TESTS_PASSED+=1
@@ -341,9 +341,9 @@ if !errorlevel! neq 0 (
     echo   * Install OpenSSH Client via Windows Settings
 )
 
-where ghux >nul 2>&1
+where ghe >nul 2>&1
 if !errorlevel! neq 0 (
-    echo   * Install GhSwitch: npm install -g ghux
+    echo   * Install GhSwitch: npm install -g ghe
 )
 
 if !SUCCESS_RATE! geq 90 (

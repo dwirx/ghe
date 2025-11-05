@@ -1,6 +1,32 @@
 # Changelog
 
-All notable changes to GhUx will be documented in this file.
+All notable changes to GHE will be documented in this file.
+
+## [v1.0.8] - 2025-11-05
+
+### 🎨 Rebranding
+
+**BREAKING CHANGES**: Complete rebranding from GhUx/ghux/ghup to **GHE**
+
+#### What Changed
+- **Package Name**: `ghux` → `ghe`
+- **Binary Name**: `ghux` → `ghe`
+- **Config Directory**: `~/.config/ghup/` → `~/.config/ghe/`
+- **Repository**: `dwirx/ghux` → `dwirx/ghe`
+- **Command Usage**: All commands now use `ghe` instead of `ghux`
+
+#### Migration Notes
+- Config files from old locations (`~/.config/ghup/` or `~/.config/github-switch/`) are automatically migrated to `~/.config/ghe/` on first run
+- SSH keys and git configurations remain unchanged
+- Update your aliases and scripts to use `ghe` instead of `ghux`
+
+#### Package Manager Updates
+- NPM: `npm install -g ghe` (previously `ghux`)
+- Homebrew: `brew tap dwirx/ghe` (previously `dwirx/ghux`)
+- Scoop: Repository updated to `dwirx/scoop-ghe`
+- AUR: Package renamed to `ghe-bin` (previously `ghux-bin`)
+
+---
 
 ## [v1.0.7] - 2025-01-04
 
@@ -34,17 +60,17 @@ All notable changes to GhUx will be documented in this file.
 ### 🎉 Major Feature: Universal Download with Smart Auto-Detection
 
 Added comprehensive file download capability with ONE powerful command that does it all:
-- **`ghux dl`** - Universal downloader with SMART AUTO-DETECTION
+- **`ghe dl`** - Universal downloader with SMART AUTO-DETECTION
   - Automatically detects Git repositories (GitHub, GitLab, Bitbucket)
   - Automatically handles regular URLs (PDFs, ISOs, installers, etc.)
   - No need to think - just paste any URL!
-- **`ghux dlx`** - Alternative explicit command (works identically to `dl`)
+- **`ghe dlx`** - Alternative explicit command (works identically to `dl`)
 
 ### ✨ New Features
 
 #### 🎯 Smart Auto-Detection
 - **Intelligent URL Detection**: Automatically detects if URL is a Git repository or regular file
-- **No Manual Selection**: Just use `ghux dl` for everything - it figures it out!
+- **No Manual Selection**: Just use `ghe dl` for everything - it figures it out!
 - **Seamless Switching**: Git-specific options (branch, pattern) only apply to Git repos
 - **Universal Options**: Authentication headers, custom user agents work for all URLs
 
@@ -52,11 +78,11 @@ Added comprehensive file download capability with ONE powerful command that does
 - **Download ANY File**: PDFs, ISOs, installers, media files, archives, scripts from ANY URL
 - **Like curl/wget**: But with progress bars, better UX, and interactive prompts
 - **Real-World Examples**:
-  - `ghux dl https://omarchy.org/install`
-  - `ghux dl https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf`
-  - `ghux dl https://iso.omarchy.org/omarchy-3.1.5.iso`
-  - `ghux dl https://releases.ubuntu.com/22.04/ubuntu.iso`
-  - `ghux dl https://github.com/user/repo/blob/main/file.md`
+  - `ghe dl https://omarchy.org/install`
+  - `ghe dl https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf`
+  - `ghe dl https://iso.omarchy.org/omarchy-3.1.5.iso`
+  - `ghe dl https://releases.ubuntu.com/22.04/ubuntu.iso`
+  - `ghe dl https://github.com/user/repo/blob/main/file.md`
 - **Progress Tracking**: Real-time download progress with speed indicator
 - **Custom Headers**: Add authentication headers, API keys, custom user agents
 - **Batch Download**: Download multiple URLs or from file lists
@@ -102,37 +128,37 @@ Added comprehensive file download capability with ONE powerful command that does
 
 ```bash
 # Universal download (ONE COMMAND FOR EVERYTHING!)
-ghux dl <url>                           # Download from ANY URL (auto-detects Git or regular)
-ghux dl <url> -o filename               # Custom filename
-ghux dl <url> -d ~/Downloads/           # Custom directory
-ghux dl -f urls.txt                     # Batch download from file list
-ghux get <url>                          # Alias for dl
-ghux fetch-file <url>                   # Alias for dl
-ghux dlx <url>                          # Alternative (works identically to dl)
+ghe dl <url>                           # Download from ANY URL (auto-detects Git or regular)
+ghe dl <url> -o filename               # Custom filename
+ghe dl <url> -d ~/Downloads/           # Custom directory
+ghe dl -f urls.txt                     # Batch download from file list
+ghe get <url>                          # Alias for dl
+ghe fetch-file <url>                   # Alias for dl
+ghe dlx <url>                          # Alternative (works identically to dl)
 
 # Download with options
-ghux dl <url> -o custom.txt             # Custom filename
-ghux dl <url> -d ~/Downloads/           # Custom directory
-ghux dl <url> --branch develop          # From specific branch
-ghux dl <url> --info                    # Show info first
+ghe dl <url> -o custom.txt             # Custom filename
+ghe dl <url> -d ~/Downloads/           # Custom directory
+ghe dl <url> --branch develop          # From specific branch
+ghe dl <url> --info                    # Show info first
 
 # Multiple files
-ghux dl <url1> <url2> <url3>            # Multiple URLs
-ghux dl -f filelist.txt                 # From file list
+ghe dl <url1> <url2> <url3>            # Multiple URLs
+ghe dl -f filelist.txt                 # From file list
 
 # Directory download
-ghux dl-dir <url>                       # Download directory
-ghux dl-dir <url> --depth 2             # Limit depth
-ghux dl-dir <url> --pattern "*.md"      # With pattern
+ghe dl-dir <url>                       # Download directory
+ghe dl-dir <url> --depth 2             # Limit depth
+ghe dl-dir <url> --pattern "*.md"      # With pattern
 
 # Pattern download
-ghux dl <repo-url> --pattern "*.js"     # All JS files
-ghux dl <repo-url> --pattern "src/**/*" --exclude "test/*"
+ghe dl <repo-url> --pattern "*.js"     # All JS files
+ghe dl <repo-url> --pattern "src/**/*" --exclude "test/*"
 
 # Release download
-ghux dl-release github.com/user/repo    # Latest release
-ghux dl-release <repo> --version v1.0.0 # Specific version
-ghux dl-release <repo> --asset binary   # Filter by name
+ghe dl-release github.com/user/repo    # Latest release
+ghe dl-release <repo> --version v1.0.0 # Specific version
+ghe dl-release <repo> --asset binary   # Filter by name
 ```
 
 ### 📋 Download Options
@@ -168,7 +194,7 @@ ghux dl-release <repo> --asset binary   # Filter by name
   - `src/download.ts` - Smart download with auto-detection (unified dl/dlx)
   - `src/utils/downloader.ts` - Download utilities with progress tracking
 - **Smart Auto-Detection**: Automatically detects Git repository URLs vs regular URLs
-- **Unified Command**: `ghux dl` handles both Git repos and any URL seamlessly
+- **Unified Command**: `ghe dl` handles both Git repos and any URL seamlessly
 - **Enhanced URL Support**: Smart parsing of various Git hosting URL formats
 - **API Integration**: Uses GitHub API for directory listings and release info
 - **Retry Logic**: Automatic retry with exponential backoff for failed downloads
@@ -210,7 +236,7 @@ ghux dl-release <repo> --asset binary   # Filter by name
 
 ### 🎉 Major Feature Update
 
-Enhanced GhUx with account health monitoring, activity logging, CLI shortcuts, and multi-platform support.
+Enhanced GHE with account health monitoring, activity logging, CLI shortcuts, and multi-platform support.
 
 ### ✨ New Features
 
@@ -230,16 +256,16 @@ Enhanced GhUx with account health monitoring, activity logging, CLI shortcuts, a
 
 #### ⚡ CLI Shortcuts
 - **Direct Commands**: Run operations without interactive menu
-  - `ghux switch <account>` - Switch to specific account by name
-  - `ghux quick` - Quick switch menu with recent accounts starred
-  - `ghux status` - Show current repository status and active account
-  - `ghux list` - List all configured accounts
-  - `ghux health` - Run health check on all accounts
-  - `ghux log` - View activity log and statistics
+  - `ghe switch <account>` - Switch to specific account by name
+  - `ghe quick` - Quick switch menu with recent accounts starred
+  - `ghe status` - Show current repository status and active account
+  - `ghe list` - List all configured accounts
+  - `ghe health` - Run health check on all accounts
+  - `ghe log` - View activity log and statistics
 
 #### 🚀 Git Shortcuts (Shove Commands)
-- **ghux shove <message>**: Add all files, commit with message, confirm before push
-- **ghux shovenc**: Add all files, commit with empty message, confirm before push
+- **ghe shove <message>**: Add all files, commit with message, confirm before push
+- **ghe shovenc**: Add all files, commit with empty message, confirm before push
 - **Confirmation**: Always asks before pushing to prevent accidents
 - **Activity Logging**: Automatically logs push operations
 
@@ -259,13 +285,13 @@ Enhanced GhUx with account health monitoring, activity logging, CLI shortcuts, a
 
 ### 📊 New Commands
 ```bash
-ghux switch work          # Direct switch to account
-ghux quick                # Quick switch to recent account
-ghux status               # Show current repo status
-ghux shove "fix: bug"     # Add, commit, and push
-ghux shovenc              # Add, commit (no msg), and push
-ghux health               # Check all accounts health
-ghux log                  # View activity history
+ghe switch work          # Direct switch to account
+ghe quick                # Quick switch to recent account
+ghe status               # Show current repo status
+ghe shove "fix: bug"     # Add, commit, and push
+ghe shovenc              # Add, commit (no msg), and push
+ghe health               # Check all accounts health
+ghe log                  # View activity history
 ```
 
 ### 🔧 Platform-Aware SSH Fixes
@@ -313,7 +339,7 @@ ghux log                  # View activity history
 
 ### 🎉 Initial Release
 
-The first official release of **GhUx** (formerly GhUp) - a beautiful GitHub account switcher for managing multiple GitHub accounts per repository.
+The first official release of **GHE** (formerly GhUp) - a beautiful GitHub account switcher for managing multiple GitHub accounts per repository.
 
 ### ✨ Core Features
 - **Beautiful Terminal UI**: Charm-inspired interface with colors, gradients, and animations
@@ -361,7 +387,7 @@ The first official release of **GhUx** (formerly GhUp) - a beautiful GitHub acco
 - **Automatic Updates**: GitHub Actions workflows for releases and NPM publishing
 
 ### 📦 Distribution
-- **NPM Package**: `npm install -g ghux`
+- **NPM Package**: `npm install -g ghe`
 - **Pre-built Binaries**: Available for all major platforms
 - **GitHub Releases**: Automated release workflow with checksums
 - **Multiple Install Methods**: One-line installer, package managers, manual download

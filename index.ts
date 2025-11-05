@@ -61,17 +61,17 @@ if (args.length > 0) {
 
         if (urls.length === 0) {
             console.error("Error: No URL specified");
-            console.log("Usage: ghux dlx <url> [options]");
+            console.log("Usage: ghe dlx <url> [options]");
             console.log("");
             console.log("Examples:");
-            console.log("  ghux dlx https://example.com/file.pdf");
+            console.log("  ghe dlx https://example.com/file.pdf");
             console.log(
-                "  ghux dlx https://example.com/installer.sh -o install.sh",
+                "  ghe dlx https://example.com/installer.sh -o install.sh",
             );
             console.log(
-                "  ghux dlx https://releases.ubuntu.com/22.04/ubuntu.iso -d ~/Downloads/",
+                "  ghe dlx https://releases.ubuntu.com/22.04/ubuntu.iso -d ~/Downloads/",
             );
-            console.log("  ghux dlx url1 url2 url3  # Multiple downloads");
+            console.log("  ghe dlx url1 url2 url3  # Multiple downloads");
             process.exit(1);
         }
 
@@ -152,15 +152,15 @@ if (args.length > 0) {
 
         if (urls.length === 0) {
             console.error("Error: No URL specified");
-            console.log("Usage: ghux dl <url> [options]");
+            console.log("Usage: ghe dl <url> [options]");
             console.log("");
             console.log("Download from Git repositories OR any URL:");
             console.log(
-                "  ghux dl https://github.com/user/repo/blob/main/file.md",
+                "  ghe dl https://github.com/user/repo/blob/main/file.md",
             );
-            console.log("  ghux dl https://example.com/document.pdf");
+            console.log("  ghe dl https://example.com/document.pdf");
             console.log(
-                "  ghux dl https://releases.ubuntu.com/22.04/ubuntu.iso",
+                "  ghe dl https://releases.ubuntu.com/22.04/ubuntu.iso",
             );
             process.exit(1);
         }
@@ -209,7 +209,7 @@ if (args.length > 0) {
 
         if (!url) {
             console.error("Error: No URL specified");
-            console.log("Usage: ghux dl-dir <url> [options]");
+            console.log("Usage: ghe dl-dir <url> [options]");
             process.exit(1);
         }
 
@@ -247,7 +247,7 @@ if (args.length > 0) {
 
         if (!url) {
             console.error("Error: No URL specified");
-            console.log("Usage: ghux dl-release <repo-url> [options]");
+            console.log("Usage: ghe dl-release <repo-url> [options]");
             process.exit(1);
         }
 
@@ -263,7 +263,7 @@ if (args.length > 0) {
             command.startsWith("git@") ||
             command.startsWith("ssh://"))
     ) {
-        // ghux <repo-url> [target-dir]
+        // ghe <repo-url> [target-dir]
         const { cloneRepositoryFlow } = await import("./src/flows");
         const repoUrl = command;
         const targetDir = args[1]; // optional
@@ -273,7 +273,7 @@ if (args.length > 0) {
 
     // CLI Shortcuts
     if (command === "switch" && args.length > 1) {
-        // ghux switch <account-name>
+        // ghe switch <account-name>
         const { switchToAccount } = await import("./src/shortcuts");
         const accountName = args[1];
         if (accountName) {
@@ -283,28 +283,28 @@ if (args.length > 0) {
     }
 
     if (command === "quick") {
-        // ghux quick - quick switch menu
+        // ghe quick - quick switch menu
         const { quickSwitch } = await import("./src/shortcuts");
         await quickSwitch();
         process.exit(0);
     }
 
     if (command === "status") {
-        // ghux status - show current repo status
+        // ghe status - show current repo status
         const { showStatus } = await import("./src/shortcuts");
         await showStatus();
         process.exit(0);
     }
 
     if (command === "list") {
-        // ghux list - list all accounts
+        // ghe list - list all accounts
         const { listAccounts } = await import("./src/shortcuts");
         await listAccounts();
         process.exit(0);
     }
 
     if (command === "shove" && args.length > 1) {
-        // ghux shove <message> - add, commit with message, confirm push
+        // ghe shove <message> - add, commit with message, confirm push
         const { shove } = await import("./src/shortcuts");
         const message = args.slice(1).join(" ");
         await shove(message);
@@ -312,21 +312,21 @@ if (args.length > 0) {
     }
 
     if (command === "shovenc") {
-        // ghux shovenc - add, commit with empty message, confirm push
+        // ghe shovenc - add, commit with empty message, confirm push
         const { shoveNoCommit } = await import("./src/shortcuts");
         await shoveNoCommit();
         process.exit(0);
     }
 
     if (command === "health") {
-        // ghux health - check health of all accounts
+        // ghe health - check health of all accounts
         const { healthCheckFlow } = await import("./src/flows");
         await healthCheckFlow();
         process.exit(0);
     }
 
     if (command === "log") {
-        // ghux log - show activity log
+        // ghe log - show activity log
         const { showActivityLogFlow } = await import("./src/flows");
         await showActivityLogFlow();
         process.exit(0);

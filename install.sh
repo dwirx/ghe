@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# GhUp Installation Script
+# GHE Installation Script
 # Downloads and installs the latest release
 
 set -e
@@ -15,7 +15,7 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # GitHub repository
-REPO="bangunx/ghup"
+REPO="bangunx/ghe"
 INSTALL_DIR="/usr/local/bin"
 
 # Detect platform
@@ -27,10 +27,10 @@ detect_platform() {
         linux*)
             case "$arch" in
                 x86_64|amd64)
-                    echo "ghup"
+                    echo "ghe"
                     ;;
                 aarch64|arm64)
-                    echo "ghup-linux-arm64"
+                    echo "ghe-linux-arm64"
                     ;;
                 *)
                     echo "Unsupported architecture: $arch" >&2
@@ -41,10 +41,10 @@ detect_platform() {
         darwin*)
             case "$arch" in
                 x86_64|amd64)
-                    echo "ghup-macos"
+                    echo "ghe-macos"
                     ;;
                 arm64)
-                    echo "ghup-macos-arm64"
+                    echo "ghe-macos-arm64"
                     ;;
                 *)
                     echo "Unsupported architecture: $arch" >&2
@@ -53,7 +53,7 @@ detect_platform() {
             esac
             ;;
         msys*|mingw*|cygwin*)
-            echo "ghup.exe"
+            echo "ghe.exe"
             ;;
         *)
             echo "Unsupported operating system: $os" >&2
@@ -80,7 +80,7 @@ print_warning() {
 }
 
 # Main installation function
-install_ghup() {
+install_ghe() {
     echo -e "${PURPLE}"
     echo "  ██████╗ ██╗  ██╗███████╗██╗    ██╗██╗████████╗ ██████╗██╗  ██╗"
     echo "  ██╔════╝ ██║  ██║██╔════╝██║    ██║██║╚══██╔══╝██╔════╝██║  ██║"
@@ -140,14 +140,14 @@ install_ghup() {
     # Install binary
     if [ -w "$INSTALL_DIR" ] || [ "$(id -u)" = "0" ]; then
         print_status "Installing to $INSTALL_DIR..."
-        cp "$temp_file" "$INSTALL_DIR/ghup"
-        print_success "GhUp installed successfully!"
+        cp "$temp_file" "$INSTALL_DIR/ghe"
+        print_success "GHE installed successfully!"
     else
         print_warning "No write permission to $INSTALL_DIR"
         print_status "Installing to ~/.local/bin..."
         mkdir -p ~/.local/bin
-        cp "$temp_file" ~/.local/bin/ghup
-        print_success "GhUp installed to ~/.local/bin/ghup"
+        cp "$temp_file" ~/.local/bin/ghe
+        print_success "GHE installed to ~/.local/bin/ghe"
         print_warning "Make sure ~/.local/bin is in your PATH"
         echo "  Add this to your shell profile:"
         echo "  export PATH=\"\$HOME/.local/bin:\$PATH\""
@@ -160,11 +160,11 @@ install_ghup() {
     echo -e "${GREEN}🎉 Installation completed!${NC}"
     echo ""
     echo "Usage:"
-    echo "  ghup          # Run from anywhere"
-    echo "  ./ghup        # Run from current directory"
+    echo "  ghe          # Run from anywhere"
+    echo "  ./ghe        # Run from current directory"
     echo ""
     echo "Get started:"
-    echo "  1. Run: ghup"
+    echo "  1. Run: ghe"
     echo "  2. Add your GitHub accounts"
     echo "  3. Switch between accounts in your repositories"
     echo ""
@@ -193,13 +193,13 @@ check_dependencies() {
 # Main execution
 main() {
     check_dependencies
-    install_ghup
+    install_ghe
 }
 
 # Handle script arguments
 case "${1:-}" in
     --help|-h)
-        echo "GhUp Installation Script"
+        echo "GHE Installation Script"
         echo ""
         echo "Usage: $0 [options]"
         echo ""
@@ -208,11 +208,11 @@ case "${1:-}" in
         echo "  --version, -v Show version information"
         echo ""
         echo "This script automatically detects your platform and installs"
-        echo "the appropriate GhUp binary."
+        echo "the appropriate GHE binary."
         exit 0
         ;;
     --version|-v)
-        echo "GhUp Installation Script v1.0.0"
+        echo "GHE Installation Script v1.0.0"
         exit 0
         ;;
     *)

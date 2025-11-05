@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# NPM Publish Script for GhUp
+# NPM Publish Script for GHE
 # This script prepares and publishes the package to npm
 
 set -e
@@ -47,7 +47,7 @@ VERSION=$(node -p "require('./package.json').version")
 print_status "Package version: $VERSION"
 
 # Check if version already exists
-if npm view ghup@$VERSION >/dev/null 2>&1; then
+if npm view ghe@$VERSION >/dev/null 2>&1; then
     print_error "Version $VERSION already exists on npm"
     print_status "Please bump the version in package.json"
     exit 1
@@ -83,7 +83,7 @@ fi
 
 # Ask for confirmation
 echo ""
-print_warning "Ready to publish ghup@$VERSION to npm"
+print_warning "Ready to publish ghe@$VERSION to npm"
 read -p "Continue? (y/N): " -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -94,13 +94,13 @@ fi
 # Publish to npm
 print_status "Publishing to npm..."
 if npm publish; then
-    print_success "Successfully published ghup@$VERSION to npm"
+    print_success "Successfully published ghe@$VERSION to npm"
     echo ""
     echo "Users can now install with:"
-    echo "  npm install -g ghup"
-    echo "  yarn global add ghup"
-    echo "  pnpm add -g ghup"
-    echo "  bun install -g ghup"
+    echo "  npm install -g ghe"
+    echo "  yarn global add ghe"
+    echo "  pnpm add -g ghe"
+    echo "  bun install -g ghe"
 else
     print_error "Failed to publish to npm"
     exit 1

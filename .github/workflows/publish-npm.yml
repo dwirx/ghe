@@ -1,4 +1,4 @@
-name: Publish ghux to npm
+name: Publish ghe to npm
 
 on:
   push:
@@ -113,8 +113,8 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          if npm view ghux@$VERSION >/dev/null 2>&1; then
-            echo "::error::ghux@$VERSION already exists on npm" >&2
+          if npm view ghe@$VERSION >/dev/null 2>&1; then
+            echo "::error::ghe@$VERSION already exists on npm" >&2
             exit 1
           fi
 
@@ -133,4 +133,4 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          echo "ghux@$VERSION published to npm." >> $GITHUB_STEP_SUMMARY
+          echo "ghe@$VERSION published to npm." >> $GITHUB_STEP_SUMMARY
