@@ -179,7 +179,7 @@ async function extractTarGz(archivePath: string, destDir: string, filename: stri
 }
 
 /**
- * Extract zip archive
+ * Extract zip archive with multiple fallback methods for Windows
  */
 async function extractZip(archivePath: string, destDir: string, filename: string): Promise<void> {
     const spinner = ora({
@@ -188,16 +188,71 @@ async function extractZip(archivePath: string, destDir: string, filename: string
     }).start();
 
     try {
-        // Use built-in unzip or powershell on Windows
         if (platform.isWindows) {
             const { exec } = await import("./utils/shell");
+            let extracted = false;
 
-            // Try using PowerShell Expand-Archive
-            const psCommand = `Expand-Archive -Path "${archivePath}" -DestinationPath "${destDir}" -Force`;
-            const result = await exec(["powershell", "-Command", psCommand], {});
+            // Method 1: Try tar (from Git Bash - commonly available on Windows)
+            try {
+                spinner.text = "Extracting with tar...";
+                const tarResult = await exec(["tar", "-xf", archivePath, "-C", destDir], {});
+                if (tarResult.code === 0) {
+                    extracted = true;
+                }
+            } catch (e) {
+                // tar not available, try next method
+            }
 
-            if (result.code !== 0) {
-                throw new Error(result.stderr || "PowerShell extraction failed");
+            // Method 2: Try PowerShell with ExecutionPolicy Bypass
+            if (!extracted) {
+                try {
+                    spinner.text = "Extracting with PowerShell...";
+                    const psCommand = `Expand-Archive -Path "${archivePath}" -DestinationPath "${destDir}" -Force`;
+                    const psResult = await exec([
+                        "powershell",
+                        "-ExecutionPolicy",
+                        "Bypass",
+                        "-NoProfile",
+                        "-Command",
+                        psCommand
+                    ], {});
+
+                    if (psResult.code === 0) {
+                        extracted = true;
+                    }
+                } catch (e) {
+                    // PowerShell failed, try next method
+                }
+            }
+
+            // Method 3: Try using tar from Windows path (Windows 10+ has tar built-in)
+            if (!extracted) {
+                try {
+                    spinner.text = "Extracting with Windows tar...";
+                    const winTarResult = await exec([
+                        "C:\\Windows\\System32\\tar.exe",
+                        "-xf",
+                        archivePath,
+                        "-C",
+                        destDir
+                    ], {});
+
+                    if (winTarResult.code === 0) {
+                        extracted = true;
+                    }
+                } catch (e) {
+                    // Windows tar not available
+                }
+            }
+
+            if (!extracted) {
+                throw new Error(
+                    "All extraction methods failed.\n" +
+                    "Please install one of the following:\n" +
+                    "  - Git for Windows (includes tar): https://git-scm.com/download/win\n" +
+                    "  - 7-Zip: https://www.7-zip.org/\n" +
+                    "  - Or install lazygit manually: scoop install lazygit"
+                );
             }
         } else {
             // Unix systems - use unzip command
@@ -269,15 +324,30 @@ export async function downloadLazygit(): Promise<string> {
     } catch (error: any) {
         showError(`Failed to install lazygit: ${error?.message || String(error)}`);
         console.log("");
-        showInfo("Manual installation:");
+        showInfo("Manual installation options:");
         console.log("");
-        console.log("  macOS:   brew install lazygit");
-        console.log("  Ubuntu:  sudo apt install lazygit");
-        console.log("  Arch:    sudo pacman -S lazygit");
-        console.log("  Fedora:  sudo dnf install lazygit");
-        console.log("  Windows: scoop install lazygit");
+
+        if (platform.isWindows) {
+            console.log("  Windows:");
+            console.log("    scoop install lazygit");
+            console.log("    choco install lazygit");
+            console.log("    winget install lazygit");
+            console.log("");
+            console.log("  Or install Git for Windows (includes tar command):");
+            console.log("    https://git-scm.com/download/win");
+        } else if (platform.isMacOS) {
+            console.log("  macOS:");
+            console.log("    brew install lazygit");
+        } else if (platform.isLinux) {
+            console.log("  Linux:");
+            console.log("    Ubuntu/Debian: sudo apt install lazygit");
+            console.log("    Arch:          sudo pacman -S lazygit");
+            console.log("    Fedora:        sudo dnf install lazygit");
+        }
+
         console.log("");
-        console.log("Or download from: https://github.com/jesseduffield/lazygit/releases");
+        console.log("Or download manually from:");
+        console.log("  https://github.com/jesseduffield/lazygit/releases");
         console.log("");
         throw error;
     }
