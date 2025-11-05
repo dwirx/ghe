@@ -155,6 +155,7 @@ sudo mv ghe /usr/local/bin/
 - 🌈 **Colorful Output** - Rich colors and gradients for better UX
 - 🎯 **Active Account Detection** - See which account is currently active
 - 🖥️ **Cross-Platform Support** - Full Windows, Linux, macOS compatibility with proper path handling
+- 🎮 **Built-in Lazygit** - Interactive terminal UI for git operations with auto-install (NEW)
 - 🔔 **Automatic Update Notifications** - Get notified when new versions are available (checks once per day, non-blocking)
 - Generate SSH key dan Import SSH private key (auto chmod, auto `.pub`, auto alias/penamaan berdasarkan username).
 - Test koneksi: uji SSH alias dan/atau token.
@@ -240,6 +241,48 @@ ghe dlx <url>  # Same as 'ghe dl', works identically
 - [DOWNLOAD_FEATURE.md](DOWNLOAD_FEATURE.md) - Advanced Git repository features
 
 > 📋 **Update Notifications**: GHE automatically checks for updates once per day and shows a notification when a new version is available. You can also manually check for updates from the main menu. See [UPDATE_CHECKER.md](UPDATE_CHECKER.md) for details.
+
+### 🎮 Built-in Lazygit - NEW
+
+**Interactive Terminal UI for Git Operations!** No installation required - GHE automatically downloads and manages lazygit for you!
+
+#### ✨ Auto-Install Magic
+- **First Run**: Automatically downloads lazygit binary for your platform
+- **Cross-Platform**: Windows, Linux (x64/ARM64), macOS (x64/ARM64)
+- **Cached**: Downloaded once, used forever
+- **Fallback**: Uses system lazygit if already installed
+- **Zero Config**: Just works!
+
+#### 🚀 Usage
+
+```bash
+# Launch lazygit in current repository
+ghe lazy
+
+# That's it! GHE handles everything:
+# ✅ Checks if you're in a git repository
+# ✅ Shows your current GHE account
+# ✅ Downloads lazygit if needed (first time only)
+# ✅ Launches interactive terminal UI
+```
+
+#### 📦 What You Get
+- **Interactive Staging**: Visual git add/reset
+- **Commit Management**: Easy commit, amend, reword
+- **Branch Operations**: Create, checkout, merge, rebase
+- **Diff Viewer**: Beautiful side-by-side diffs
+- **Stash Management**: Visual stash operations
+- **Log Viewer**: Interactive git log with search
+- **Merge Conflicts**: Visual conflict resolution
+- **And Much More**: Full git operations in TUI
+
+#### 🎯 Account Integration
+When you run `ghe lazy`, it shows:
+- Current GHE account in use
+- Git user name and email
+- Repository status
+
+Perfect for developers who want powerful git operations without leaving the terminal!
 
 ## 🛠️ Development Setup
 

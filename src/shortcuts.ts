@@ -413,6 +413,7 @@ export async function listAccounts(): Promise<void> {
 
 /**
  * Launch lazygit - interactive terminal UI for git operations
+ * Built-in lazygit with auto-download for cross-platform support
  */
 export async function lazyGit(): Promise<void> {
     const cwd = process.cwd();
@@ -421,25 +422,6 @@ export async function lazyGit(): Promise<void> {
     if (!(await isGitRepo(cwd))) {
         showError("Not in a git repository");
         showInfo("Navigate to a git repository first");
-        process.exit(1);
-    }
-
-    // Check if lazygit is installed
-    const { exec } = await import("./utils/shell");
-    const { code } = await exec(["which", "lazygit"]);
-
-    if (code !== 0) {
-        showError("lazygit is not installed");
-        console.log("");
-        showInfo("Install lazygit:");
-        console.log("");
-        console.log("  macOS:   brew install lazygit");
-        console.log("  Ubuntu:  sudo apt install lazygit");
-        console.log("  Arch:    sudo pacman -S lazygit");
-        console.log("  Fedora:  sudo dnf install lazygit");
-        console.log("");
-        console.log("Or visit: https://github.com/jesseduffield/lazygit");
-        console.log("");
         process.exit(1);
     }
 
@@ -465,10 +447,28 @@ export async function lazyGit(): Promise<void> {
         console.log("");
     }
 
+    // Get or download lazygit binary
+    let lazygitPath: string;
+
+    try {
+        const { ensureLazygit, getLazygitVersion } = await import("./lazygitManager");
+        lazygitPath = await ensureLazygit();
+
+        // Show version info
+        const version = await getLazygitVersion(lazygitPath);
+        if (version !== "unknown") {
+            console.log(colors.muted(`   lazygit version: ${version}`));
+        }
+        console.log("");
+    } catch (error: any) {
+        showError(`Failed to setup lazygit: ${error?.message || String(error)}`);
+        process.exit(1);
+    }
+
     // Launch lazygit in interactive mode
     const { spawn } = await import("child_process");
 
-    const lazygitProcess = spawn("lazygit", [], {
+    const lazygitProcess = spawn(lazygitPath, [], {
         cwd,
         stdio: "inherit",
     });

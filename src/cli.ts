@@ -117,7 +117,7 @@ function showHelp() {
     console.log("  ghe list                 List all configured accounts");
     console.log("  ghe health               Check health of all accounts");
     console.log("  ghe log                  View activity log");
-    console.log("  ghe lazy                 Launch lazygit terminal UI");
+    console.log("  ghe lazy                 Launch lazygit (auto-installs if needed)");
     console.log("");
     console.log("Git Shortcuts:");
     console.log(
