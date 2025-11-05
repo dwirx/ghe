@@ -959,6 +959,9 @@ export async function testConnectionFlow(cfg: AppConfig) {
         const platformName = getPlatformName(acc.platform?.type || "github");
         const platformIcon = getPlatformIcon(acc.platform?.type || "github");
 
+        // Small delay to ensure terminal is ready after prompt
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
         const spinner = createSpinner(
             `Testing SSH connection to ${platformName} (${platformHost})...`,
         );
@@ -1030,6 +1033,9 @@ export async function testConnectionFlow(cfg: AppConfig) {
             );
         }
     } else if (chosen === "token" && acc.token) {
+        // Small delay to ensure terminal is ready after prompt
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
         const spinner = createSpinner("Testing token authentication...");
         spinner.start();
 
@@ -1156,6 +1162,9 @@ export async function switchGlobalSshFlow(cfg: AppConfig) {
     });
 
     if (doTest) {
+        // Small delay to ensure terminal is ready and prevent output buffering issues
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
         const spinner = createSpinner(
             `Testing SSH connection to ${platformName} (${platformHost})...`,
         );
