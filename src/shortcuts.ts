@@ -410,3 +410,81 @@ export async function listAccounts(): Promise<void> {
 
     console.log("");
 }
+
+/**
+ * Launch lazygit - interactive terminal UI for git operations
+ */
+export async function lazyGit(): Promise<void> {
+    const cwd = process.cwd();
+
+    // Check if we're in a git repository
+    if (!(await isGitRepo(cwd))) {
+        showError("Not in a git repository");
+        showInfo("Navigate to a git repository first");
+        process.exit(1);
+    }
+
+    // Check if lazygit is installed
+    const { exec } = await import("./utils/shell");
+    const { code } = await exec(["which", "lazygit"]);
+
+    if (code !== 0) {
+        showError("lazygit is not installed");
+        console.log("");
+        showInfo("Install lazygit:");
+        console.log("");
+        console.log("  macOS:   brew install lazygit");
+        console.log("  Ubuntu:  sudo apt install lazygit");
+        console.log("  Arch:    sudo pacman -S lazygit");
+        console.log("  Fedora:  sudo dnf install lazygit");
+        console.log("");
+        console.log("Or visit: https://github.com/jesseduffield/lazygit");
+        console.log("");
+        process.exit(1);
+    }
+
+    // Show current account info
+    const cfg = loadConfig();
+    const activeAccount = await detectActiveAccount(cfg.accounts, cwd);
+    const gitUser = await getCurrentGitUser(cwd);
+
+    if (activeAccount) {
+        console.log("");
+        console.log(colors.success(`🚀 Launching lazygit with account: ${activeAccount}`));
+        if (gitUser?.userName) {
+            console.log(colors.muted(`   User: ${gitUser.userName}`));
+        }
+        if (gitUser?.userEmail) {
+            console.log(colors.muted(`   Email: ${gitUser.userEmail}`));
+        }
+        console.log("");
+    } else {
+        console.log("");
+        console.log(colors.warning("⚠️  No GHE account detected for this repository"));
+        console.log(colors.muted("   Launching lazygit with current git config"));
+        console.log("");
+    }
+
+    // Launch lazygit in interactive mode
+    const { spawn } = await import("child_process");
+
+    const lazygitProcess = spawn("lazygit", [], {
+        cwd,
+        stdio: "inherit",
+    });
+
+    // Wait for lazygit to exit
+    await new Promise<void>((resolve, reject) => {
+        lazygitProcess.on("exit", (code) => {
+            if (code === 0 || code === null) {
+                resolve();
+            } else {
+                reject(new Error(`lazygit exited with code ${code}`));
+            }
+        });
+
+        lazygitProcess.on("error", (err) => {
+            reject(err);
+        });
+    });
+}

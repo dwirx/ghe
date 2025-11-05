@@ -332,6 +332,13 @@ if (args.length > 0) {
         process.exit(0);
     }
 
+    if (command === "lazy") {
+        // ghe lazy - launch lazygit
+        const { lazyGit } = await import("./src/shortcuts");
+        await lazyGit();
+        process.exit(0);
+    }
+
     if (command === "setname") {
         // ghe setname <name> - set global git user.name
         const { setGlobalUserName } = await import("./src/git");
