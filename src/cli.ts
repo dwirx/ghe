@@ -546,13 +546,8 @@ export async function main() {
             showError(`Operation failed: ${e?.message || String(e)}`);
         }
 
-        // Add a pause before showing menu again
+        // Short delay to let user read the output before showing menu again
         console.log();
-        await prompts({
-            type: "text",
-            name: "continue",
-            message: colors.muted("Press Enter to continue..."),
-            initial: "",
-        });
+        await new Promise((resolve) => setTimeout(resolve, 800));
     }
 }

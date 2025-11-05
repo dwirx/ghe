@@ -1117,12 +1117,8 @@ export async function showShortcutsInteractive(): Promise<void> {
             showInfo("Copy this command to use it");
             console.log("");
 
-            const { continuePrompt } = await prompts({
-                type: "text",
-                name: "continuePrompt",
-                message: colors.muted("Press Enter to continue..."),
-                initial: "",
-            });
+            // Short delay to let user read the command
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             continue;
         }
 
@@ -1170,12 +1166,8 @@ export async function showShortcutsInteractive(): Promise<void> {
             }
 
             console.log("");
-            const { continuePrompt } = await prompts({
-                type: "text",
-                name: "continuePrompt",
-                message: colors.muted("Press Enter to continue..."),
-                initial: "",
-            });
+            // Short delay to let user read the output
+            await new Promise((resolve) => setTimeout(resolve, 1000));
         }
     }
 }
