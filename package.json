@@ -1,6 +1,6 @@
 {
     "name": "ghe",
-    "version": "1.0.7",
+    "version": "1.1.1",
     "description": "Beautiful GitHub Account Switcher - Interactive CLI tool for managing multiple GitHub accounts per repository with health checks, activity logs, and multi-platform support",
     "module": "index.ts",
     "type": "module",
