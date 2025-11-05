@@ -341,9 +341,20 @@ if (args.length > 0) {
 
     if (command === "shortcuts" || command === "shortcut") {
         // ghe shortcuts [search-query] - show all shortcuts or search
+        // ghe shortcuts -i / --interactive - interactive mode
         const { showShortcuts } = await import("./src/shortcuts");
-        const searchQuery = args.slice(1).join(" ");
-        await showShortcuts(searchQuery || undefined);
+
+        // Check for interactive flag
+        const hasInteractiveFlag = args.includes("-i") || args.includes("--interactive");
+
+        if (hasInteractiveFlag) {
+            // Interactive mode
+            await showShortcuts(undefined, true);
+        } else {
+            // Normal mode with optional search
+            const searchQuery = args.slice(1).filter(arg => !arg.startsWith("-")).join(" ");
+            await showShortcuts(searchQuery || undefined, false);
+        }
         process.exit(0);
     }
 
