@@ -339,6 +339,14 @@ if (args.length > 0) {
         process.exit(0);
     }
 
+    if (command === "shortcuts" || command === "shortcut") {
+        // ghe shortcuts [search-query] - show all shortcuts or search
+        const { showShortcuts } = await import("./src/shortcuts");
+        const searchQuery = args.slice(1).join(" ");
+        await showShortcuts(searchQuery || undefined);
+        process.exit(0);
+    }
+
     if (command === "setname") {
         // ghe setname <name> - set global git user.name
         const { setGlobalUserName } = await import("./src/git");

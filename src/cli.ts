@@ -53,6 +53,7 @@ function showHelp() {
     console.log("  ghe                      Start interactive mode");
     console.log("  ghe --version            Show version information");
     console.log("  ghe --help               Show this help message");
+    console.log("  ghe shortcuts [query]    Show all shortcuts or search by keyword");
     console.log("");
     console.log("Clone Repository:");
     console.log(
@@ -118,6 +119,7 @@ function showHelp() {
     console.log("  ghe health               Check health of all accounts");
     console.log("  ghe log                  View activity log");
     console.log("  ghe lazy                 Launch lazygit (auto-installs if needed)");
+    console.log("  ghe shortcuts [query]    Show all shortcuts or search by keyword");
     console.log("");
     console.log("Git Shortcuts:");
     console.log(
@@ -282,6 +284,15 @@ function showHelp() {
     );
     console.log(
         "  ghe gp                                             # Pull from remote",
+    );
+    console.log(
+        "  ghe shortcuts                                      # Show all available shortcuts",
+    );
+    console.log(
+        "  ghe shortcuts branch                               # Search shortcuts for 'branch'",
+    );
+    console.log(
+        "  ghe shortcuts fetch                                # Search shortcuts for 'fetch'",
     );
     console.log("");
     console.log("Documentation: https://github.com/dwirx/ghe#readme");

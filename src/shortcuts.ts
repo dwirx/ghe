@@ -412,6 +412,238 @@ export async function listAccounts(): Promise<void> {
 }
 
 /**
+ * Show all available shortcuts with descriptions and search functionality
+ */
+export async function showShortcuts(searchQuery?: string): Promise<void> {
+    const shortcuts = [
+        // Branch Viewing
+        {
+            command: "ghe gb",
+            equivalent: "git branch",
+            description: "Show local branches",
+            category: "Branch Viewing",
+        },
+        {
+            command: "ghe gba",
+            equivalent: "git branch -a",
+            description: "Show all branches (local + remote)",
+            category: "Branch Viewing",
+        },
+        {
+            command: "ghe gbr",
+            equivalent: "git branch -r",
+            description: "Show remote branches only",
+            category: "Branch Viewing",
+        },
+        {
+            command: "ghe gsb",
+            equivalent: "git show-branch",
+            description: "Show branch comparison",
+            category: "Branch Viewing",
+        },
+        {
+            command: "ghe gs",
+            equivalent: "git status",
+            description: "Show git status with current branch",
+            category: "Branch Viewing",
+        },
+        // Branch Creation
+        {
+            command: "ghe gbn <name>",
+            equivalent: "git branch <name>",
+            description: "Create new branch without switching",
+            category: "Branch Creation",
+        },
+        {
+            command: "ghe gcb <name>",
+            equivalent: "git checkout -b <name>",
+            description: "Create & switch to new branch",
+            category: "Branch Creation",
+        },
+        {
+            command: "ghe gsc <name>",
+            equivalent: "git switch -c <name>",
+            description: "Create & switch to new branch (modern)",
+            category: "Branch Creation",
+        },
+        // Branch Switching
+        {
+            command: "ghe gco <name>",
+            equivalent: "git checkout <name>",
+            description: "Switch to branch",
+            category: "Branch Switching",
+        },
+        {
+            command: "ghe gsw <name>",
+            equivalent: "git switch <name>",
+            description: "Switch to branch (modern)",
+            category: "Branch Switching",
+        },
+        {
+            command: "ghe gback",
+            equivalent: "git checkout -",
+            description: "Switch to previous branch",
+            category: "Branch Switching",
+        },
+        // Fetch/Pull
+        {
+            command: "ghe gf",
+            equivalent: "git fetch origin",
+            description: "Fetch from origin",
+            category: "Fetch/Pull",
+        },
+        {
+            command: "ghe gp",
+            equivalent: "git pull",
+            description: "Pull from remote",
+            category: "Fetch/Pull",
+        },
+        // Git Shortcuts
+        {
+            command: "ghe shove <message>",
+            equivalent: "git add . && git commit -m <message> && git push",
+            description: "Add, commit, and push with confirmation",
+            category: "Git Shortcuts",
+        },
+        {
+            command: "ghe shovenc",
+            equivalent: "git add . && git commit --allow-empty-message && git push",
+            description: "Add, commit (empty msg), and push with confirmation",
+            category: "Git Shortcuts",
+        },
+        // Git Config
+        {
+            command: "ghe setname <name>",
+            equivalent: "git config --global user.name <name>",
+            description: "Set global git user.name",
+            category: "Git Config",
+        },
+        {
+            command: "ghe setmail <email>",
+            equivalent: "git config --global user.email <email>",
+            description: "Set global git user.email",
+            category: "Git Config",
+        },
+        {
+            command: "ghe showconfig",
+            equivalent: "git config --list",
+            description: "Show all git configuration",
+            category: "Git Config",
+        },
+        // CLI Shortcuts
+        {
+            command: "ghe switch <account>",
+            equivalent: "-",
+            description: "Switch to specific account",
+            category: "CLI Shortcuts",
+        },
+        {
+            command: "ghe quick",
+            equivalent: "-",
+            description: "Quick switch menu (recent accounts)",
+            category: "CLI Shortcuts",
+        },
+        {
+            command: "ghe status",
+            equivalent: "-",
+            description: "Show current repository status",
+            category: "CLI Shortcuts",
+        },
+        {
+            command: "ghe list",
+            equivalent: "-",
+            description: "List all configured accounts",
+            category: "CLI Shortcuts",
+        },
+        {
+            command: "ghe health",
+            equivalent: "-",
+            description: "Check health of all accounts",
+            category: "CLI Shortcuts",
+        },
+        {
+            command: "ghe log",
+            equivalent: "-",
+            description: "View activity log",
+            category: "CLI Shortcuts",
+        },
+        {
+            command: "ghe lazy",
+            equivalent: "lazygit",
+            description: "Launch lazygit (auto-installs if needed)",
+            category: "CLI Shortcuts",
+        },
+    ];
+
+    // Filter shortcuts if search query provided
+    let filteredShortcuts = shortcuts;
+    if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        filteredShortcuts = shortcuts.filter(
+            (s) =>
+                s.command.toLowerCase().includes(query) ||
+                s.description.toLowerCase().includes(query) ||
+                s.equivalent.toLowerCase().includes(query) ||
+                s.category.toLowerCase().includes(query),
+        );
+
+        if (filteredShortcuts.length === 0) {
+            showWarning(`No shortcuts found matching: "${searchQuery}"`);
+            showInfo("Try a different search term or run 'ghe shortcuts' to see all");
+            return;
+        }
+    }
+
+    // Group by category
+    const groupedShortcuts = filteredShortcuts.reduce(
+        (acc, shortcut) => {
+            if (!acc[shortcut.category]) {
+                acc[shortcut.category] = [];
+            }
+            acc[shortcut.category]?.push(shortcut);
+            return acc;
+        },
+        {} as Record<string, typeof shortcuts>,
+    );
+
+    console.log("");
+    if (searchQuery) {
+        console.log(colors.primary(`🔍 Search Results for: "${searchQuery}"`));
+        console.log(colors.muted(`Found ${filteredShortcuts.length} shortcut(s)`));
+    } else {
+        console.log(colors.primary("⚡ Available Shortcuts"));
+        console.log(colors.muted(`Total: ${shortcuts.length} shortcuts`));
+    }
+    console.log(colors.muted("═".repeat(80)));
+    console.log("");
+
+    // Display shortcuts by category
+    for (const [category, items] of Object.entries(groupedShortcuts)) {
+        console.log(colors.accent(`▸ ${category}`));
+        console.log("");
+
+        for (const item of items) {
+            console.log(`  ${colors.success(item.command.padEnd(30))}`);
+            console.log(
+                `  ${colors.muted("→")} ${colors.text(item.equivalent)}`,
+            );
+            console.log(`  ${colors.muted(item.description)}`);
+            console.log("");
+        }
+    }
+
+    if (!searchQuery) {
+        console.log(colors.muted("─".repeat(80)));
+        console.log("");
+        console.log(colors.accent("💡 Tips:"));
+        console.log(`  • Search shortcuts: ${colors.success("ghe shortcuts <query>")}`);
+        console.log(`  • Example: ${colors.success("ghe shortcuts branch")}`);
+        console.log(`  • Example: ${colors.success("ghe shortcuts fetch")}`);
+        console.log("");
+    }
+}
+
+/**
  * Launch lazygit - interactive terminal UI for git operations
  * Built-in lazygit with auto-download for cross-platform support
  */
