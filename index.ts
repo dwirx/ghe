@@ -724,6 +724,964 @@ if (args.length > 0) {
         process.exit(0);
     }
 
+    // Branch Management Commands
+    if (command === "gbd") {
+        // ghe gbd <branch> - git branch -d <branch>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe gbd <branch-name>");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "branch", "-d", branchName], { cwd: process.cwd() });
+            showSuccess(`Branch '${branchName}' deleted successfully`);
+        } catch (e: any) {
+            showError(`Failed to delete branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gbD") {
+        // ghe gbD <branch> - git branch -D <branch>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe gbD <branch-name>");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "branch", "-D", branchName], { cwd: process.cwd() });
+            showSuccess(`Branch '${branchName}' force deleted successfully`);
+        } catch (e: any) {
+            showError(`Failed to force delete branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gbm") {
+        // ghe gbm <new-name> - git branch -m <new-name>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a new branch name");
+            console.log("Usage: ghe gbm <new-branch-name>");
+            process.exit(1);
+        }
+
+        try {
+            const newName = args[1];
+            await run(["git", "branch", "-m", newName], { cwd: process.cwd() });
+            showSuccess(`Branch renamed to '${newName}'`);
+        } catch (e: any) {
+            showError(`Failed to rename branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Additional Fetch/Pull Commands
+    if (command === "gfa") {
+        // ghe gfa - git fetch --all
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showInfo } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showInfo("Fetching from all remotes...");
+            await run(["git", "fetch", "--all"], { cwd: process.cwd() });
+            showSuccess("Fetch from all remotes completed");
+        } catch (e: any) {
+            showError(`Failed to fetch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gpr") {
+        // ghe gpr - git pull --rebase
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showInfo } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showInfo("Pulling with rebase...");
+            await run(["git", "pull", "--rebase"], { cwd: process.cwd() });
+            showSuccess("Pull with rebase completed");
+        } catch (e: any) {
+            showError(`Failed to pull with rebase: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Commit Commands
+    if (command === "gc") {
+        // ghe gc <message> - git commit -m <message>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        const message = args.slice(1).join(" ");
+        if (!message) {
+            showError("Please provide a commit message");
+            console.log("Usage: ghe gc <message>");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "commit", "-m", message], { cwd: process.cwd() });
+            showSuccess("Committed successfully");
+        } catch (e: any) {
+            showError(`Failed to commit: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gca") {
+        // ghe gca <message> - git commit -am <message>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showInfo } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        const message = args.slice(1).join(" ");
+        if (!message) {
+            showError("Please provide a commit message");
+            console.log("Usage: ghe gca <message>");
+            process.exit(1);
+        }
+
+        try {
+            showInfo("Adding all changes and committing...");
+            await run(["git", "commit", "-am", message], { cwd: process.cwd() });
+            showSuccess("Committed successfully");
+        } catch (e: any) {
+            showError(`Failed to commit: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gcam") {
+        // ghe gcam <message> - git commit --amend -m <message>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        const message = args.slice(1).join(" ");
+        if (!message) {
+            showError("Please provide a commit message");
+            console.log("Usage: ghe gcam <message>");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "commit", "--amend", "-m", message], { cwd: process.cwd() });
+            showSuccess("Commit amended successfully");
+        } catch (e: any) {
+            showError(`Failed to amend commit: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gcan") {
+        // ghe gcan - git commit --amend --no-edit
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "commit", "--amend", "--no-edit"], { cwd: process.cwd() });
+            showSuccess("Commit amended successfully");
+        } catch (e: any) {
+            showError(`Failed to amend commit: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Add/Stage Commands
+    if (command === "ga") {
+        // ghe ga - git add .
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "add", "."], { cwd: process.cwd() });
+            showSuccess("All changes added to staging");
+        } catch (e: any) {
+            showError(`Failed to add changes: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gaa") {
+        // ghe gaa - git add --all
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "add", "--all"], { cwd: process.cwd() });
+            showSuccess("All changes added to staging");
+        } catch (e: any) {
+            showError(`Failed to add changes: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gap") {
+        // ghe gap - git add -p
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "add", "-p"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to add changes: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Push Commands
+    if (command === "gps") {
+        // ghe gps - git push
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showInfo } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showInfo("Pushing to remote...");
+            await run(["git", "push"], { cwd: process.cwd() });
+            showSuccess("Pushed successfully");
+        } catch (e: any) {
+            showError(`Failed to push: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gpsu") {
+        // ghe gpsu - git push -u origin HEAD
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showInfo } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showInfo("Pushing and setting upstream...");
+            await run(["git", "push", "-u", "origin", "HEAD"], { cwd: process.cwd() });
+            showSuccess("Pushed and set upstream successfully");
+        } catch (e: any) {
+            showError(`Failed to push: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gpsf") {
+        // ghe gpsf - git push --force-with-lease
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showInfo } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showInfo("Force pushing with lease...");
+            await run(["git", "push", "--force-with-lease"], { cwd: process.cwd() });
+            showSuccess("Force pushed successfully");
+        } catch (e: any) {
+            showError(`Failed to force push: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Log Commands
+    if (command === "gl") {
+        // ghe gl - git log --oneline
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "log", "--oneline"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show log: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gll") {
+        // ghe gll - git log --graph --oneline --all
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "log", "--graph", "--oneline", "--all"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show log: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "glog") {
+        // ghe glog - detailed colored log
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "log", "--graph", "--pretty=format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show log: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Diff Commands
+    if (command === "gd") {
+        // ghe gd - git diff
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "diff"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show diff: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gds") {
+        // ghe gds - git diff --staged
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "diff", "--staged"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show diff: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gdh") {
+        // ghe gdh - git diff HEAD
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "diff", "HEAD"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show diff: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Stash Commands
+    if (command === "gst") {
+        // ghe gst - git stash
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "stash"], { cwd: process.cwd() });
+            showSuccess("Changes stashed successfully");
+        } catch (e: any) {
+            showError(`Failed to stash: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gstp") {
+        // ghe gstp - git stash pop
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "stash", "pop"], { cwd: process.cwd() });
+            showSuccess("Stash applied and removed");
+        } catch (e: any) {
+            showError(`Failed to pop stash: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gsta") {
+        // ghe gsta - git stash apply
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "stash", "apply"], { cwd: process.cwd() });
+            showSuccess("Stash applied successfully");
+        } catch (e: any) {
+            showError(`Failed to apply stash: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gstl") {
+        // ghe gstl - git stash list
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "stash", "list"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to list stash: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gstd") {
+        // ghe gstd - git stash drop
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "stash", "drop"], { cwd: process.cwd() });
+            showSuccess("Stash dropped successfully");
+        } catch (e: any) {
+            showError(`Failed to drop stash: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Merge Commands
+    if (command === "gm") {
+        // ghe gm <branch> - git merge <branch>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe gm <branch-name>");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "merge", branchName], { cwd: process.cwd() });
+            showSuccess(`Merged '${branchName}' successfully`);
+        } catch (e: any) {
+            showError(`Failed to merge: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gma") {
+        // ghe gma - git merge --abort
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "merge", "--abort"], { cwd: process.cwd() });
+            showSuccess("Merge aborted");
+        } catch (e: any) {
+            showError(`Failed to abort merge: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gmc") {
+        // ghe gmc - git merge --continue
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "merge", "--continue"], { cwd: process.cwd() });
+            showSuccess("Merge continued");
+        } catch (e: any) {
+            showError(`Failed to continue merge: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Rebase Commands
+    if (command === "grb") {
+        // ghe grb <branch> - git rebase <branch>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe grb <branch-name>");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "rebase", branchName], { cwd: process.cwd() });
+            showSuccess(`Rebased onto '${branchName}' successfully`);
+        } catch (e: any) {
+            showError(`Failed to rebase: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "grba") {
+        // ghe grba - git rebase --abort
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "rebase", "--abort"], { cwd: process.cwd() });
+            showSuccess("Rebase aborted");
+        } catch (e: any) {
+            showError(`Failed to abort rebase: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "grbc") {
+        // ghe grbc - git rebase --continue
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "rebase", "--continue"], { cwd: process.cwd() });
+            showSuccess("Rebase continued");
+        } catch (e: any) {
+            showError(`Failed to continue rebase: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Reset Commands
+    if (command === "grh") {
+        // ghe grh - git reset HEAD
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "reset", "HEAD"], { cwd: process.cwd() });
+            showSuccess("All changes unstaged");
+        } catch (e: any) {
+            showError(`Failed to reset: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "grhh") {
+        // ghe grhh - git reset --hard HEAD
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showWarning } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showWarning("This will discard all uncommitted changes!");
+            await run(["git", "reset", "--hard", "HEAD"], { cwd: process.cwd() });
+            showSuccess("All changes discarded");
+        } catch (e: any) {
+            showError(`Failed to reset: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "grsh") {
+        // ghe grsh - git reset --soft HEAD~1
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "reset", "--soft", "HEAD~1"], { cwd: process.cwd() });
+            showSuccess("Last commit undone, changes kept staged");
+        } catch (e: any) {
+            showError(`Failed to reset: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Remote Commands
+    if (command === "gr") {
+        // ghe gr - git remote -v
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "remote", "-v"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show remotes: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gra") {
+        // ghe gra <name> <url> - git remote add <name> <url>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 3 || !args[1] || !args[2]) {
+            showError("Please provide remote name and URL");
+            console.log("Usage: ghe gra <name> <url>");
+            console.log("Example: ghe gra upstream https://github.com/user/repo.git");
+            process.exit(1);
+        }
+
+        try {
+            const name = args[1];
+            const url = args[2];
+            await run(["git", "remote", "add", name, url], { cwd: process.cwd() });
+            showSuccess(`Remote '${name}' added successfully`);
+        } catch (e: any) {
+            showError(`Failed to add remote: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "grr") {
+        // ghe grr <name> - git remote remove <name>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide remote name");
+            console.log("Usage: ghe grr <name>");
+            process.exit(1);
+        }
+
+        try {
+            const name = args[1];
+            await run(["git", "remote", "remove", name], { cwd: process.cwd() });
+            showSuccess(`Remote '${name}' removed successfully`);
+        } catch (e: any) {
+            showError(`Failed to remove remote: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Clean Commands
+    if (command === "gclean") {
+        // ghe gclean - git clean -fd
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showWarning } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showWarning("Removing untracked files and directories...");
+            await run(["git", "clean", "-fd"], { cwd: process.cwd() });
+            showSuccess("Untracked files removed");
+        } catch (e: any) {
+            showError(`Failed to clean: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gcleann") {
+        // ghe gcleann - git clean -fdn
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "clean", "-fdn"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to preview clean: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Tag Commands
+    if (command === "gt") {
+        // ghe gt - git tag
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "tag"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to list tags: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gta") {
+        // ghe gta <tag> - git tag -a <tag>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a tag name");
+            console.log("Usage: ghe gta <tag-name>");
+            console.log("Example: ghe gta v1.0.0");
+            process.exit(1);
+        }
+
+        try {
+            const tagName = args[1];
+            await run(["git", "tag", "-a", tagName], { cwd: process.cwd() });
+            showSuccess(`Tag '${tagName}' created`);
+        } catch (e: any) {
+            showError(`Failed to create tag: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gtd") {
+        // ghe gtd <tag> - git tag -d <tag>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a tag name");
+            console.log("Usage: ghe gtd <tag-name>");
+            process.exit(1);
+        }
+
+        try {
+            const tagName = args[1];
+            await run(["git", "tag", "-d", tagName], { cwd: process.cwd() });
+            showSuccess(`Tag '${tagName}' deleted`);
+        } catch (e: any) {
+            showError(`Failed to delete tag: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
     // Help and version are handled in main()
 }
 
