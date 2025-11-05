@@ -332,6 +332,71 @@ if (args.length > 0) {
         process.exit(0);
     }
 
+    if (command === "setname") {
+        // ghe setname <name> - set global git user.name
+        const { setGlobalUserName } = await import("./src/git");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a username");
+            console.log("Usage: ghe setname <username>");
+            console.log('Example: ghe setname "John Doe"');
+            process.exit(1);
+        }
+
+        try {
+            const userName = args.slice(1).join(" ");
+            await setGlobalUserName(userName);
+            showSuccess(`Git user.name set to: ${userName}`);
+        } catch (e: any) {
+            showError(`Failed to set git user.name: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "setmail") {
+        // ghe setmail <email> - set global git user.email
+        const { setGlobalUserEmail } = await import("./src/git");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide an email address");
+            console.log("Usage: ghe setmail <email>");
+            console.log("Example: ghe setmail john.doe@example.com");
+            process.exit(1);
+        }
+
+        try {
+            const email = args[1];
+            await setGlobalUserEmail(email);
+            showSuccess(`Git user.email set to: ${email}`);
+        } catch (e: any) {
+            showError(
+                `Failed to set git user.email: ${e?.message || String(e)}`,
+            );
+        }
+        process.exit(0);
+    }
+
+    if (command === "showconfig") {
+        // ghe showconfig - show git config list
+        const { getGitConfigList } = await import("./src/git");
+        const { showSuccess, showError, showSection } = await import(
+            "./src/utils/ui"
+        );
+
+        try {
+            showSection("Git Configuration");
+            const config = await getGitConfigList();
+            console.log(config);
+            console.log("");
+            showSuccess("Git configuration displayed successfully");
+        } catch (e: any) {
+            showError(`Failed to get git config: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
     // Help and version are handled in main()
 }
 
