@@ -1,60 +1,60 @@
 # 📦 Clone Repository Feature
 
-GhUx now supports cloning repositories directly with automatic account selection and authentication setup. This feature combines the convenience of `git clone` with GhUx's powerful account management.
+GhE now supports cloning repositories directly with automatic account selection and authentication setup. This feature combines the convenience of `git clone` with GhE's powerful account management.
 
 ## 🚀 Quick Start
 
 ```bash
 # Clone with HTTPS
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 
 # Clone with SSH
-ghux git@github.com:user/repo.git
+ghe git@github.com:user/repo.git
 
 # Clone to a specific directory
-ghux https://github.com/user/repo.git myproject
+ghe https://github.com/user/repo.git myproject
 ```
 
 ## 📋 Supported URL Formats
 
-GhUx accepts all common Git URL formats:
+GhE accepts all common Git URL formats:
 
 ### HTTPS URLs
 ```bash
-ghux https://github.com/user/repo.git
-ghux https://github.com/user/repo
-ghux https://github.com/user/repo#
-ghux http://github.com/user/repo.git
+ghe https://github.com/user/repo.git
+ghe https://github.com/user/repo
+ghe https://github.com/user/repo#
+ghe http://github.com/user/repo.git
 ```
 
 ### SSH URLs
 ```bash
-ghux git@github.com:user/repo.git
-ghux git@github.com:user/repo
-ghux ssh://git@github.com/user/repo.git
+ghe git@github.com:user/repo.git
+ghe git@github.com:user/repo
+ghe ssh://git@github.com/user/repo.git
 ```
 
 ### Multi-Platform Support
 ```bash
 # GitHub
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 
 # GitLab
-ghux https://gitlab.com/user/repo.git
-ghux git@gitlab.com:user/repo.git
+ghe https://gitlab.com/user/repo.git
+ghe git@gitlab.com:user/repo.git
 
 # Bitbucket
-ghux https://bitbucket.org/user/repo.git
-ghux git@bitbucket.org:user/repo.git
+ghe https://bitbucket.org/user/repo.git
+ghe git@bitbucket.org:user/repo.git
 
 # Gitea (self-hosted)
-ghux https://gitea.example.com/user/repo.git
-ghux git@gitea.example.com:user/repo.git
+ghe https://gitea.example.com/user/repo.git
+ghe git@gitea.example.com:user/repo.git
 ```
 
 ## 🔄 Clone Workflow
 
-When you run `ghux <repo-url>`, here's what happens:
+When you run `ghe <repo-url>`, here's what happens:
 
 ### 1. **URL Validation**
 - Validates the repository URL format
@@ -111,7 +111,7 @@ If the account has only one method:
 ### Example 1: Clone with Existing Account
 
 ```bash
-$ ghux https://github.com/mycompany/api.git
+$ ghe https://github.com/mycompany/api.git
 
 ╭─────────────────────────────────────╮
 │        Clone Repository             │
@@ -146,7 +146,7 @@ $ ghux https://github.com/mycompany/api.git
 ### Example 2: Clone to Custom Directory
 
 ```bash
-$ ghux git@github.com:user/awesome-project.git my-project
+$ ghe git@github.com:user/awesome-project.git my-project
 
 # Clones to './my-project' instead of './awesome-project'
 ```
@@ -154,7 +154,7 @@ $ ghux git@github.com:user/awesome-project.git my-project
 ### Example 3: Clone Without Account Setup
 
 ```bash
-$ ghux https://github.com/opensource/project.git
+$ ghe https://github.com/opensource/project.git
 
 ⚠ No accounts configured. Cloning without account setup...
 
@@ -163,34 +163,34 @@ $ ghux https://github.com/opensource/project.git
 ⣷ Cloning repository...
 
 ✔ Repository cloned to: project
-ℹ Run ghux inside project to configure account
+ℹ Run ghe inside project to configure account
 ```
 
 ### Example 4: First-Time User
 
 ```bash
-# 1. Install GhUx
-npm install -g ghux
+# 1. Install GhE
+npm install -g ghe
 
 # 2. Clone a repository (even without accounts configured)
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 
 # 3. Enter the cloned directory
 cd repo
 
 # 4. Configure your account
-ghux
+ghe
 # Choose "Add account" from the menu
 # Follow the prompts to set up SSH or Token
 
 # 5. Switch to the account
-ghux
+ghe
 # Choose "Switch account for current repo"
 ```
 
 ## 🎯 Advantages Over `git clone`
 
-| Feature | `git clone` | `ghux <url>` |
+| Feature | `git clone` | `ghe <url>` |
 |---------|-------------|--------------|
 | Clone repository | ✅ | ✅ |
 | Auto-setup authentication | ❌ | ✅ |
@@ -224,17 +224,17 @@ The clone feature works seamlessly across all platforms:
 
 ### Linux / macOS
 ```bash
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 ```
 
 ### Windows (PowerShell)
 ```powershell
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 ```
 
 ### Windows (Git Bash)
 ```bash
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 ```
 
 Path handling is automatic and platform-aware:
@@ -250,12 +250,12 @@ Path handling is automatic and platform-aware:
 **Solution:**
 ```bash
 # Ensure the URL is complete
-ghux https://github.com/user/repo.git  # ✅
-ghux github.com/user/repo              # ❌
+ghe https://github.com/user/repo.git  # ✅
+ghe github.com/user/repo              # ❌
 
 # Both SSH and HTTPS are supported
-ghux git@github.com:user/repo.git      # ✅
-ghux https://github.com/user/repo.git  # ✅
+ghe git@github.com:user/repo.git      # ✅
+ghe https://github.com/user/repo.git  # ✅
 ```
 
 ### Issue: "Clone failed: Permission denied"
@@ -276,7 +276,7 @@ ghux https://github.com/user/repo.git  # ✅
 
 3. Test connection before cloning:
    ```bash
-   ghux
+   ghe
    # Choose "Test connection"
    # Select the account
    ```
@@ -288,10 +288,10 @@ ghux https://github.com/user/repo.git  # ✅
 **Solution:**
 ```bash
 # Use standard GitHub URL format
-ghux https://github.com/owner/repo.git
+ghe https://github.com/owner/repo.git
 
 # Avoid browser URLs
-ghux https://github.com/owner/repo/tree/main  # ❌
+ghe https://github.com/owner/repo/tree/main  # ❌
 ```
 
 ### Issue: Clone works but wrong account is used
@@ -306,9 +306,9 @@ ghux https://github.com/owner/repo/tree/main  # ❌
    git config user.email
    ```
 
-2. Re-run GhUx to switch account:
+2. Re-run GhE to switch account:
    ```bash
-   ghux
+   ghe
    # Choose "Switch account for current repo"
    ```
 
@@ -324,9 +324,9 @@ ghux https://github.com/owner/repo/tree/main  # ❌
 
 ```bash
 # Clone multiple repos for a project
-ghux https://github.com/org/frontend.git
-ghux https://github.com/org/backend.git
-ghux https://github.com/org/database.git
+ghe https://github.com/org/frontend.git
+ghe https://github.com/org/backend.git
+ghe https://github.com/org/database.git
 
 # All use the same account selection
 ```
@@ -335,11 +335,11 @@ ghux https://github.com/org/database.git
 
 ```bash
 # Clone work repo with work account
-ghux https://github.com/mycompany/api.git
+ghe https://github.com/mycompany/api.git
 # Select: work account
 
 # Clone personal repo with personal account
-ghux https://github.com/myusername/hobby.git
+ghe https://github.com/myusername/hobby.git
 # Select: personal account
 ```
 
@@ -347,13 +347,13 @@ ghux https://github.com/myusername/hobby.git
 
 ```bash
 # Clone without setup (no accounts yet)
-ghux https://github.com/user/repo.git
+ghe https://github.com/user/repo.git
 
 # Enter directory
 cd repo
 
 # Setup account later
-ghux
+ghe
 # Add account and switch
 ```
 
@@ -370,11 +370,11 @@ repos=(
 )
 
 for repo in "${repos[@]}"; do
-  ghux "$repo"
+  ghe "$repo"
 done
 ```
 
-**Note:** Interactive prompts will appear for each repository. For fully automated cloning, use `git clone` after setting up GhUx accounts globally.
+**Note:** Interactive prompts will appear for each repository. For fully automated cloning, use `git clone` after setting up GhE accounts globally.
 
 ## 📊 Activity Logging
 
@@ -382,7 +382,7 @@ All clone operations are logged for tracking:
 
 ```bash
 # View activity log
-ghux log
+ghe log
 
 # Example log entry:
 # 2024-01-15 10:30:45 | SWITCH | work | mycompany/api | SSH | SUCCESS
@@ -399,15 +399,15 @@ Log includes:
 
 ## 🎓 Learning Resources
 
-- **Main README**: [README.md](README.md) - Full GhUx documentation
+- **Main README**: [README.md](README.md) - Full GhE documentation
 - **Installation Guide**: [INSTALL.md](INSTALL.md) - All installation methods
 - **Troubleshooting**: [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Common issues
 - **Platform Support**: [PLATFORM_SUPPORT_SUMMARY.md](PLATFORM_SUPPORT_SUMMARY.md) - Cross-platform compatibility
 
 ## 🤝 Contributing
 
-Found a bug or have a feature request for the clone functionality? Please open an issue on [GitHub](https://github.com/dwirx/ghux/issues).
+Found a bug or have a feature request for the clone functionality? Please open an issue on [GitHub](https://github.com/dwirx/ghe/issues).
 
 ---
 
-**Made with ❤️ by the GhUx team**
+**Made with ❤️ by the GhE team**

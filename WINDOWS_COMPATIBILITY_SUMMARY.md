@@ -2,7 +2,7 @@
 
 ## 🎯 Overview
 
-GhSwitch (ghux) v1.0.7+ now has **full Windows support** with automatic detection, permission handling, and cross-platform compatibility across PowerShell, CMD, Git Bash, and WSL.
+GhSwitch (ghe) v1.0.7+ now has **full Windows support** with automatic detection, permission handling, and cross-platform compatibility across PowerShell, CMD, Git Bash, and WSL.
 
 ## ✅ Fixed Issues
 
@@ -73,7 +73,7 @@ getPlatformInfo(): string                      // System information
 ### Automatic Permission Fixing
 
 ```bash
-ghux health
+ghe health
 # Detects permission issues
 # Prompts: "Some SSH keys have permission issues. Fix them automatically? (Y/n)"
 # Automatically applies correct permissions for Windows/Unix
@@ -231,28 +231,28 @@ test-windows.cmd
 All existing configurations work automatically - just update:
 
 ```powershell
-npm update -g ghux
+npm update -g ghe
 ```
 
 ### Recommended Post-Update Steps
 
 1. **Check version:**
    ```bash
-   ghux --version  # Should show 1.0.7+
+   ghe --version  # Should show 1.0.7+
    ```
 
 2. **Run health check:**
    ```bash
-   ghux health
+   ghe health
    ```
 
 3. **Fix permissions if needed:**
    - Answer "Yes" when prompted
-   - Or run manually: `ghux health` → auto-fix
+   - Or run manually: `ghe health` → auto-fix
 
 4. **Verify platform detection:**
    ```bash
-   ghux info
+   ghe info
    ```
 
 ## 🎨 Platform Detection
@@ -356,20 +356,20 @@ All platform-specific operations include:
 
 ```powershell
 # 1. Install
-npm install -g ghux
+npm install -g ghe
 
 # 2. Test compatibility
 powershell -File test-windows.ps1
 
 # 3. Setup account
-ghux
+ghe
 # Choose: ➕ Add account
 
 # 4. Health check
-ghux health
+ghe health
 
 # 5. Done! Switch accounts anytime
-ghux
+ghe
 ```
 
 ## 📞 Support
@@ -381,15 +381,15 @@ ghux
 
 ### Commands
 ```bash
-ghux --help       # Show help
-ghux --version    # Show version
-ghux info         # Show platform info
-ghux health       # Run health check
+ghe --help       # Show help
+ghe --version    # Show version
+ghe info         # Show platform info
+ghe health       # Run health check
 ```
 
 ### Getting Help
-- GitHub Issues: https://github.com/dwirx/ghux/issues
-- Include: `ghux info` output
+- GitHub Issues: https://github.com/dwirx/ghe/issues
+- Include: `ghe info` output
 - Include: Error messages
 - Include: Windows version
 

@@ -1,6 +1,6 @@
-# 🎉 GhUx v1.0.1 - New Features Documentation
+# 🎉 GhE v1.0.1 - New Features Documentation
 
-Welcome to GhUx v1.0.1! This release brings powerful new features to enhance your GitHub account management workflow.
+Welcome to GhE v1.0.1! This release brings powerful new features to enhance your GitHub account management workflow.
 
 ---
 
@@ -22,11 +22,11 @@ Monitor the health of all your configured accounts with automated SSH key and to
 
 ```bash
 # Interactive mode
-ghux
+ghe
 # Select "🏥 Health check"
 
 # Direct command
-ghux health
+ghe health
 ```
 
 **What it checks:**
@@ -74,11 +74,11 @@ Track all your account operations with comprehensive activity logging and statis
 
 ```bash
 # Interactive mode
-ghux
+ghe
 # Select "📜 Activity log"
 
 # Direct command
-ghux log
+ghe log
 ```
 
 **What it tracks:**
@@ -137,41 +137,41 @@ Skip the interactive menu and run commands directly for faster workflows.
 #### Account Management
 ```bash
 # Switch to specific account by name
-ghux switch work
+ghe switch work
 
 # Quick switch with recent accounts menu
-ghux quick
+ghe quick
 
 # List all configured accounts
-ghux list
+ghe list
 
 # Show current repository status
-ghux status
+ghe status
 ```
 
 #### Monitoring
 ```bash
 # Run health check on all accounts
-ghux health
+ghe health
 
 # View activity log
-ghux log
+ghe log
 ```
 
 #### Git Operations
 ```bash
 # Add, commit with message, confirm before push
-ghux shove "fix: resolved bug in auth flow"
+ghe shove "fix: resolved bug in auth flow"
 
 # Add, commit with empty message, confirm before push
-ghux shovenc
+ghe shovenc
 ```
 
 **Quick Switch Feature:**
-The `ghux quick` command shows recently used accounts first, marked with a ⭐ star for easy identification.
+The `ghe quick` command shows recently used accounts first, marked with a ⭐ star for easy identification.
 
 ```bash
-$ ghux quick
+$ ghe quick
 
 ? Quick switch to account: (Use arrow keys)
 ❯ work-account (current) ⭐
@@ -182,7 +182,7 @@ $ ghux quick
 
 **Status Command Output:**
 ```bash
-$ ghux status
+$ ghe status
 
 📊 Repository Status
 ──────────────────────────────────────────────────
@@ -213,13 +213,13 @@ Branch: feature/new-api
 
 Streamline your git workflow with convenient shortcuts that combine add, commit, and push operations.
 
-**ghux shove <message>**
+**ghe shove <message>**
 
 Add all files, commit with a message, and optionally push with confirmation.
 
 ```bash
 # Example usage
-ghux shove "feat: add user authentication"
+ghe shove "feat: add user authentication"
 
 # What happens:
 # 1. git add .
@@ -228,13 +228,13 @@ ghux shove "feat: add user authentication"
 # 4. If yes: git push origin
 ```
 
-**ghux shovenc**
+**ghe shovenc**
 
 Add all files, commit with empty message, and optionally push with confirmation.
 
 ```bash
 # Example usage
-ghux shovenc
+ghe shovenc
 
 # What happens:
 # 1. git add .
@@ -251,7 +251,7 @@ ghux shovenc
 
 **Example Output:**
 ```bash
-$ ghux shove "docs: update README"
+$ ghe shove "docs: update README"
 
 ℹ Adding files...
 ✓ Files added
@@ -266,7 +266,7 @@ $ ghux shove "docs: update README"
 
 ### 🌐 Multi-Platform Git Service Support
 
-GhUx now supports multiple git hosting platforms beyond GitHub!
+GhE now supports multiple git hosting platforms beyond GitHub!
 
 **Supported Platforms:**
 - 🐙 **GitHub** (github.com)
@@ -331,26 +331,26 @@ For self-hosted or enterprise installations:
 
 ### Interactive Commands
 ```bash
-ghux              # Start interactive menu
-ghux --version    # Show version
-ghux --help       # Show help
+ghe              # Start interactive menu
+ghe --version    # Show version
+ghe --help       # Show help
 ```
 
 ### Direct Commands
 ```bash
 # Account Operations
-ghux switch <name>    # Switch to specific account
-ghux quick            # Quick switch menu
-ghux list             # List all accounts
-ghux status           # Show repo status
+ghe switch <name>    # Switch to specific account
+ghe quick            # Quick switch menu
+ghe list             # List all accounts
+ghe status           # Show repo status
 
 # Monitoring
-ghux health           # Check account health
-ghux log              # View activity log
+ghe health           # Check account health
+ghe log              # View activity log
 
 # Git Operations
-ghux shove <msg>      # Add, commit, push (with confirmation)
-ghux shovenc          # Add, commit empty, push (with confirmation)
+ghe shove <msg>      # Add, commit, push (with confirmation)
+ghe shovenc          # Add, commit empty, push (with confirmation)
 ```
 
 ---
@@ -404,7 +404,7 @@ chmod 700 ~/.ssh
 **Token Expiration:**
 1. Go to platform settings (e.g., GitHub → Settings → Developer settings → Personal access tokens)
 2. Generate new token with required scopes
-3. Update account in GhUx: Select "✏️ Edit account"
+3. Update account in GhE: Select "✏️ Edit account"
 
 ### Activity Log
 
@@ -414,7 +414,7 @@ chmod 700 ~/.ssh
 
 **Clear log if needed:**
 ```bash
-ghux log
+ghe log
 # Select "🗑️ Clear log"
 ```
 
@@ -422,7 +422,7 @@ ghux log
 
 ## 🚀 Migration from v1.0.0
 
-**No action required!** GhUx v1.0.1 automatically:
+**No action required!** GhE v1.0.1 automatically:
 - ✅ Maintains backward compatibility
 - ✅ Migrates existing configs
 - ✅ Adds new fields automatically
@@ -438,7 +438,7 @@ ghux log
 ## 💡 Tips & Best Practices
 
 ### Account Health
-- Run `ghux health` regularly (weekly recommended)
+- Run `ghe health` regularly (weekly recommended)
 - Watch for token expiration warnings
 - Keep SSH keys properly configured
 
@@ -448,12 +448,12 @@ ghux log
 - Use statistics to optimize workflow
 
 ### CLI Shortcuts
-- Use `ghux quick` for frequently switched accounts
+- Use `ghe quick` for frequently switched accounts
 - Alias common commands in your shell:
   ```bash
-  alias ghs='ghux status'
-  alias ghq='ghux quick'
-  alias ghh='ghux health'
+  alias ghs='ghe status'
+  alias ghq='ghe quick'
+  alias ghh='ghe health'
   ```
 
 ### Multi-Platform
@@ -465,13 +465,13 @@ ghux log
 
 ## 📚 Learn More
 
-- **GitHub Repository:** https://github.com/dwirx/ghux
-- **Report Issues:** https://github.com/dwirx/ghux/issues
+- **GitHub Repository:** https://github.com/dwirx/ghe
+- **Report Issues:** https://github.com/dwirx/ghe/issues
 - **Changelog:** See CHANGELOG.md
 - **Original README:** See README.md
 
 ---
 
-**Enjoy GhUx v1.0.1! 🎉**
+**Enjoy GhE v1.0.1! 🎉**
 
 *For questions or feedback, please open an issue on GitHub.*

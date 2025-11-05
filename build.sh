@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# GhUp Build Script
+# GhE Build Script
 # Creates standalone executables for multiple platforms
 
 set -e
 
-echo "🔨 Building GhUp standalone executables..."
+echo "🔨 Building GhE standalone executables..."
 echo ""
 
 # Create build directory
@@ -20,32 +20,32 @@ echo ""
 
 # Build for current platform (Linux x64)
 echo "🐧 Building for Linux x64..."
-bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghup ./index.ts
-echo "✓ Linux x64 build complete: build/ghup"
+bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghe ./index.ts
+echo "✓ Linux x64 build complete: build/ghe"
 echo ""
 
 # Build for Linux ARM64
 echo "🐧 Building for Linux ARM64..."
-bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghup-linux-arm64 ./index.ts
-echo "✓ Linux ARM64 build complete: build/ghup-linux-arm64"
+bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghe-linux-arm64 ./index.ts
+echo "✓ Linux ARM64 build complete: build/ghe-linux-arm64"
 echo ""
 
 # Build for Windows x64
 echo "🪟 Building for Windows x64..."
-bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghup.exe ./index.ts
-echo "✓ Windows x64 build complete: build/ghup.exe"
+bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghe.exe ./index.ts
+echo "✓ Windows x64 build complete: build/ghe.exe"
 echo ""
 
 # Build for macOS x64
 echo "🍎 Building for macOS x64..."
-bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghup-macos ./index.ts
-echo "✓ macOS x64 build complete: build/ghup-macos"
+bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghe-macos ./index.ts
+echo "✓ macOS x64 build complete: build/ghe-macos"
 echo ""
 
 # Build for macOS ARM64 (Apple Silicon)
 echo "🍎 Building for macOS ARM64 (Apple Silicon)..."
-bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghup-macos-arm64 ./index.ts
-echo "✓ macOS ARM64 build complete: build/ghup-macos-arm64"
+bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghe-macos-arm64 ./index.ts
+echo "✓ macOS ARM64 build complete: build/ghe-macos-arm64"
 echo ""
 
 # Generate checksums
@@ -66,8 +66,8 @@ echo ""
 echo "🎉 All builds completed successfully!"
 echo ""
 echo "🚀 Usage:"
-echo "  Linux:   ./build/ghup"
-echo "  Windows: ./build/ghup.exe"
-echo "  macOS:   ./build/ghup-macos or ./build/ghup-macos-arm64"
+echo "  Linux:   ./build/ghe"
+echo "  Windows: ./build/ghe.exe"
+echo "  macOS:   ./build/ghe-macos or ./build/ghe-macos-arm64"
 echo ""
 echo "📦 You can now distribute these standalone binaries!"

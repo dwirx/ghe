@@ -1,13 +1,13 @@
 # Platform Testing Guide
 
-This document describes how to test GhUx with different Git platforms and what to expect.
+This document describes how to test GhE with different Git platforms and what to expect.
 
 ## Prerequisites
 
 Before testing, ensure you have:
 1. SSH keys generated for each platform
 2. Public keys added to your accounts on each platform
-3. Accounts configured in GhUx
+3. Accounts configured in GhE
 
 ## Test Procedure
 
@@ -15,8 +15,8 @@ Before testing, ensure you have:
 
 **Setup:**
 ```bash
-# Add GitHub account in GhUx
-ghux
+# Add GitHub account in GhE
+ghe
 # Choose: Add new account → SSH → GitHub → Enter details
 ```
 
@@ -30,13 +30,13 @@ ssh -T git@github.com
 Hi username! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-**GhUx Test:**
+**GhE Test:**
 ```bash
-ghux
+ghe
 # Choose: Test connection → Select GitHub account
 ```
 
-**Expected GhUx Output:**
+**Expected GhE Output:**
 ```
 ✓ SSH authentication test passed!
 ℹ Authenticated successfully to github.com
@@ -49,8 +49,8 @@ Successfully authenticated as username
 
 **Setup:**
 ```bash
-# Add GitLab account in GhUx
-ghux
+# Add GitLab account in GhE
+ghe
 # Choose: Add new account → SSH → GitLab → Enter details
 ```
 
@@ -64,13 +64,13 @@ ssh -T git@gitlab.com
 Welcome to GitLab, @username!
 ```
 
-**GhUx Test:**
+**GhE Test:**
 ```bash
-ghux
+ghe
 # Choose: Test connection → Select GitLab account
 ```
 
-**Expected GhUx Output:**
+**Expected GhE Output:**
 ```
 ✓ SSH authentication test passed!
 ℹ Authenticated successfully to gitlab.com
@@ -83,8 +83,8 @@ Successfully authenticated as username
 
 **Setup:**
 ```bash
-# Add Bitbucket account in GhUx
-ghux
+# Add Bitbucket account in GhE
+ghe
 # Choose: Add new account → SSH → Bitbucket → Enter details
 ```
 
@@ -100,13 +100,13 @@ authenticated via ssh key.
 You can use git to connect to Bitbucket. Shell access is disabled
 ```
 
-**GhUx Test:**
+**GhE Test:**
 ```bash
-ghux
+ghe
 # Choose: Test connection → Select Bitbucket account
 ```
 
-**Expected GhUx Output:**
+**Expected GhE Output:**
 ```
 ✓ SSH authentication test passed!
 ℹ Authenticated successfully to bitbucket.org
@@ -119,8 +119,8 @@ Successfully authenticated as user
 
 **Setup:**
 ```bash
-# Add Gitea account in GhUx
-ghux
+# Add Gitea account in GhE
+ghe
 # Choose: Add new account → SSH → Gitea → Enter details
 ```
 
@@ -136,13 +136,13 @@ ssh -T git@gitea.yourcompany.com
 Hi there, username! You've successfully authenticated, but Gitea does not provide shell access.
 ```
 
-**GhUx Test:**
+**GhE Test:**
 ```bash
-ghux
+ghe
 # Choose: Test connection → Select Gitea account
 ```
 
-**Expected GhUx Output:**
+**Expected GhE Output:**
 ```
 ✓ SSH authentication test passed!
 ℹ Authenticated successfully to gitea.com
@@ -191,7 +191,7 @@ Host gitea.com
 
 ## Platform-Specific Success Patterns
 
-GhUx recognizes these patterns as successful authentication:
+GhE recognizes these patterns as successful authentication:
 
 | Platform | Success Pattern | Example |
 |----------|----------------|---------|
@@ -214,7 +214,7 @@ git remote -v
 # origin  git@github.com:user/repo.git (fetch)
 
 # Switch to GitLab account
-ghux
+ghe
 # Choose: Switch for current repo → Select GitLab account
 
 # Verify remote changed
@@ -222,7 +222,7 @@ git remote -v
 # origin  git@gitlab.com:user/repo.git (fetch)
 
 # Test connection
-ghux
+ghe
 # Choose: Test connection → Should show GitLab success
 ```
 
@@ -230,7 +230,7 @@ ghux
 
 ```bash
 # Set global default to Bitbucket
-ghux
+ghe
 # Choose: Switch SSH globally → Select Bitbucket account
 
 # Check SSH config
@@ -245,16 +245,16 @@ ssh -T git@bitbucket.org
 
 ```bash
 # Add multiple GitHub accounts
-ghux
+ghe
 # Add account: github-work
 # Add account: github-personal
 
 # Switch between them
-ghux
+ghe
 # Choose: Switch SSH globally → github-work
 # SSH config now uses work key
 
-ghux
+ghe
 # Choose: Switch SSH globally → github-personal
 # SSH config now uses personal key
 ```
@@ -303,11 +303,11 @@ nc -zv github.com 22
 # Should show: Connection succeeded
 
 # If timeout, try HTTPS instead:
-ghux
+ghe
 # Choose: Add new account → Token (HTTPS)
 ```
 
-### Test Shows Success But GhUx Reports Failure
+### Test Shows Success But GhE Reports Failure
 
 **Cause:** SSH output pattern not recognized
 
@@ -319,7 +319,7 @@ ssh -vvv -T git@yourplatform.com 2>&1 | tee ssh_debug.log
 # Check what the actual success message is
 grep -i "authenticated\|welcome\|success" ssh_debug.log
 
-# Report the pattern so it can be added to GhUx
+# Report the pattern so it can be added to GhE
 ```
 
 ---
@@ -329,7 +329,7 @@ grep -i "authenticated\|welcome\|success" ssh_debug.log
 Test all accounts at once:
 
 ```bash
-ghux health
+ghe health
 ```
 
 **Expected Output:**
@@ -366,7 +366,7 @@ cd ~/github-project
 git remote -v
 # origin  git@github.com:user/repo.git
 
-ghux status
+ghe status
 # Expected: Should detect GitHub
 
 # GitLab
@@ -374,7 +374,7 @@ cd ~/gitlab-project
 git remote -v
 # origin  git@gitlab.com:user/repo.git
 
-ghux status
+ghe status
 # Expected: Should detect GitLab
 
 # Self-hosted GitLab
@@ -382,7 +382,7 @@ cd ~/company-project
 git remote -v
 # origin  git@gitlab.company.com:user/repo.git
 
-ghux status
+ghe status
 # Expected: Should detect GitLab with custom domain
 ```
 
@@ -418,14 +418,14 @@ ssh -T git@gitlab.com && echo "✓ GitLab OK" || echo "✗ GitLab FAIL"
 # 3. Test Bitbucket
 ssh -T git@bitbucket.org && echo "✓ Bitbucket OK" || echo "✗ Bitbucket FAIL"
 
-# 4. Test GhUx
-ghux health
+# 4. Test GhE
+ghe health
 
 # 5. Test platform detection
 cd /tmp
 git clone git@github.com:user/repo.git test-repo
 cd test-repo
-ghux status
+ghe status
 cd /tmp && rm -rf test-repo
 ```
 
@@ -437,22 +437,22 @@ When reporting platform-specific issues, include:
 
 1. Platform name and URL
 2. Output of manual SSH test: `ssh -T git@platform.com`
-3. Output of GhUx test
+3. Output of GhE test
 4. Content of `~/.ssh/config` (remove sensitive paths if needed)
-5. Output of `ghux status` and `ghux health`
+5. Output of `ghe status` and `ghe health`
 6. OS and shell: `echo $SHELL` and `uname -a`
 
 **Example Report:**
 
 ```
 Platform: GitLab (gitlab.com)
-Issue: SSH test shows success but GhUx reports failure
+Issue: SSH test shows success but GhE reports failure
 
 Manual test output:
 $ ssh -T git@gitlab.com
 Welcome to GitLab, @myusername!
 
-GhUx test output:
+GhE test output:
 ✗ SSH connection test failed!
 
 SSH Config:
@@ -465,5 +465,5 @@ Host gitlab.com
 Environment:
 - OS: Ubuntu 22.04
 - Shell: /bin/bash
-- GhUx version: 1.0.1
+- GhE version: 1.0.1
 ```

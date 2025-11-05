@@ -1,8 +1,8 @@
-# 🎉 GhUx v1.0.5 - Final Release Summary
+# 🎉 GhE v1.0.5 - Final Release Summary
 
 ## 🚀 Revolutionary Universal Download System
 
-GhUx v1.0.5 introduces the most powerful and intuitive file download system ever built into a Git account manager!
+GhE v1.0.5 introduces the most powerful and intuitive file download system ever built into a Git account manager!
 
 ---
 
@@ -19,11 +19,11 @@ git clone ... && git checkout ...                   # For Git files
 ### After v1.0.5
 ```bash
 # ONE command for EVERYTHING:
-ghux dl https://example.com/file.pdf                        # Regular file
-ghux dl https://releases.ubuntu.com/ubuntu.iso              # ISO
-ghux dl https://github.com/user/repo/blob/main/file.md     # Git file
-ghux dl https://omarchy.org/install                         # Script
-ghux dl https://hostnezt.com/file.pdf                       # Any URL!
+ghe dl https://example.com/file.pdf                        # Regular file
+ghe dl https://releases.ubuntu.com/ubuntu.iso              # ISO
+ghe dl https://github.com/user/repo/blob/main/file.md     # Git file
+ghe dl https://omarchy.org/install                         # Script
+ghe dl https://hostnezt.com/file.pdf                       # Any URL!
 ```
 
 **No thinking required - just paste any URL!**
@@ -34,7 +34,7 @@ ghux dl https://hostnezt.com/file.pdf                       # Any URL!
 
 ### 1. Smart Auto-Detection ✨
 
-GhUx automatically detects what you're downloading:
+GhE automatically detects what you're downloading:
 
 - **Git Repository URLs** → Uses Git-specific features (branches, patterns, releases)
 - **Regular URLs** → Uses universal downloader (progress, authentication, headers)
@@ -48,33 +48,33 @@ Download **ANYTHING** from **ANY** URL:
 
 ```bash
 # PDFs and Documents
-ghux dl https://example.com/document.pdf
-ghux dl https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf
+ghe dl https://example.com/document.pdf
+ghe dl https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf
 
 # Linux ISOs
-ghux dl https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
-ghux dl https://iso.omarchy.org/omarchy-3.1.5.iso
+ghe dl https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
+ghe dl https://iso.omarchy.org/omarchy-3.1.5.iso
 
 # Installation Scripts
-ghux dl https://omarchy.org/install -o install.sh
-ghux dl https://get.docker.com/ -o docker-install.sh
+ghe dl https://omarchy.org/install -o install.sh
+ghe dl https://get.docker.com/ -o docker-install.sh
 
 # Installers and Executables
-ghux dl https://example.com/setup.exe
-ghux dl https://example.com/installer.dmg
+ghe dl https://example.com/setup.exe
+ghe dl https://example.com/installer.dmg
 
 # Media Files
-ghux dl https://example.com/image.jpg
-ghux dl https://example.com/video.mp4
+ghe dl https://example.com/image.jpg
+ghe dl https://example.com/video.mp4
 
 # Archives
-ghux dl https://example.com/package.zip
-ghux dl https://example.com/backup.tar.gz
+ghe dl https://example.com/package.zip
+ghe dl https://example.com/backup.tar.gz
 
 # Git Repository Files
-ghux dl https://github.com/user/repo/blob/main/README.md
-ghux dl gitlab.com/user/project/-/blob/main/config.yml
-ghux dl bitbucket.org/user/repo/src/main/file.js
+ghe dl https://github.com/user/repo/blob/main/README.md
+ghe dl gitlab.com/user/project/-/blob/main/config.yml
+ghe dl bitbucket.org/user/repo/src/main/file.js
 ```
 
 ### 3. Advanced Features
@@ -88,21 +88,21 @@ Downloading ubuntu-22.04.3-desktop-amd64.iso - 45.3% (2.1 GB/4.7 GB) @ 15.2 MB/s
 #### Authentication Support
 ```bash
 # Bearer tokens
-ghux dl https://api.example.com/file.pdf -H "Authorization: Bearer TOKEN"
+ghe dl https://api.example.com/file.pdf -H "Authorization: Bearer TOKEN"
 
 # API keys
-ghux dl https://api.example.com/data.json -H "X-API-Key: your_key"
+ghe dl https://api.example.com/data.json -H "X-API-Key: your_key"
 
 # Custom user agent
-ghux dl https://example.com/file.pdf -A "MyApp/1.0"
+ghe dl https://example.com/file.pdf -A "MyApp/1.0"
 
 # Multiple headers
-ghux dl <url> -H "Header1: value1" -H "Header2: value2"
+ghe dl <url> -H "Header1: value1" -H "Header2: value2"
 ```
 
 #### File Info Preview
 ```bash
-ghux dl https://releases.ubuntu.com/ubuntu.iso --info
+ghe dl https://releases.ubuntu.com/ubuntu.iso --info
 
 # Shows:
 # ╭─────────────────────────────────────╮
@@ -120,7 +120,7 @@ ghux dl https://releases.ubuntu.com/ubuntu.iso --info
 #### Batch Downloads
 ```bash
 # Multiple URLs
-ghux dl url1 url2 url3
+ghe dl url1 url2 url3
 
 # From file list (mix Git repos and regular URLs!)
 cat > downloads.txt << EOF
@@ -130,7 +130,7 @@ https://releases.ubuntu.com/22.04/ubuntu.iso
 https://gitlab.com/user/project/-/blob/master/config.yml
 EOF
 
-ghux dl -f downloads.txt -d ~/Downloads/
+ghe dl -f downloads.txt -d ~/Downloads/
 ```
 
 #### Git-Specific Features (Auto-Enabled)
@@ -139,27 +139,27 @@ When Git repository is detected, these features automatically activate:
 
 ```bash
 # Branch/Tag/Commit Downloads
-ghux dl github.com/user/repo/file.md --branch develop
-ghux dl github.com/user/repo/file.md --tag v1.0.0
-ghux dl github.com/user/repo/file.md --commit abc123
+ghe dl github.com/user/repo/file.md --branch develop
+ghe dl github.com/user/repo/file.md --tag v1.0.0
+ghe dl github.com/user/repo/file.md --commit abc123
 
 # Pattern Matching (download multiple files)
-ghux dl github.com/user/repo --pattern "*.md"
-ghux dl github.com/user/repo --pattern "src/**/*.ts"
-ghux dl github.com/user/repo --pattern "*.js" --exclude "test/*"
+ghe dl github.com/user/repo --pattern "*.md"
+ghe dl github.com/user/repo --pattern "src/**/*.ts"
+ghe dl github.com/user/repo --pattern "*.js" --exclude "test/*"
 
 # Directory Downloads
-ghux dl-dir https://github.com/user/repo/tree/main/src
-ghux dl-dir github.com/user/repo/docs --depth 2
+ghe dl-dir https://github.com/user/repo/tree/main/src
+ghe dl-dir github.com/user/repo/docs --depth 2
 
 # Release Downloads (GitHub only)
-ghux dl-release github.com/user/repo
-ghux dl-release github.com/user/repo --version v2.0.0
-ghux dl-release github.com/user/repo --asset linux
+ghe dl-release github.com/user/repo
+ghe dl-release github.com/user/repo --version v2.0.0
+ghe dl-release github.com/user/repo --asset linux
 
 # Short URL Syntax
-ghux dl user/repo/file.md                    # Assumes GitHub & main branch
-ghux dl user/repo:develop/file.md            # With branch notation
+ghe dl user/repo/file.md                    # Assumes GitHub & main branch
+ghe dl user/repo:develop/file.md            # With branch notation
 ```
 
 ---
@@ -169,12 +169,12 @@ ghux dl user/repo:develop/file.md            # With branch notation
 ### Main Commands
 
 ```bash
-ghux dl <url>              # Universal download (RECOMMENDED)
-ghux get <url>             # Alias for 'dl'
-ghux fetch-file <url>      # Alias for 'dl'
-ghux dlx <url>             # Alternative explicit universal download
-ghux dl-dir <url>          # Download entire directory (Git repos)
-ghux dl-release <repo>     # Download GitHub release assets
+ghe dl <url>              # Universal download (RECOMMENDED)
+ghe get <url>             # Alias for 'dl'
+ghe fetch-file <url>      # Alias for 'dl'
+ghe dlx <url>             # Alternative explicit universal download
+ghe dl-dir <url>          # Download entire directory (Git repos)
+ghe dl-release <repo>     # Download GitHub release assets
 ```
 
 ### Universal Options (Work for ALL URLs)
@@ -314,7 +314,7 @@ ghux dl-release <repo>     # Download GitHub release assets
 
 ## 📊 Comparison Table
 
-| Feature | GhUx v1.0.5 | curl | wget | git |
+| Feature | GhE v1.0.5 | curl | wget | git |
 |---------|-------------|------|------|-----|
 | Git repos | ✅ | ❌ | ❌ | ✅ |
 | Regular URLs | ✅ | ✅ | ✅ | ❌ |
@@ -338,32 +338,32 @@ ghux dl-release <repo>     # Download GitHub release assets
 
 ```bash
 # NPM
-npm install -g ghux@1.0.5
+npm install -g ghe@1.0.5
 
 # Bun (Recommended)
-bun install -g ghux@1.0.5
+bun install -g ghe@1.0.5
 
 # Yarn
-yarn global add ghux@1.0.5
+yarn global add ghe@1.0.5
 
 # One-line installer
-curl -fsSL https://raw.githubusercontent.com/dwirx/ghux/main/install-curl.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dwirx/ghe/main/install-curl.sh | bash
 ```
 
 ### First Download
 
 ```bash
 # Download this release notes
-ghux dl https://github.com/dwirx/ghux/blob/main/FINAL_SUMMARY_v1.0.5.md
+ghe dl https://github.com/dwirx/ghe/blob/main/FINAL_SUMMARY_v1.0.5.md
 
 # Download a PDF
-ghux dl https://example.com/document.pdf
+ghe dl https://example.com/document.pdf
 
 # Download Linux ISO
-ghux dl https://releases.ubuntu.com/22.04/ubuntu.iso -d ~/ISOs/
+ghe dl https://releases.ubuntu.com/22.04/ubuntu.iso -d ~/ISOs/
 
 # Download with preview
-ghux dl https://example.com/file.pdf --info
+ghe dl https://example.com/file.pdf --info
 ```
 
 ---
@@ -371,7 +371,7 @@ ghux dl https://example.com/file.pdf --info
 ## 🎓 Learning Path
 
 ### Beginner
-1. Start with `ghux dl <url>` for any file
+1. Start with `ghe dl <url>` for any file
 2. Use `-o` to rename files
 3. Use `-d` to specify directory
 4. Try `--info` to preview files
@@ -399,15 +399,15 @@ ghux dl https://example.com/file.pdf --info
 mkdir -p ~/Downloads/{pdfs,isos,installers,git-files}
 
 # Download to organized folders
-ghux dl https://example.com/doc.pdf -d ~/Downloads/pdfs/
-ghux dl https://ubuntu.com/ubuntu.iso -d ~/Downloads/isos/
-ghux dl github.com/user/repo/file.md -d ~/Downloads/git-files/
+ghe dl https://example.com/doc.pdf -d ~/Downloads/pdfs/
+ghe dl https://ubuntu.com/ubuntu.iso -d ~/Downloads/isos/
+ghe dl github.com/user/repo/file.md -d ~/Downloads/git-files/
 ```
 
 ### 2. Preview Large Files
 ```bash
 # Always preview before downloading large files
-ghux dl https://releases.ubuntu.com/22.04/ubuntu.iso --info
+ghe dl https://releases.ubuntu.com/22.04/ubuntu.iso --info
 ```
 
 ### 3. Batch Mixed Downloads
@@ -419,13 +419,13 @@ https://example.com/document.pdf
 https://releases.ubuntu.com/ubuntu.iso
 EOF
 
-ghux dl -f mixed.txt
+ghe dl -f mixed.txt
 ```
 
 ### 4. Safe Script Downloads
 ```bash
 # Download script
-ghux dl https://install.example.com/setup.sh -o install.sh
+ghe dl https://install.example.com/setup.sh -o install.sh
 
 # Preview before executing
 cat install.sh
@@ -460,27 +460,27 @@ chmod +x install.sh
 ### File Already Exists
 ```bash
 # Prompted by default
-ghux dl <url>
+ghe dl <url>
 # ? File already exists. Overwrite? (y/N)
 
 # Force overwrite
-ghux dl <url> --overwrite
+ghe dl <url> --overwrite
 ```
 
 ### Download Fails
 ```bash
 # 1. Check file info
-ghux dl <url> --info
+ghe dl <url> --info
 
 # 2. Try custom user agent
-ghux dl <url> -A "Mozilla/5.0"
+ghe dl <url> -A "Mozilla/5.0"
 
 # 3. Add authentication
-ghux dl <url> -H "Authorization: Bearer TOKEN"
+ghe dl <url> -H "Authorization: Bearer TOKEN"
 ```
 
 ### Git URL Issues
-- GhUx automatically falls back to universal download if Git parsing fails
+- GhE automatically falls back to universal download if Git parsing fails
 - You'll still get your file!
 
 ---
@@ -506,9 +506,9 @@ ghux dl <url> -H "Authorization: Bearer TOKEN"
 
 ## 🎉 Summary
 
-**GhUx v1.0.5** is now the **most powerful and intuitive download tool** available:
+**GhE v1.0.5** is now the **most powerful and intuitive download tool** available:
 
-✅ **ONE Command** - `ghux dl` for everything  
+✅ **ONE Command** - `ghe dl` for everything  
 ✅ **Smart Detection** - Automatically handles Git repos and regular URLs  
 ✅ **No Thinking** - Just paste any URL and it works  
 ✅ **Full Featured** - Progress, authentication, patterns, releases  
@@ -526,9 +526,9 @@ git clone --depth 1 https://github.com/user/repo && cd repo && ...
 
 ### With This:
 ```bash
-ghux dl https://example.com/file.pdf
-ghux dl https://example.com/ubuntu.iso
-ghux dl https://github.com/user/repo/blob/main/file.md
+ghe dl https://example.com/file.pdf
+ghe dl https://example.com/ubuntu.iso
+ghe dl https://github.com/user/repo/blob/main/file.md
 ```
 
 ---
@@ -541,7 +541,7 @@ ghux dl https://github.com/user/repo/blob/main/file.md
 - **[DLX_UNIVERSAL_DOWNLOAD.md](DLX_UNIVERSAL_DOWNLOAD.md)** - Universal download guide
 - **[DOWNLOAD_FEATURE.md](DOWNLOAD_FEATURE.md)** - Git repository features
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history
-- `ghux --help` - Built-in help
+- `ghe --help` - Built-in help
 
 ---
 
@@ -561,7 +561,7 @@ ghux dl https://github.com/user/repo/blob/main/file.md
 - **gh** - GitHub CLI tool
 
 ### Made Better
-GhUx combines the best features of all these tools and adds:
+GhE combines the best features of all these tools and adds:
 - Smart auto-detection
 - Beautiful UI
 - Interactive prompts
@@ -573,19 +573,19 @@ GhUx combines the best features of all these tools and adds:
 
 ## 🚀 Next Steps
 
-1. **Install GhUx v1.0.5**
+1. **Install GhE v1.0.5**
    ```bash
-   npm install -g ghux@1.0.5
+   npm install -g ghe@1.0.5
    ```
 
 2. **Try Your First Download**
    ```bash
-   ghux dl https://example.com/file.pdf
+   ghe dl https://example.com/file.pdf
    ```
 
 3. **Explore Features**
    ```bash
-   ghux --help
+   ghe --help
    ```
 
 4. **Read Documentation**
@@ -602,18 +602,18 @@ GhUx combines the best features of all these tools and adds:
 
 ## 💬 Feedback & Support
 
-- **GitHub**: https://github.com/dwirx/ghux
-- **Issues**: https://github.com/dwirx/ghux/issues
-- **Discussions**: https://github.com/dwirx/ghux/discussions
-- **NPM**: https://www.npmjs.com/package/ghux
+- **GitHub**: https://github.com/dwirx/ghe
+- **Issues**: https://github.com/dwirx/ghe/issues
+- **Discussions**: https://github.com/dwirx/ghe/discussions
+- **NPM**: https://www.npmjs.com/package/ghe
 
 ---
 
-**Happy Downloading with GhUx v1.0.5! 🚀**
+**Happy Downloading with GhE v1.0.5! 🚀**
 
 *One Command. Everything. Better.*
 
 ---
 
-**GhUx Team**  
+**GhE Team**  
 Version 1.0.5 - January 2025

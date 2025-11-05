@@ -1,4 +1,4 @@
-# 🚀 GhUx Universal Download (dlx) - Download Anything
+# 🚀 GhE Universal Download (dlx) - Download Anything
 
 > Like `curl` and `wget`, but better! Download any file from any URL with progress tracking and advanced features.
 
@@ -6,7 +6,7 @@
 
 ## 🎯 What is `dlx`?
 
-`ghux dlx` is a universal downloader that can download **ANY** file from **ANY** HTTP/HTTPS URL. Unlike the `ghux dl` command which is specifically for Git repositories, `dlx` works with:
+`ghe dlx` is a universal downloader that can download **ANY** file from **ANY** HTTP/HTTPS URL. Unlike the `ghe dl` command which is specifically for Git repositories, `dlx` works with:
 
 - 📄 **PDFs** - Documents, books, papers
 - 💿 **ISO Files** - Linux distributions, software images
@@ -22,22 +22,22 @@
 
 ```bash
 # Download a PDF
-ghux dlx https://example.com/document.pdf
+ghe dlx https://example.com/document.pdf
 
 # Download an ISO file
-ghux dlx https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
+ghe dlx https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
 
 # Download an installer
-ghux dlx https://example.com/installer.exe
+ghe dlx https://example.com/installer.exe
 
 # Download a script
-ghux dlx https://omarchy.org/install
+ghe dlx https://omarchy.org/install
 
 # Download with custom name
-ghux dlx https://example.com/file.pdf -o my-document.pdf
+ghe dlx https://example.com/file.pdf -o my-document.pdf
 
 # Download to specific directory
-ghux dlx https://example.com/ubuntu.iso -d ~/Downloads/
+ghe dlx https://example.com/ubuntu.iso -d ~/Downloads/
 ```
 
 ---
@@ -48,34 +48,34 @@ ghux dlx https://example.com/ubuntu.iso -d ~/Downloads/
 
 ```bash
 # Basic download
-ghux dlx <url>
+ghe dlx <url>
 
 # Examples:
-ghux dlx https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf
-ghux dlx https://iso.omarchy.org/omarchy-3.1.5.iso
-ghux dlx https://get.docker.com/
+ghe dlx https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf
+ghe dlx https://iso.omarchy.org/omarchy-3.1.5.iso
+ghe dlx https://get.docker.com/
 ```
 
 ### Download with Custom Name
 
 ```bash
-ghux dlx <url> -o <filename>
+ghe dlx <url> -o <filename>
 
 # Examples:
-ghux dlx https://example.com/ubuntu.iso -o ubuntu-22.04.iso
-ghux dlx https://example.com/installer.sh -o install-script.sh
-ghux dlx https://example.com/document.pdf -o psychology-of-money.pdf
+ghe dlx https://example.com/ubuntu.iso -o ubuntu-22.04.iso
+ghe dlx https://example.com/installer.sh -o install-script.sh
+ghe dlx https://example.com/document.pdf -o psychology-of-money.pdf
 ```
 
 ### Download to Directory
 
 ```bash
-ghux dlx <url> -d <directory>
+ghe dlx <url> -d <directory>
 
 # Examples:
-ghux dlx https://example.com/file.pdf -d ~/Downloads/
-ghux dlx https://example.com/image.png -d ./images/
-ghux dlx https://releases.ubuntu.com/ubuntu.iso -d /mnt/isos/
+ghe dlx https://example.com/file.pdf -d ~/Downloads/
+ghe dlx https://example.com/image.png -d ./images/
+ghe dlx https://releases.ubuntu.com/ubuntu.iso -d /mnt/isos/
 ```
 
 ---
@@ -109,10 +109,10 @@ ghux dlx https://releases.ubuntu.com/ubuntu.iso -d /mnt/isos/
 
 ```bash
 # Download multiple files at once
-ghux dlx url1 url2 url3
+ghe dlx url1 url2 url3
 
 # Example:
-ghux dlx \
+ghe dlx \
   https://example.com/file1.pdf \
   https://example.com/file2.pdf \
   https://example.com/file3.pdf
@@ -134,8 +134,8 @@ https://releases.ubuntu.com/22.04/ubuntu.iso
 Download all:
 
 ```bash
-ghux dlx -f downloads.txt
-ghux dlx -f downloads.txt -d ~/Downloads/
+ghe dlx -f downloads.txt
+ghe dlx -f downloads.txt -d ~/Downloads/
 ```
 
 ---
@@ -146,78 +146,78 @@ ghux dlx -f downloads.txt -d ~/Downloads/
 
 ```bash
 # Ubuntu
-ghux dlx https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
+ghe dlx https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
 
 # Arch Linux
-ghux dlx https://mirror.rackspace.com/archlinux/iso/latest/archlinux-x86_64.iso -d ~/ISOs/
+ghe dlx https://mirror.rackspace.com/archlinux/iso/latest/archlinux-x86_64.iso -d ~/ISOs/
 
 # Fedora
-ghux dlx https://download.fedoraproject.org/pub/fedora/linux/releases/39/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-39.iso
+ghe dlx https://download.fedoraproject.org/pub/fedora/linux/releases/39/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-39.iso
 ```
 
 ### 2. Download PDF Documents
 
 ```bash
 # Download a book
-ghux dlx https://hostnezt.com/cssfiles/general/the-psychology-of-money-by-morgan-housel.pdf
+ghe dlx https://hostnezt.com/cssfiles/general/the-psychology-of-money-by-morgan-housel.pdf
 
 # Download with custom name
-ghux dlx https://example.com/report.pdf -o annual-report-2024.pdf
+ghe dlx https://example.com/report.pdf -o annual-report-2024.pdf
 
 # Download to documents folder
-ghux dlx https://example.com/whitepaper.pdf -d ~/Documents/
+ghe dlx https://example.com/whitepaper.pdf -d ~/Documents/
 ```
 
 ### 3. Download Installers
 
 ```bash
 # Download installer script
-ghux dlx https://omarchy.org/install -o omarchy-install.sh
+ghe dlx https://omarchy.org/install -o omarchy-install.sh
 
 # Download Windows installer
-ghux dlx https://example.com/setup.exe -o my-app-setup.exe
+ghe dlx https://example.com/setup.exe -o my-app-setup.exe
 
 # Download macOS DMG
-ghux dlx https://example.com/app.dmg -d ~/Downloads/
+ghe dlx https://example.com/app.dmg -d ~/Downloads/
 ```
 
 ### 4. Download Media Files
 
 ```bash
 # Download image
-ghux dlx https://example.com/photo.jpg -o vacation.jpg
+ghe dlx https://example.com/photo.jpg -o vacation.jpg
 
 # Download video
-ghux dlx https://example.com/tutorial.mp4 -d ~/Videos/
+ghe dlx https://example.com/tutorial.mp4 -d ~/Videos/
 
 # Download audio
-ghux dlx https://example.com/music.mp3 -d ~/Music/
+ghe dlx https://example.com/music.mp3 -d ~/Music/
 ```
 
 ### 5. Download Archives
 
 ```bash
 # Download ZIP file
-ghux dlx https://github.com/user/project/archive/refs/heads/main.zip
+ghe dlx https://github.com/user/project/archive/refs/heads/main.zip
 
 # Download tarball
-ghux dlx https://example.com/package.tar.gz -d ~/Downloads/
+ghe dlx https://example.com/package.tar.gz -d ~/Downloads/
 
 # Download 7z archive
-ghux dlx https://example.com/backup.7z
+ghe dlx https://example.com/backup.7z
 ```
 
 ### 6. Download Scripts
 
 ```bash
 # Download and save shell script
-ghux dlx https://install.example.com/setup.sh -o install.sh
+ghe dlx https://install.example.com/setup.sh -o install.sh
 
 # Download Python script
-ghux dlx https://example.com/script.py -o my-script.py
+ghe dlx https://example.com/script.py -o my-script.py
 
 # Download with execution permissions (manual)
-ghux dlx https://example.com/installer.sh -o install.sh
+ghe dlx https://example.com/installer.sh -o install.sh
 chmod +x install.sh
 ./install.sh
 ```
@@ -230,23 +230,23 @@ chmod +x install.sh
 
 ```bash
 # Mimic browser
-ghux dlx https://example.com/file.pdf -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+ghe dlx https://example.com/file.pdf -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 
 # Custom identifier
-ghux dlx https://example.com/file.zip -A "MyApp/1.0"
+ghe dlx https://example.com/file.zip -A "MyApp/1.0"
 ```
 
 ### Custom Headers
 
 ```bash
 # Add authentication header
-ghux dlx https://api.example.com/file.pdf -H "Authorization: Bearer YOUR_TOKEN"
+ghe dlx https://api.example.com/file.pdf -H "Authorization: Bearer YOUR_TOKEN"
 
 # Add API key
-ghux dlx https://api.example.com/data.json -H "X-API-Key: your_key_here"
+ghe dlx https://api.example.com/data.json -H "X-API-Key: your_key_here"
 
 # Multiple headers
-ghux dlx https://example.com/file.zip \
+ghe dlx https://example.com/file.zip \
   -H "Authorization: Bearer token" \
   -H "X-Custom-Header: value"
 ```
@@ -255,7 +255,7 @@ ghux dlx https://example.com/file.zip \
 
 ```bash
 # Preview file information
-ghux dlx https://example.com/large-file.iso --info
+ghe dlx https://example.com/large-file.iso --info
 
 # Output:
 # ╭─────────────────────────────────────╮
@@ -274,14 +274,14 @@ ghux dlx https://example.com/large-file.iso --info
 
 ```bash
 # Don't follow redirects
-ghux dlx https://example.com/redirect --no-redirect
+ghe dlx https://example.com/redirect --no-redirect
 ```
 
 ---
 
 ## 🆚 dlx vs dl vs curl vs wget
 
-| Feature | `ghux dlx` | `ghux dl` | `curl` | `wget` |
+| Feature | `ghe dlx` | `ghe dl` | `curl` | `wget` |
 |---------|-----------|-----------|---------|--------|
 | Any URL | ✅ | ❌ | ✅ | ✅ |
 | Git repos | ❌ | ✅ | ❌ | ❌ |
@@ -296,8 +296,8 @@ ghux dlx https://example.com/redirect --no-redirect
 
 ### When to use what?
 
-- **`ghux dlx`** - General purpose downloads, any file from any URL
-- **`ghux dl`** - Files from Git repositories (GitHub, GitLab, etc.)
+- **`ghe dlx`** - General purpose downloads, any file from any URL
+- **`ghe dl`** - Files from Git repositories (GitHub, GitLab, etc.)
 - **`curl`** - API requests, complex HTTP operations
 - **`wget`** - Recursive downloads, mirror websites
 
@@ -316,17 +316,17 @@ https://example.com/file3.pdf
 EOF
 
 # Download all with progress
-ghux dlx -f downloads.txt -d ~/Downloads/
+ghe dlx -f downloads.txt -d ~/Downloads/
 ```
 
 ### 2. Download Large Files
 
 ```bash
 # Show file info first to check size
-ghux dlx https://releases.ubuntu.com/22.04/ubuntu.iso --info
+ghe dlx https://releases.ubuntu.com/22.04/ubuntu.iso --info
 
 # Then download with progress tracking
-ghux dlx https://releases.ubuntu.com/22.04/ubuntu.iso -d ~/ISOs/
+ghe dlx https://releases.ubuntu.com/22.04/ubuntu.iso -d ~/ISOs/
 ```
 
 ### 3. Organized Downloads
@@ -336,29 +336,29 @@ ghux dlx https://releases.ubuntu.com/22.04/ubuntu.iso -d ~/ISOs/
 mkdir -p ~/Downloads/{pdfs,isos,installers}
 
 # Download to specific folders
-ghux dlx https://example.com/document.pdf -d ~/Downloads/pdfs/
-ghux dlx https://example.com/ubuntu.iso -d ~/Downloads/isos/
-ghux dlx https://example.com/installer.exe -d ~/Downloads/installers/
+ghe dlx https://example.com/document.pdf -d ~/Downloads/pdfs/
+ghe dlx https://example.com/ubuntu.iso -d ~/Downloads/isos/
+ghe dlx https://example.com/installer.exe -d ~/Downloads/installers/
 ```
 
 ### 4. Safe Downloads
 
 ```bash
 # Always preview before downloading large files
-ghux dlx <url> --info
+ghe dlx <url> --info
 
 # Prevent accidental overwrites (default behavior)
-ghux dlx <url>  # Will prompt if file exists
+ghe dlx <url>  # Will prompt if file exists
 
 # Force overwrite if needed
-ghux dlx <url> --overwrite
+ghe dlx <url> --overwrite
 ```
 
 ### 5. Verify Downloads
 
 ```bash
 # Download file
-ghux dlx https://example.com/file.zip -o download.zip
+ghe dlx https://example.com/file.zip -o download.zip
 
 # Check file size
 ls -lh download.zip
@@ -375,10 +375,10 @@ sha256sum download.zip
 
 ```bash
 # ✅ Good - HTTPS
-ghux dlx https://example.com/file.pdf
+ghe dlx https://example.com/file.pdf
 
 # ⚠️ Warning - HTTP (insecure)
-ghux dlx http://example.com/file.pdf
+ghe dlx http://example.com/file.pdf
 ```
 
 ### Verify Sources
@@ -392,10 +392,10 @@ ghux dlx http://example.com/file.pdf
 
 ```bash
 # 1. Preview file info first
-ghux dlx <url> --info
+ghe dlx <url> --info
 
 # 2. Download to safe location
-ghux dlx <url> -d ~/Downloads/
+ghe dlx <url> -d ~/Downloads/
 
 # 3. Verify file type
 file downloaded-file
@@ -412,27 +412,27 @@ file downloaded-file
 
 ```bash
 # Check URL is valid
-ghux dlx <url> --info
+ghe dlx <url> --info
 
 # Try with custom user agent
-ghux dlx <url> -A "Mozilla/5.0"
+ghe dlx <url> -A "Mozilla/5.0"
 
 # Check if URL requires authentication
-ghux dlx <url> -H "Authorization: Bearer YOUR_TOKEN"
+ghe dlx <url> -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 ### File Already Exists
 
 ```bash
 # Prompt appears by default
-ghux dlx <url>
+ghe dlx <url>
 # ? File already exists: file.pdf. Overwrite? (y/N)
 
 # Force overwrite
-ghux dlx <url> --overwrite
+ghe dlx <url> --overwrite
 
 # Use different name
-ghux dlx <url> -o different-name.pdf
+ghe dlx <url> -o different-name.pdf
 ```
 
 ### Slow Download
@@ -446,10 +446,10 @@ ghux dlx <url> -o different-name.pdf
 
 ```bash
 # May need to follow redirects (default: enabled)
-ghux dlx <url>
+ghe dlx <url>
 
 # Disable redirects if needed
-ghux dlx <url> --no-redirect
+ghe dlx <url> --no-redirect
 ```
 
 ---
@@ -479,11 +479,11 @@ Downloading ubuntu-22.04.3-desktop-amd64.iso - 45.3% (2.1 GB/4.7 GB) @ 15.2 MB/s
 # Old way (curl)
 curl -L -o file.pdf https://example.com/file.pdf
 
-# New way (ghux dlx)
-ghux dlx https://example.com/file.pdf -o file.pdf
+# New way (ghe dlx)
+ghe dlx https://example.com/file.pdf -o file.pdf
 
 # Even simpler (auto filename)
-ghux dlx https://example.com/file.pdf
+ghe dlx https://example.com/file.pdf
 ```
 
 ### Replace wget
@@ -492,21 +492,21 @@ ghux dlx https://example.com/file.pdf
 # Old way (wget)
 wget -O file.pdf https://example.com/file.pdf
 
-# New way (ghux dlx)
-ghux dlx https://example.com/file.pdf -o file.pdf
+# New way (ghe dlx)
+ghe dlx https://example.com/file.pdf -o file.pdf
 
 # With progress and better UI
-ghux dlx https://example.com/file.pdf
+ghe dlx https://example.com/file.pdf
 ```
 
 ---
 
 ## 🔗 Related Commands
 
-- `ghux dl` - Download from Git repositories
-- `ghux dl-dir` - Download directories from Git
-- `ghux dl-release` - Download GitHub releases
-- `ghux` - Main interactive menu
+- `ghe dl` - Download from Git repositories
+- `ghe dl-dir` - Download directories from Git
+- `ghe dl-release` - Download GitHub releases
+- `ghe` - Main interactive menu
 
 ---
 
@@ -515,13 +515,13 @@ ghux dlx https://example.com/file.pdf
 - [README.md](README.md) - Main documentation
 - [DOWNLOAD_FEATURE.md](DOWNLOAD_FEATURE.md) - Git repository downloads
 - [CHANGELOG.md](CHANGELOG.md) - Version history
-- `ghux --help` - Built-in help
+- `ghe --help` - Built-in help
 
 ---
 
 ## 🎯 Summary
 
-**`ghux dlx`** is your go-to command for downloading any file from any URL:
+**`ghe dlx`** is your go-to command for downloading any file from any URL:
 
 - ✅ Simple and intuitive
 - ✅ Progress tracking with speed
@@ -534,7 +534,7 @@ ghux dlx https://example.com/file.pdf
 **Try it now:**
 
 ```bash
-ghux dlx https://example.com/file.pdf
+ghe dlx https://example.com/file.pdf
 ```
 
 ---

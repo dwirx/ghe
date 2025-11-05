@@ -1,8 +1,8 @@
-# 🎉 GhUx v1.0.5 Release Notes
+# 🎉 GhE v1.0.5 Release Notes
 
 ## 📥 Major Feature: File Download from Git Repositories
 
-We're excited to announce GhUx v1.0.5 with comprehensive file download capabilities! Now you can download files and directories directly from GitHub, GitLab, and Bitbucket repositories without cloning the entire repo.
+We're excited to announce GhE v1.0.5 with comprehensive file download capabilities! Now you can download files and directories directly from GitHub, GitLab, and Bitbucket repositories without cloning the entire repo.
 
 ---
 
@@ -14,16 +14,16 @@ Download any file from a repository with simple commands:
 
 ```bash
 # Download a single file
-ghux dl https://github.com/dwirx/ghux/blob/main/README.md
+ghe dl https://github.com/dwirx/ghe/blob/main/README.md
 
 # Download with custom name
-ghux dl <url> -o my-readme.md
+ghe dl <url> -o my-readme.md
 
 # Download to specific directory
-ghux dl <url> -d ~/Downloads/
+ghe dl <url> -d ~/Downloads/
 ```
 
-**Aliases:** `ghux get`, `ghux fetch-file`
+**Aliases:** `ghe get`, `ghe fetch-file`
 
 ### 📂 Multiple Files Download
 
@@ -31,10 +31,10 @@ Download multiple files at once or from a file list:
 
 ```bash
 # Multiple URLs
-ghux dl url1 url2 url3
+ghe dl url1 url2 url3
 
 # From a file list
-ghux dl -f urls.txt
+ghe dl -f urls.txt
 ```
 
 ### 🗂️ Directory Download
@@ -43,10 +43,10 @@ Download entire directories with structure preservation:
 
 ```bash
 # Download entire directory
-ghux dl-dir https://github.com/user/repo/tree/main/src
+ghe dl-dir https://github.com/user/repo/tree/main/src
 
 # Limit directory depth
-ghux dl-dir <url> --depth 2
+ghe dl-dir <url> --depth 2
 ```
 
 ### 🎯 Pattern Matching
@@ -55,13 +55,13 @@ Download files matching specific patterns:
 
 ```bash
 # Download all markdown files
-ghux dl github.com/user/repo --pattern "*.md"
+ghe dl github.com/user/repo --pattern "*.md"
 
 # Download TypeScript files in src directory
-ghux dl github.com/user/repo --pattern "src/**/*.ts"
+ghe dl github.com/user/repo --pattern "src/**/*.ts"
 
 # Exclude patterns
-ghux dl github.com/user/repo --pattern "*.js" --exclude "test/*"
+ghe dl github.com/user/repo --pattern "*.js" --exclude "test/*"
 ```
 
 ### 🏷️ Release Downloads
@@ -70,13 +70,13 @@ Download assets from GitHub releases:
 
 ```bash
 # Download from latest release
-ghux dl-release github.com/user/repo
+ghe dl-release github.com/user/repo
 
 # Specific release version
-ghux dl-release github.com/user/repo --version v2.0.0
+ghe dl-release github.com/user/repo --version v2.0.0
 
 # Filter by asset name
-ghux dl-release github.com/user/repo --asset linux
+ghe dl-release github.com/user/repo --asset linux
 ```
 
 ### 🌿 Branch/Tag/Commit Specific
@@ -85,16 +85,16 @@ Download from any version:
 
 ```bash
 # From specific branch
-ghux dl <url> --branch develop
+ghe dl <url> --branch develop
 
 # From tag
-ghux dl <url> --tag v1.2.3
+ghe dl <url> --tag v1.2.3
 
 # From commit
-ghux dl <url> --commit abc123
+ghe dl <url> --commit abc123
 
 # Short syntax
-ghux dl user/repo:develop/file.md
+ghe dl user/repo:develop/file.md
 ```
 
 ---
@@ -114,11 +114,11 @@ Supports multiple Git hosting platforms and URL formats:
 
 ```bash
 # All these formats work:
-ghux dl https://github.com/user/repo/blob/main/file.md
-ghux dl https://raw.githubusercontent.com/user/repo/main/file.md
-ghux dl github.com/user/repo/blob/main/file.md
-ghux dl user/repo/file.md                    # assumes GitHub & main branch
-ghux dl user/repo:develop/file.md            # with branch notation
+ghe dl https://github.com/user/repo/blob/main/file.md
+ghe dl https://raw.githubusercontent.com/user/repo/main/file.md
+ghe dl github.com/user/repo/blob/main/file.md
+ghe dl user/repo/file.md                    # assumes GitHub & main branch
+ghe dl user/repo:develop/file.md            # with branch notation
 ```
 
 ---
@@ -158,11 +158,11 @@ ghux dl user/repo:develop/file.md            # with branch notation
 
 ```bash
 # Download commands
-ghux dl <url> [options]              # Download file(s)
-ghux get <url>                       # Alias for dl
-ghux fetch-file <url>                # Alias for dl
-ghux dl-dir <url> [options]          # Download directory
-ghux dl-release <repo> [options]     # Download release assets
+ghe dl <url> [options]              # Download file(s)
+ghe get <url>                       # Alias for dl
+ghe fetch-file <url>                # Alias for dl
+ghe dl-dir <url> [options]          # Download directory
+ghe dl-release <repo> [options]     # Download release assets
 ```
 
 ---
@@ -172,27 +172,27 @@ ghux dl-release <repo> [options]     # Download release assets
 ### 1. Download Configuration Files
 
 ```bash
-ghux dl user/repo/package.json -o my-package.json
+ghe dl user/repo/package.json -o my-package.json
 ```
 
 ### 2. Fetch Documentation
 
 ```bash
-ghux dl-dir github.com/user/repo/docs
-ghux dl github.com/user/repo --pattern "docs/**/*.md"
+ghe dl-dir github.com/user/repo/docs
+ghe dl github.com/user/repo --pattern "docs/**/*.md"
 ```
 
 ### 3. Download Build Artifacts
 
 ```bash
-ghux dl-release github.com/user/tool
-ghux dl-release github.com/user/tool --asset linux-x64
+ghe dl-release github.com/user/tool
+ghe dl-release github.com/user/tool --asset linux-x64
 ```
 
 ### 4. Get Example Files
 
 ```bash
-ghux dl-dir github.com/user/library/examples
+ghe dl-dir github.com/user/library/examples
 ```
 
 ### 5. Batch Download
@@ -206,7 +206,7 @@ github.com/user/repo/CONTRIBUTING.md
 EOF
 
 # Download all
-ghux dl -f urls.txt
+ghe dl -f urls.txt
 ```
 
 ---
@@ -246,23 +246,23 @@ Complete documentation available in:
 
 ```bash
 # NPM
-npm install -g ghux@1.0.5
+npm install -g ghe@1.0.5
 
 # Bun
-bun install -g ghux@1.0.5
+bun install -g ghe@1.0.5
 
 # One-line install script
-curl -fsSL https://raw.githubusercontent.com/dwirx/ghux/main/install-curl.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dwirx/ghe/main/install-curl.sh | bash
 ```
 
 ### First Download
 
 ```bash
 # Try it out!
-ghux dl https://github.com/dwirx/ghux/blob/main/README.md
+ghe dl https://github.com/dwirx/ghe/blob/main/README.md
 
 # Or download this release notes file
-ghux dl github.com/dwirx/ghux/RELEASE_NOTES_v1.0.5.md -o release-notes.md
+ghe dl github.com/dwirx/ghe/RELEASE_NOTES_v1.0.5.md -o release-notes.md
 ```
 
 ---
@@ -278,15 +278,15 @@ If you're upgrading from v1.0.1 or earlier:
 
 ```bash
 # NPM users
-npm update -g ghux
+npm update -g ghe
 
 # Bun users
-bun update -g ghux
+bun update -g ghe
 
 # Package manager users
-brew upgrade ghux        # Homebrew
-yay -Syu ghux-bin       # AUR
-scoop update ghux       # Scoop
+brew upgrade ghe        # Homebrew
+yay -Syu ghe-bin       # AUR
+scoop update ghe       # Scoop
 ```
 
 ---
@@ -322,11 +322,11 @@ Special thanks to the open source community for inspiration:
 
 ## 🔗 Links
 
-- **GitHub Repository**: https://github.com/dwirx/ghux
-- **NPM Package**: https://www.npmjs.com/package/ghux
-- **Documentation**: https://github.com/dwirx/ghux#readme
-- **Issues**: https://github.com/dwirx/ghux/issues
-- **Releases**: https://github.com/dwirx/ghux/releases
+- **GitHub Repository**: https://github.com/dwirx/ghe
+- **NPM Package**: https://www.npmjs.com/package/ghe
+- **Documentation**: https://github.com/dwirx/ghe#readme
+- **Issues**: https://github.com/dwirx/ghe/issues
+- **Releases**: https://github.com/dwirx/ghe/releases
 
 ---
 
@@ -334,12 +334,12 @@ Special thanks to the open source community for inspiration:
 
 We'd love to hear your feedback on the new download features!
 
-- 🐛 **Bug Reports**: [Open an issue](https://github.com/dwirx/ghux/issues/new)
-- 💡 **Feature Requests**: [Start a discussion](https://github.com/dwirx/ghux/discussions)
-- ⭐ **Like it?**: [Star the repo](https://github.com/dwirx/ghux)
+- 🐛 **Bug Reports**: [Open an issue](https://github.com/dwirx/ghe/issues/new)
+- 💡 **Feature Requests**: [Start a discussion](https://github.com/dwirx/ghe/discussions)
+- ⭐ **Like it?**: [Star the repo](https://github.com/dwirx/ghe)
 
 ---
 
 **Happy Downloading! 🚀**
 
-*GhUx Team*
+*GhE Team*

@@ -2,13 +2,13 @@
 
 ## 📋 Ringkasan
 
-GhUx sekarang dilengkapi dengan **notifikasi update otomatis** yang akan memberitahu Anda ketika versi baru tersedia. Fitur ini memastikan Anda selalu menggunakan versi terbaru dengan fitur dan perbaikan bug terkini.
+GhE sekarang dilengkapi dengan **notifikasi update otomatis** yang akan memberitahu Anda ketika versi baru tersedia. Fitur ini memastikan Anda selalu menggunakan versi terbaru dengan fitur dan perbaikan bug terkini.
 
 ## 🚀 Cara Kerja
 
 ### Pengecekan Otomatis Saat Startup
 
-Setiap kali Anda menjalankan `ghux`, aplikasi akan secara otomatis memeriksa update di latar belakang:
+Setiap kali Anda menjalankan `ghe`, aplikasi akan secara otomatis memeriksa update di latar belakang:
 
 - **Interval Pengecekan**: Sekali setiap 24 jam (di-cache)
 - **Non-blocking**: Tidak memperlambat startup aplikasi
@@ -34,14 +34,14 @@ Ketika versi baru tersedia, Anda akan melihat kotak notifikasi cantik dengan inf
 │  🚀 Update available: 1.0.0 → 2.0.0                   │
 │                                                         │
 │  Run to update:                                         │
-│  npm install -g ghux                                    │
+│  npm install -g ghe                                    │
 │                                                         │
 │  Or with specific package manager:                      │
-│  yarn global add ghux                                   │
-│  pnpm add -g ghux                                       │
-│  bun install -g ghux                                    │
+│  yarn global add ghe                                   │
+│  pnpm add -g ghe                                       │
+│  bun install -g ghe                                    │
 │                                                         │
-│  Changelog: https://github.com/dwirx/ghux/releases     │
+│  Changelog: https://github.com/dwirx/ghe/releases     │
 │                                                         │
 ╰─────────────────────────────────────────────────────────╯
 ```
@@ -50,34 +50,34 @@ Ketika versi baru tersedia, Anda akan melihat kotak notifikasi cantik dengan inf
 
 Anda dapat melakukan pengecekan update secara manual kapan saja menggunakan menu interaktif:
 
-1. Jalankan `ghux`
+1. Jalankan `ghe`
 2. Pilih "🔄 Check for updates" dari menu utama
 3. Aplikasi akan memaksa pengecekan (mengabaikan cache) dan menampilkan hasil
 
-## 📦 Cara Update GhUx
+## 📦 Cara Update GhE
 
 ### Menggunakan npm (disarankan)
 
 ```bash
-npm install -g ghux
+npm install -g ghe
 ```
 
 ### Menggunakan yarn
 
 ```bash
-yarn global add ghux
+yarn global add ghe
 ```
 
 ### Menggunakan pnpm
 
 ```bash
-pnpm add -g ghux
+pnpm add -g ghe
 ```
 
 ### Menggunakan bun
 
 ```bash
-bun install -g ghux
+bun install -g ghe
 ```
 
 ### Verifikasi Update
@@ -85,7 +85,7 @@ bun install -g ghux
 Setelah update, verifikasi versi baru:
 
 ```bash
-ghux --version
+ghe --version
 ```
 
 ## ⚙️ Konfigurasi
@@ -93,7 +93,7 @@ ghux --version
 Update checker menggunakan pengaturan default berikut:
 
 - **Interval Pengecekan Update**: 24 jam
-- **Lokasi Cache**: `~/.config/configstore/update-notifier-ghux.json`
+- **Lokasi Cache**: `~/.config/configstore/update-notifier-ghe.json`
 - **Network Timeout**: 5 detik
 - **Tampilkan Notifikasi**: Aktif secara default
 
@@ -127,7 +127,7 @@ source ~/.bashrc  # atau ~/.zshrc
 ### Opsi 2: Hapus Cache (tidak disarankan)
 
 ```bash
-rm ~/.config/configstore/update-notifier-ghux.json
+rm ~/.config/configstore/update-notifier-ghe.json
 ```
 
 **Catatan**: Pengecekan akan kembali aktif saat aplikasi dijalankan lagi.
@@ -167,20 +167,20 @@ rm ~/.config/configstore/update-notifier-ghux.json
 
 - Periksa koneksi internet Anda
 - Verifikasi pengaturan firewall/proxy
-- Coba akses https://registry.npmjs.org/ghux secara manual di browser
+- Coba akses https://registry.npmjs.org/ghe secara manual di browser
 
 ### Masalah cache
 
 Hapus file cache:
 
 ```bash
-rm ~/.config/configstore/update-notifier-ghux.json
+rm ~/.config/configstore/update-notifier-ghe.json
 ```
 
 Atau di Windows:
 
 ```powershell
-del %APPDATA%\configstore\update-notifier-ghux.json
+del %APPDATA%\configstore\update-notifier-ghe.json
 ```
 
 ### Update checker error di corporate network
@@ -206,8 +206,8 @@ export NO_UPDATE_NOTIFIER=1
 ## 📚 Lihat Juga
 
 - [Changelog](./CHANGELOG.md) - Riwayat versi
-- [Panduan Instalasi](./README.md#installation) - Cara install GhUx
-- [GitHub Releases](https://github.com/dwirx/ghux/releases) - Catatan rilis
+- [Panduan Instalasi](./README.md#installation) - Cara install GhE
+- [GitHub Releases](https://github.com/dwirx/ghe/releases) - Catatan rilis
 
 ## 💡 Tips
 
@@ -241,7 +241,7 @@ Tidak. Update checker memerlukan koneksi internet. Jika offline, pengecekan akan
 Gunakan opsi `--prefix` untuk npm:
 
 ```bash
-npm install -g --prefix ~/.local ghux
+npm install -g --prefix ~/.local ghe
 ```
 
 Pastikan `~/.local/bin` ada di PATH Anda.

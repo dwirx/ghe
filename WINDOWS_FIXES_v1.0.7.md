@@ -90,7 +90,7 @@ getPlatformInfo(): string
 Health check now offers to fix permission issues automatically:
 
 ```bash
-ghux health
+ghe health
 # If permission issues detected:
 # "Some SSH keys have permission issues. Fix them automatically? (Y/n)"
 ```
@@ -153,7 +153,7 @@ Automatically detects:
 
 View detected environment:
 ```bash
-ghux info
+ghe info
 ```
 
 ## 📦 Updated Dependencies
@@ -214,7 +214,7 @@ try {
 
 ### Windows-Aware Checks
 ```bash
-ghux health
+ghe health
 ```
 
 Now properly handles:
@@ -253,7 +253,7 @@ Total Accounts: 1
 
 1. **Run health check:**
    ```bash
-   ghux health
+   ghe health
    ```
 
 2. **Fix permissions if needed:**
@@ -266,8 +266,8 @@ Total Accounts: 1
 
 4. **Verify installation:**
    ```bash
-   ghux --version
-   ghux info
+   ghe --version
+   ghe info
    ```
 
 ## 🐛 Bug Fixes
@@ -325,4 +325,4 @@ January 4, 2025
 ---
 
 **Full Changelog:** v1.0.6...v1.0.7
-**Download:** `npm install -g ghux@1.0.7`
+**Download:** `npm install -g ghe@1.0.7`

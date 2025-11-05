@@ -1,15 +1,15 @@
-# 🚀 Download Quick Start Guide - GhUx v1.0.5
+# 🚀 Download Quick Start Guide - GhE v1.0.5
 
-> Quick reference for downloading files with GhUx
+> Quick reference for downloading files with GhE
 
 ---
 
 ## 📥 Two Download Commands
 
-### `ghux dlx` - Download ANYTHING from ANY URL
+### `ghe dlx` - Download ANYTHING from ANY URL
 Like curl/wget, works with any HTTP/HTTPS URL
 
-### `ghux dl` - Download from Git repositories
+### `ghe dl` - Download from Git repositories
 Smart downloader for GitHub, GitLab, Bitbucket
 
 ---
@@ -20,25 +20,25 @@ Smart downloader for GitHub, GitLab, Bitbucket
 
 ```bash
 # Download a PDF
-ghux dlx https://example.com/document.pdf
+ghe dlx https://example.com/document.pdf
 
 # Download Linux ISO
-ghux dlx https://releases.ubuntu.com/22.04/ubuntu.iso
+ghe dlx https://releases.ubuntu.com/22.04/ubuntu.iso
 
 # Download installer
-ghux dlx https://omarchy.org/install
+ghe dlx https://omarchy.org/install
 
 # Download with custom name
-ghux dlx https://example.com/file.pdf -o my-file.pdf
+ghe dlx https://example.com/file.pdf -o my-file.pdf
 
 # Download to directory
-ghux dlx https://example.com/ubuntu.iso -d ~/Downloads/
+ghe dlx https://example.com/ubuntu.iso -d ~/Downloads/
 
 # Download multiple files
-ghux dlx url1 url2 url3
+ghe dlx url1 url2 url3
 
 # Download from file list
-ghux dlx -f urls.txt
+ghe dlx -f urls.txt
 ```
 
 ### Common Options
@@ -57,16 +57,16 @@ ghux dlx -f urls.txt
 
 ```bash
 # Download PDF book
-ghux dlx https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf
+ghe dlx https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf
 
 # Download custom ISO
-ghux dlx https://iso.omarchy.org/omarchy-3.1.5.iso -d ~/ISOs/
+ghe dlx https://iso.omarchy.org/omarchy-3.1.5.iso -d ~/ISOs/
 
 # Download with authentication
-ghux dlx https://api.example.com/file.pdf -H "Authorization: Bearer TOKEN"
+ghe dlx https://api.example.com/file.pdf -H "Authorization: Bearer TOKEN"
 
 # Preview before download
-ghux dlx https://releases.ubuntu.com/22.04/ubuntu.iso --info
+ghe dlx https://releases.ubuntu.com/22.04/ubuntu.iso --info
 ```
 
 ---
@@ -77,34 +77,34 @@ ghux dlx https://releases.ubuntu.com/22.04/ubuntu.iso --info
 
 ```bash
 # Download single file
-ghux dl https://github.com/user/repo/blob/main/README.md
+ghe dl https://github.com/user/repo/blob/main/README.md
 
 # Download with custom name
-ghux dl <url> -o custom.md
+ghe dl <url> -o custom.md
 
 # Download from different branch
-ghux dl github.com/user/repo/file.txt --branch develop
+ghe dl github.com/user/repo/file.txt --branch develop
 
 # Download all markdown files
-ghux dl github.com/user/repo --pattern "*.md"
+ghe dl github.com/user/repo --pattern "*.md"
 
 # Download directory
-ghux dl-dir https://github.com/user/repo/tree/main/src
+ghe dl-dir https://github.com/user/repo/tree/main/src
 
 # Download release
-ghux dl-release github.com/user/repo
+ghe dl-release github.com/user/repo
 ```
 
 ### Short URL Syntax
 
 ```bash
 # These are equivalent:
-ghux dl https://github.com/user/repo/blob/main/file.md
-ghux dl github.com/user/repo/blob/main/file.md
-ghux dl user/repo/file.md
+ghe dl https://github.com/user/repo/blob/main/file.md
+ghe dl github.com/user/repo/blob/main/file.md
+ghe dl user/repo/file.md
 
 # With branch:
-ghux dl user/repo:develop/file.md
+ghe dl user/repo:develop/file.md
 ```
 
 ### Common Options
@@ -124,7 +124,7 @@ ghux dl user/repo:develop/file.md
 
 ## 🎯 When to Use What?
 
-### Use `ghux dlx` for:
+### Use `ghe dlx` for:
 - ✅ PDFs and documents from any website
 - ✅ Linux ISOs and disk images
 - ✅ Software installers and executables
@@ -133,7 +133,7 @@ ghux dl user/repo:develop/file.md
 - ✅ Scripts from any URL
 - ✅ Any file from any HTTP/HTTPS URL
 
-### Use `ghux dl` for:
+### Use `ghe dl` for:
 - ✅ Files from GitHub repositories
 - ✅ Files from GitLab repositories
 - ✅ Files from Bitbucket repositories
@@ -148,8 +148,8 @@ ghux dl user/repo:develop/file.md
 ### 1. Preview Before Download
 ```bash
 # Show file info first
-ghux dlx https://example.com/large-file.iso --info
-ghux dl https://github.com/user/repo/file.md --info
+ghe dlx https://example.com/large-file.iso --info
+ghe dl https://github.com/user/repo/file.md --info
 ```
 
 ### 2. Batch Downloads
@@ -162,7 +162,7 @@ https://example.com/file3.pdf
 EOF
 
 # Download all
-ghux dlx -f urls.txt
+ghe dlx -f urls.txt
 ```
 
 ### 3. Organized Downloads
@@ -171,17 +171,17 @@ ghux dlx -f urls.txt
 mkdir -p ~/Downloads/{pdfs,isos,installers}
 
 # Download to specific folders
-ghux dlx https://example.com/doc.pdf -d ~/Downloads/pdfs/
-ghux dlx https://example.com/ubuntu.iso -d ~/Downloads/isos/
+ghe dlx https://example.com/doc.pdf -d ~/Downloads/pdfs/
+ghe dlx https://example.com/ubuntu.iso -d ~/Downloads/isos/
 ```
 
 ### 4. Custom Names
 ```bash
 # Universal download
-ghux dlx https://example.com/download?id=123 -o myfile.pdf
+ghe dlx https://example.com/download?id=123 -o myfile.pdf
 
 # Git repository
-ghux dl user/repo/config.json -o my-config.json
+ghe dl user/repo/config.json -o my-config.json
 ```
 
 ---
@@ -191,40 +191,40 @@ ghux dl user/repo/config.json -o my-config.json
 ### File Already Exists
 ```bash
 # You'll be prompted by default
-ghux dlx <url>
+ghe dlx <url>
 # ? File already exists. Overwrite? (y/N)
 
 # Force overwrite
-ghux dlx <url> --overwrite
+ghe dlx <url> --overwrite
 ```
 
 ### Download Fails
 ```bash
 # Try with --info to debug
-ghux dlx <url> --info
+ghe dlx <url> --info
 
 # Try custom user agent
-ghux dlx <url> -A "Mozilla/5.0"
+ghe dlx <url> -A "Mozilla/5.0"
 
 # Add authentication if needed
-ghux dlx <url> -H "Authorization: Bearer TOKEN"
+ghe dlx <url> -H "Authorization: Bearer TOKEN"
 ```
 
 ### Invalid URL (for git repos)
 ```bash
 # ✗ Wrong
-ghux dl github.com/user/repo
+ghe dl github.com/user/repo
 
 # ✓ Correct
-ghux dl github.com/user/repo/file.md
-ghux dl github.com/user/repo/blob/main/file.md
+ghe dl github.com/user/repo/file.md
+ghe dl github.com/user/repo/blob/main/file.md
 ```
 
 ---
 
 ## 📊 Comparison Table
 
-| Feature | `ghux dlx` | `ghux dl` | `curl` | `wget` |
+| Feature | `ghe dlx` | `ghe dl` | `curl` | `wget` |
 |---------|-----------|-----------|---------|--------|
 | Any URL | ✅ | ❌ | ✅ | ✅ |
 | Git repos | ❌ | ✅ | ❌ | ❌ |
@@ -240,7 +240,7 @@ ghux dl github.com/user/repo/blob/main/file.md
 - **[DLX_UNIVERSAL_DOWNLOAD.md](DLX_UNIVERSAL_DOWNLOAD.md)** - Complete dlx guide
 - **[DOWNLOAD_FEATURE.md](DOWNLOAD_FEATURE.md)** - Complete dl guide
 - **[README.md](README.md)** - Main documentation
-- `ghux --help` - Built-in help
+- `ghe --help` - Built-in help
 
 ---
 
@@ -249,49 +249,49 @@ ghux dl github.com/user/repo/blob/main/file.md
 ### Download Linux ISOs
 ```bash
 # Ubuntu
-ghux dlx https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
+ghe dlx https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
 
 # Arch Linux
-ghux dlx https://mirror.rackspace.com/archlinux/iso/latest/archlinux-x86_64.iso
+ghe dlx https://mirror.rackspace.com/archlinux/iso/latest/archlinux-x86_64.iso
 
 # Download to specific folder
-ghux dlx <iso-url> -d ~/ISOs/
+ghe dlx <iso-url> -d ~/ISOs/
 ```
 
 ### Download PDFs
 ```bash
 # Download document
-ghux dlx https://example.com/whitepaper.pdf
+ghe dlx https://example.com/whitepaper.pdf
 
 # Download book
-ghux dlx https://example.com/book.pdf -o my-book.pdf
+ghe dlx https://example.com/book.pdf -o my-book.pdf
 
 # Download multiple
-ghux dlx doc1.pdf doc2.pdf doc3.pdf -d ~/Documents/
+ghe dlx doc1.pdf doc2.pdf doc3.pdf -d ~/Documents/
 ```
 
 ### Download from GitHub
 ```bash
 # Download README
-ghux dl user/repo/README.md
+ghe dl user/repo/README.md
 
 # Download config
-ghux dl user/repo/config.json -o my-config.json
+ghe dl user/repo/config.json -o my-config.json
 
 # Download all docs
-ghux dl user/repo --pattern "docs/**/*.md"
+ghe dl user/repo --pattern "docs/**/*.md"
 
 # Download entire src directory
-ghux dl-dir user/repo/src
+ghe dl-dir user/repo/src
 
 # Download latest release
-ghux dl-release user/repo
+ghe dl-release user/repo
 ```
 
 ### Download Scripts
 ```bash
 # Download and save
-ghux dlx https://install.example.com/setup.sh -o install.sh
+ghe dlx https://install.example.com/setup.sh -o install.sh
 
 # Make executable
 chmod +x install.sh
@@ -303,15 +303,15 @@ chmod +x install.sh
 ### Download with Authentication
 ```bash
 # API token
-ghux dlx https://api.example.com/file.pdf \
+ghe dlx https://api.example.com/file.pdf \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # API key
-ghux dlx https://api.example.com/data.json \
+ghe dlx https://api.example.com/data.json \
   -H "X-API-Key: your_key_here"
 
 # Custom user agent
-ghux dlx https://example.com/file.zip \
+ghe dlx https://example.com/file.zip \
   -A "MyApp/1.0"
 ```
 
@@ -321,17 +321,17 @@ ghux dlx https://example.com/file.zip \
 
 ```bash
 # UNIVERSAL DOWNLOAD (ANY URL)
-ghux dlx <url>                    # Download file
-ghux dlx <url> -o name            # Custom name
-ghux dlx <url> -d dir             # Custom dir
-ghux dlx -f list.txt              # Batch download
+ghe dlx <url>                    # Download file
+ghe dlx <url> -o name            # Custom name
+ghe dlx <url> -d dir             # Custom dir
+ghe dlx -f list.txt              # Batch download
 
 # GIT REPOSITORY DOWNLOAD
-ghux dl <repo-url>                # Download file
-ghux dl <url> -b branch           # From branch
-ghux dl <url> --pattern "*.md"    # Pattern match
-ghux dl-dir <url>                 # Directory
-ghux dl-release <repo>            # Release
+ghe dl <repo-url>                # Download file
+ghe dl <url> -b branch           # From branch
+ghe dl <url> --pattern "*.md"    # Pattern match
+ghe dl-dir <url>                 # Directory
+ghe dl-release <repo>            # Release
 
 # OPTIONS
 --info          # Preview file info
@@ -345,4 +345,4 @@ ghux dl-release <repo>            # Release
 
 **Happy Downloading! 🚀**
 
-Need help? Run `ghux --help` or check the full documentation.
+Need help? Run `ghe --help` or check the full documentation.

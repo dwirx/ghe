@@ -8,19 +8,19 @@
 
 ```bash
 # Download single file
-ghux dl <url>
+ghe dl <url>
 
 # Download with custom name
-ghux dl <url> -o newname.txt
+ghe dl <url> -o newname.txt
 
 # Download to directory
-ghux dl <url> -d ~/Downloads/
+ghe dl <url> -d ~/Downloads/
 
 # Download directory
-ghux dl-dir <url>
+ghe dl-dir <url>
 
 # Download release
-ghux dl-release <repo>
+ghe dl-release <repo>
 ```
 
 ---
@@ -29,22 +29,22 @@ ghux dl-release <repo>
 
 ### Download README
 ```bash
-ghux dl https://github.com/user/repo/blob/main/README.md
+ghe dl https://github.com/user/repo/blob/main/README.md
 ```
 
 ### Download Config File
 ```bash
-ghux dl github.com/user/repo/config.json -o my-config.json
+ghe dl github.com/user/repo/config.json -o my-config.json
 ```
 
 ### Download from Different Branch
 ```bash
-ghux dl github.com/user/repo/file.txt --branch develop
+ghe dl github.com/user/repo/file.txt --branch develop
 ```
 
 ### Download Multiple Files
 ```bash
-ghux dl \
+ghe dl \
   github.com/user/repo/file1.md \
   github.com/user/repo/file2.md \
   github.com/user/repo/file3.md
@@ -52,42 +52,42 @@ ghux dl \
 
 ### Download All Markdown Files
 ```bash
-ghux dl github.com/user/repo --pattern "*.md"
+ghe dl github.com/user/repo --pattern "*.md"
 ```
 
 ### Download TypeScript Source
 ```bash
-ghux dl github.com/user/repo --pattern "src/**/*.ts"
+ghe dl github.com/user/repo --pattern "src/**/*.ts"
 ```
 
 ### Download Documentation Directory
 ```bash
-ghux dl-dir https://github.com/user/repo/tree/main/docs
+ghe dl-dir https://github.com/user/repo/tree/main/docs
 ```
 
 ### Download Examples Folder
 ```bash
-ghux dl-dir github.com/user/repo/examples -d ./examples/
+ghe dl-dir github.com/user/repo/examples -d ./examples/
 ```
 
 ### Download Latest Release
 ```bash
-ghux dl-release github.com/user/repo
+ghe dl-release github.com/user/repo
 ```
 
 ### Download Specific Release Asset
 ```bash
-ghux dl-release github.com/user/repo --asset linux --version v2.0.0
+ghe dl-release github.com/user/repo --asset linux --version v2.0.0
 ```
 
 ### Download from Tag
 ```bash
-ghux dl github.com/user/repo/package.json --tag v1.0.0
+ghe dl github.com/user/repo/package.json --tag v1.0.0
 ```
 
 ### Download from Commit
 ```bash
-ghux dl github.com/user/repo/file.js --commit abc123
+ghe dl github.com/user/repo/file.js --commit abc123
 ```
 
 ---
@@ -96,12 +96,12 @@ ghux dl github.com/user/repo/file.js --commit abc123
 
 ```bash
 # These are equivalent:
-ghux dl https://github.com/user/repo/blob/main/file.md
-ghux dl github.com/user/repo/blob/main/file.md
-ghux dl user/repo/file.md
+ghe dl https://github.com/user/repo/blob/main/file.md
+ghe dl github.com/user/repo/blob/main/file.md
+ghe dl user/repo/file.md
 
 # With branch:
-ghux dl user/repo:develop/file.md
+ghe dl user/repo:develop/file.md
 ```
 
 ---
@@ -136,7 +136,7 @@ ghux dl user/repo:develop/file.md
 
 ## 💡 Pro Tips
 
-1. **File List**: Save URLs to `urls.txt` and use `ghux dl -f urls.txt`
+1. **File List**: Save URLs to `urls.txt` and use `ghe dl -f urls.txt`
 2. **Preview**: Use `--info` to see file details before downloading
 3. **Safety**: Files won't be overwritten unless you use `--overwrite`
 4. **Patterns**: Use glob patterns like `**/*.js` for recursive matching
@@ -149,7 +149,7 @@ ghux dl user/repo:develop/file.md
 For complete documentation, see:
 - [DOWNLOAD_FEATURE.md](DOWNLOAD_FEATURE.md) - Comprehensive guide
 - [README.md](README.md) - Main documentation
-- `ghux --help` - Built-in help
+- `ghe --help` - Built-in help
 
 ---
 
@@ -157,13 +157,13 @@ For complete documentation, see:
 
 ```bash
 # Show all commands
-ghux --help
+ghe --help
 
 # Check version
-ghux --version
+ghe --version
 ```
 
-**Issues?** https://github.com/dwirx/ghux/issues
+**Issues?** https://github.com/dwirx/ghe/issues
 
 ---
 

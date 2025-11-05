@@ -9,7 +9,15 @@ import {
     detectActiveAccount,
 } from "./flows";
 import { generateSshKey } from "./ssh";
-import { getCurrentGitUser, getCurrentRemoteInfo, isGitRepo } from "./git";
+import {
+    getCurrentGitUser,
+    getCurrentRemoteInfo,
+    isGitRepo,
+    setGlobalGitName,
+    setGlobalGitEmail,
+    getGlobalGitConfig,
+    getAllGitConfig
+} from "./git";
 import {
     showTitle,
     showSection,
@@ -33,7 +41,7 @@ import type { Account } from "./types";
 const PACKAGE_VERSION = "1.0.6";
 
 function showVersion() {
-    console.log(`ghux v${PACKAGE_VERSION}`);
+    console.log(`ghe v${PACKAGE_VERSION}`);
     console.log("Beautiful GitHub Account Switcher");
     console.log(
         "Interactive CLI tool for managing multiple GitHub accounts per repository",
@@ -42,37 +50,37 @@ function showVersion() {
         "Enhanced with automatic active account detection and comprehensive connection testing",
     );
     console.log("");
-    console.log("GitHub: https://github.com/dwirx/ghux");
-    console.log("NPM: https://www.npmjs.com/package/ghux");
+    console.log("GitHub: https://github.com/dwirx/ghe");
+    console.log("NPM: https://www.npmjs.com/package/ghe");
 }
 
 function showHelp() {
-    console.log(`GhUx - GitHub Account Switcher v${PACKAGE_VERSION}`);
+    console.log(`GhE - GitHub Account Switcher v${PACKAGE_VERSION}`);
     console.log("");
     console.log("Usage:");
-    console.log("  ghux                      Start interactive mode");
-    console.log("  ghux --version            Show version information");
-    console.log("  ghux --help               Show this help message");
+    console.log("  ghe                      Start interactive mode");
+    console.log("  ghe --version            Show version information");
+    console.log("  ghe --help               Show this help message");
     console.log("");
     console.log("Clone Repository:");
     console.log(
-        "  ghux <repo-url> [dir]     Clone repository with account selection",
+        "  ghe <repo-url> [dir]     Clone repository with account selection",
     );
     console.log("                            Supports SSH and HTTPS URLs");
     console.log("");
     console.log("Universal Download (RECOMMENDED):");
-    console.log("  ghux dl <url> [options]   Download ANY file from ANY URL");
+    console.log("  ghe dl <url> [options]   Download ANY file from ANY URL");
     console.log(
         "                            Auto-detects: Git repos OR regular URLs",
     );
     console.log(
         "                            Works with: PDFs, ISOs, installers, etc.",
     );
-    console.log("  ghux get <url>            Alias for 'dl' command");
-    console.log("  ghux fetch-file <url>     Alias for 'dl' command");
+    console.log("  ghe get <url>            Alias for 'dl' command");
+    console.log("  ghe fetch-file <url>     Alias for 'dl' command");
     console.log("");
     console.log("Universal Download (Alternative):");
-    console.log("  ghux dlx <url> [options]  Explicit universal downloader");
+    console.log("  ghe dlx <url> [options]  Explicit universal downloader");
     console.log(
         "                            Same as 'dl' but explicit for any URL",
     );
@@ -109,21 +117,32 @@ function showHelp() {
     console.log("  --version <tag>           Specific release version");
     console.log("");
     console.log("CLI Shortcuts:");
-    console.log("  ghux switch <account>     Switch to specific account");
+    console.log("  ghe switch <account>     Switch to specific account");
     console.log(
-        "  ghux quick                Quick switch menu (recent accounts)",
+        "  ghe quick                Quick switch menu (recent accounts)",
     );
-    console.log("  ghux status               Show current repository status");
-    console.log("  ghux list                 List all configured accounts");
-    console.log("  ghux health               Check health of all accounts");
-    console.log("  ghux log                  View activity log");
+    console.log("  ghe status               Show current repository status");
+    console.log("  ghe list                 List all configured accounts");
+    console.log("  ghe health               Check health of all accounts");
+    console.log("  ghe log                  View activity log");
+    console.log("");
+    console.log("Git Config Shortcuts:");
+    console.log(
+        "  ghe setname <name>       Set global git user.name",
+    );
+    console.log(
+        "  ghe setmail <email>      Set global git user.email",
+    );
+    console.log(
+        "  ghe showconfig           Show git configuration",
+    );
     console.log("");
     console.log("Git Shortcuts:");
     console.log(
-        "  ghux shove <message>      Add, commit, and push with confirmation",
+        "  ghe shove <message>      Add, commit, and push with confirmation",
     );
     console.log(
-        "  ghux shovenc              Add, commit (empty msg), push with confirmation",
+        "  ghe shovenc              Add, commit (empty msg), push with confirmation",
     );
     console.log("");
     console.log("Interactive Commands:");
@@ -144,58 +163,67 @@ function showHelp() {
     console.log("");
     console.log("Examples:");
     console.log(
-        "  ghux                                                # Start interactive menu",
+        "  ghe                                                # Start interactive menu",
     );
     console.log(
-        "  ghux https://github.com/user/repo.git               # Clone with HTTPS",
+        "  ghe https://github.com/user/repo.git               # Clone with HTTPS",
     );
     console.log(
-        "  ghux git@github.com:user/repo.git                   # Clone with SSH",
+        "  ghe git@github.com:user/repo.git                   # Clone with SSH",
     );
     console.log(
-        "  ghux https://github.com/user/repo.git myproject     # Clone to 'myproject' dir",
+        "  ghe https://github.com/user/repo.git myproject     # Clone to 'myproject' dir",
     );
     console.log(
-        "  ghux dl https://example.com/file.pdf                # Download any file",
+        "  ghe dl https://example.com/file.pdf                # Download any file",
     );
     console.log(
-        "  ghux dl https://releases.ubuntu.com/22.04/ubuntu.iso   # Download ISO",
+        "  ghe dl https://releases.ubuntu.com/22.04/ubuntu.iso   # Download ISO",
     );
     console.log(
-        "  ghux dl https://github.com/user/repo/blob/main/README.md  # Download from Git repo",
+        "  ghe dl https://github.com/user/repo/blob/main/README.md  # Download from Git repo",
     );
     console.log(
-        "  ghux dl https://omarchy.org/install -o install.sh   # Download script",
+        "  ghe dl https://omarchy.org/install -o install.sh   # Download script",
     );
     console.log(
-        "  ghux dl <url> -o custom.txt                         # Download with custom name",
+        "  ghe dl <url> -o custom.txt                         # Download with custom name",
     );
     console.log(
-        "  ghux dl-dir https://github.com/user/repo/tree/main/src    # Download directory",
+        "  ghe dl-dir https://github.com/user/repo/tree/main/src    # Download directory",
     );
     console.log(
-        '  ghux dl github.com/user/repo --pattern "*.md"       # Download all markdown files',
+        '  ghe dl github.com/user/repo --pattern "*.md"       # Download all markdown files',
     );
     console.log(
-        "  ghux dl-release github.com/user/repo                # Download latest release",
+        "  ghe dl-release github.com/user/repo                # Download latest release",
     );
     console.log(
-        "  ghux switch work                                    # Switch to 'work' account",
+        "  ghe switch work                                    # Switch to 'work' account",
     );
     console.log(
-        "  ghux quick                                          # Quick switch to recent account",
+        "  ghe quick                                          # Quick switch to recent account",
     );
     console.log(
-        "  ghux status                                         # Show current repo status",
+        "  ghe status                                         # Show current repo status",
     );
     console.log(
-        '  ghux shove "fix: bug"                               # Add, commit, and push',
+        '  ghe shove "fix: bug"                               # Add, commit, and push',
     );
     console.log(
-        "  ghux health                                         # Check all accounts health",
+        "  ghe health                                         # Check all accounts health",
+    );
+    console.log(
+        '  ghe setname "John Doe"                             # Set global git user.name',
+    );
+    console.log(
+        "  ghe setmail john@example.com                       # Set global git user.email",
+    );
+    console.log(
+        "  ghe showconfig                                     # Show git configuration",
     );
     console.log("");
-    console.log("Documentation: https://github.com/dwirx/ghux#readme");
+    console.log("Documentation: https://github.com/dwirx/ghe#readme");
 }
 
 async function showRepositoryContext(accounts: Account[]) {
@@ -266,6 +294,88 @@ export async function main() {
 
     if (args.includes("--help") || args.includes("-h")) {
         showHelp();
+        return;
+    }
+
+    // Handle git config commands
+    if (args[0] === "setname") {
+        const name = args.slice(1).join(" ");
+        if (!name) {
+            showError("Please provide a name");
+            console.log("Usage: ghe setname <name>");
+            console.log('Example: ghe setname "John Doe"');
+            return;
+        }
+        try {
+            await setGlobalGitName(name);
+            showSuccess(`Global git user.name set to: ${name}`);
+            const config = await getGlobalGitConfig();
+            console.log("");
+            console.log(colors.muted("Current global config:"));
+            console.log(colors.text(`  user.name  = ${config.userName}`));
+            console.log(colors.text(`  user.email = ${config.userEmail || "(not set)"}`));
+        } catch (err) {
+            showError(`Failed to set git user.name: ${err}`);
+        }
+        return;
+    }
+
+    if (args[0] === "setmail") {
+        const email = args[1];
+        if (!email) {
+            showError("Please provide an email");
+            console.log("Usage: ghe setmail <email>");
+            console.log("Example: ghe setmail john@example.com");
+            return;
+        }
+        try {
+            await setGlobalGitEmail(email);
+            showSuccess(`Global git user.email set to: ${email}`);
+            const config = await getGlobalGitConfig();
+            console.log("");
+            console.log(colors.muted("Current global config:"));
+            console.log(colors.text(`  user.name  = ${config.userName || "(not set)"}`));
+            console.log(colors.text(`  user.email = ${config.userEmail}`));
+        } catch (err) {
+            showError(`Failed to set git user.email: ${err}`);
+        }
+        return;
+    }
+
+    if (args[0] === "showconfig") {
+        try {
+            console.log(colors.primary("📋 Git Configuration"));
+            console.log("");
+
+            const config = await getGlobalGitConfig();
+            if (config.userName || config.userEmail) {
+                console.log(colors.accent("Global Configuration:"));
+                console.log(colors.text(`  user.name  = ${config.userName || "(not set)"}`));
+                console.log(colors.text(`  user.email = ${config.userEmail || "(not set)"}`));
+                console.log("");
+            }
+
+            console.log(colors.muted("Full Configuration:"));
+            console.log(colors.muted("─".repeat(60)));
+            const allConfig = await getAllGitConfig();
+            const lines = allConfig.split("\n").filter(Boolean);
+
+            // Group by section
+            for (const line of lines) {
+                if (line.startsWith("user.")) {
+                    console.log(colors.accent(line));
+                } else if (line.startsWith("core.")) {
+                    console.log(colors.secondary(line));
+                } else if (line.startsWith("credential.")) {
+                    console.log(colors.primary(line));
+                } else {
+                    console.log(colors.muted(line));
+                }
+            }
+            console.log(colors.muted("─".repeat(60)));
+        } catch (err) {
+            showError(`Failed to get git config: ${err}`);
+        }
         return;
     }
 

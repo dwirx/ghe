@@ -1,4 +1,4 @@
-# 📥 GhUx Download Feature Documentation
+# 📥 GhE Download Feature Documentation
 
 Download files and directories directly from Git repositories (GitHub, GitLab, Bitbucket) without cloning.
 
@@ -20,19 +20,19 @@ Download files and directories directly from Git repositories (GitHub, GitLab, B
 
 ```bash
 # Download a single file
-ghux dl https://github.com/dwirx/ghux/blob/main/README.md
+ghe dl https://github.com/dwirx/ghe/blob/main/README.md
 
 # Download with custom name
-ghux dl <url> -o custom-name.md
+ghe dl <url> -o custom-name.md
 
 # Download to specific directory
-ghux dl <url> -d ~/Downloads/
+ghe dl <url> -d ~/Downloads/
 
 # Download entire directory
-ghux dl-dir https://github.com/user/repo/tree/main/src
+ghe dl-dir https://github.com/user/repo/tree/main/src
 
 # Download latest release
-ghux dl-release github.com/user/repo
+ghe dl-release github.com/user/repo
 ```
 
 ---
@@ -43,45 +43,45 @@ ghux dl-release github.com/user/repo
 
 ```bash
 # Standard download
-ghux dl https://github.com/dwirx/ghux/blob/main/CHANGELOG.md
+ghe dl https://github.com/dwirx/ghe/blob/main/CHANGELOG.md
 
 # Using raw URL
-ghux dl https://raw.githubusercontent.com/dwirx/ghux/main/CHANGELOG.md
+ghe dl https://raw.githubusercontent.com/dwirx/ghe/main/CHANGELOG.md
 
 # Shorthand commands
-ghux get <url>
-ghux fetch-file <url>
+ghe get <url>
+ghe fetch-file <url>
 ```
 
 ### Download with Custom Name
 
 ```bash
 # Rename on download
-ghux dl https://github.com/user/repo/blob/main/config.json -o my-config.json
+ghe dl https://github.com/user/repo/blob/main/config.json -o my-config.json
 
 # Using long option
-ghux dl <url> --output custom-name.txt
+ghe dl <url> --output custom-name.txt
 
 # Keep original name (explicit)
-ghux dl <url> -O
+ghe dl <url> -O
 ```
 
 ### Download to Specific Directory
 
 ```bash
 # Download to folder
-ghux dl <url> --dir ./configs/
-ghux dl <url> -d ~/Downloads/
+ghe dl <url> --dir ./configs/
+ghe dl <url> -d ~/Downloads/
 
 # Download and preserve repository path structure
-ghux dl <url> --preserve-path
+ghe dl <url> --preserve-path
 ```
 
 ### Show File Info Before Download
 
 ```bash
 # Preview file details
-ghux dl <url> --info
+ghe dl <url> --info
 
 # Output example:
 # ╭─────────────────────────────────────╮
@@ -91,7 +91,7 @@ ghux dl <url> --info
 # │ Size: 15.2 KB                       │
 # │ Last Modified: 2024-01-15           │
 # │ Platform: github                    │
-# │ Repository: dwirx/ghux              │
+# │ Repository: dwirx/ghe              │
 # │ Branch: main                        │
 # │ URL: https://raw...                 │
 # ╰─────────────────────────────────────╯
@@ -106,13 +106,13 @@ ghux dl <url> --info
 
 ```bash
 # Download several files at once
-ghux dl \
+ghe dl \
   https://github.com/user/repo/blob/main/file1.md \
   https://github.com/user/repo/blob/main/file2.md \
   https://github.com/user/repo/blob/main/file3.md
 
 # Short syntax
-ghux dl user/repo/file1.md user/repo/file2.md user/repo/file3.md
+ghe dl user/repo/file1.md user/repo/file2.md user/repo/file3.md
 ```
 
 ### Download from File List
@@ -131,8 +131,8 @@ https://github.com/user/repo/blob/main/docs/guide.md
 Download from the list:
 
 ```bash
-ghux dl -f filelist.txt
-ghux dl --file-list urls.txt -d ./downloads/
+ghe dl -f filelist.txt
+ghe dl --file-list urls.txt -d ./downloads/
 ```
 
 ---
@@ -143,30 +143,30 @@ ghux dl --file-list urls.txt -d ./downloads/
 
 ```bash
 # Download entire directory
-ghux dl-dir https://github.com/user/repo/tree/main/src
+ghe dl-dir https://github.com/user/repo/tree/main/src
 
 # Short format (assumes github.com)
-ghux dl-dir user/repo/src
+ghe dl-dir user/repo/src
 
 # Download to specific location
-ghux dl-dir <url> --dir ./local-folder/
+ghe dl-dir <url> --dir ./local-folder/
 ```
 
 ### Limit Directory Depth
 
 ```bash
 # Only download 2 levels deep
-ghux dl-dir <url> --depth 2
+ghe dl-dir <url> --depth 2
 
 # Download only top-level files
-ghux dl-dir <url> --depth 1
+ghe dl-dir <url> --depth 1
 ```
 
 ### Preserve Path Structure
 
 ```bash
 # Maintain repository folder structure locally
-ghux dl-dir <url> --preserve-path
+ghe dl-dir <url> --preserve-path
 ```
 
 ---
@@ -177,29 +177,29 @@ ghux dl-dir <url> --preserve-path
 
 ```bash
 # Download all markdown files
-ghux dl github.com/user/repo --pattern "*.md"
+ghe dl github.com/user/repo --pattern "*.md"
 
 # Download all TypeScript files in src directory
-ghux dl github.com/user/repo --pattern "src/**/*.ts"
+ghe dl github.com/user/repo --pattern "src/**/*.ts"
 
 # Download all PDF documentation
-ghux dl github.com/user/repo --pattern "docs/*.pdf"
+ghe dl github.com/user/repo --pattern "docs/*.pdf"
 
 # Multiple patterns with directory download
-ghux dl-dir github.com/user/repo/src --pattern "*.js"
+ghe dl-dir github.com/user/repo/src --pattern "*.js"
 ```
 
 ### Exclude Patterns
 
 ```bash
 # Download JS files but exclude tests
-ghux dl github.com/user/repo --pattern "*.js" --exclude "test/*"
+ghe dl github.com/user/repo --pattern "*.js" --exclude "test/*"
 
 # Download all files except node_modules
-ghux dl-dir github.com/user/repo --pattern "*" --exclude "node_modules/*"
+ghe dl-dir github.com/user/repo --pattern "*" --exclude "node_modules/*"
 
 # Complex filtering
-ghux dl github.com/user/repo \
+ghe dl github.com/user/repo \
   --pattern "src/**/*.ts" \
   --exclude "**/*.test.ts" \
   --exclude "**/*.spec.ts"
@@ -222,7 +222,7 @@ ghux dl github.com/user/repo \
 
 ```bash
 # Download from latest GitHub release
-ghux dl-release github.com/user/repo
+ghe dl-release github.com/user/repo
 
 # Interactive asset selection
 # ╭──────────────────────────────────────╮
@@ -243,28 +243,28 @@ ghux dl-release github.com/user/repo
 
 ```bash
 # Download from specific version
-ghux dl-release github.com/user/repo --version v2.0.0
-ghux dl-release github.com/user/repo -v v1.5.3
+ghe dl-release github.com/user/repo --version v2.0.0
+ghe dl-release github.com/user/repo -v v1.5.3
 ```
 
 ### Filter by Asset Name
 
 ```bash
 # Download only assets containing "linux"
-ghux dl-release github.com/user/repo --asset linux
+ghe dl-release github.com/user/repo --asset linux
 
 # Download specific file
-ghux dl-release github.com/user/repo --asset binary.tar.gz
+ghe dl-release github.com/user/repo --asset binary.tar.gz
 
 # Combine with version
-ghux dl-release github.com/user/repo --version v2.0.0 --asset linux
+ghe dl-release github.com/user/repo --version v2.0.0 --asset linux
 ```
 
 ### Save to Directory
 
 ```bash
 # Download release assets to specific folder
-ghux dl-release github.com/user/repo -d ~/Downloads/releases/
+ghe dl-release github.com/user/repo -d ~/Downloads/releases/
 ```
 
 ---
@@ -275,49 +275,49 @@ ghux dl-release github.com/user/repo -d ~/Downloads/releases/
 
 ```bash
 # Download from develop branch
-ghux dl github.com/user/repo/blob/develop/file.md
+ghe dl github.com/user/repo/blob/develop/file.md
 
 # Using option flag
-ghux dl github.com/user/repo/file.md --branch develop
-ghux dl github.com/user/repo/file.md -b develop
+ghe dl github.com/user/repo/file.md --branch develop
+ghe dl github.com/user/repo/file.md -b develop
 
 # Short syntax with branch
-ghux dl user/repo:develop/file.md
+ghe dl user/repo:develop/file.md
 ```
 
 ### Download from Tag
 
 ```bash
 # Download from specific tag
-ghux dl github.com/user/repo/blob/v1.2.3/CHANGELOG.md
+ghe dl github.com/user/repo/blob/v1.2.3/CHANGELOG.md
 
 # Using option flag
-ghux dl github.com/user/repo/CHANGELOG.md --tag v1.2.3
-ghux dl github.com/user/repo/CHANGELOG.md -t v1.2.3
+ghe dl github.com/user/repo/CHANGELOG.md --tag v1.2.3
+ghe dl github.com/user/repo/CHANGELOG.md -t v1.2.3
 ```
 
 ### Download from Commit Hash
 
 ```bash
 # Download from specific commit
-ghux dl github.com/user/repo/blob/abc123def/file.md
+ghe dl github.com/user/repo/blob/abc123def/file.md
 
 # Using option flag
-ghux dl github.com/user/repo/file.md --commit abc123def
-ghux dl github.com/user/repo/file.md -c abc123def456
+ghe dl github.com/user/repo/file.md --commit abc123def
+ghe dl github.com/user/repo/file.md -c abc123def456
 ```
 
 ### Apply to Directory Downloads
 
 ```bash
 # Download directory from specific branch
-ghux dl-dir github.com/user/repo/src --branch develop
+ghe dl-dir github.com/user/repo/src --branch develop
 
 # Download with pattern from tag
-ghux dl github.com/user/repo --pattern "*.md" --tag v2.0.0
+ghe dl github.com/user/repo --pattern "*.md" --tag v2.0.0
 
 # Release from specific version
-ghux dl-release github.com/user/repo --version v1.5.0
+ghe dl-release github.com/user/repo --version v1.5.0
 ```
 
 ---
@@ -326,7 +326,7 @@ ghux dl-release github.com/user/repo --version v1.5.0
 
 ### Supported Platforms
 
-GhUx supports multiple Git hosting platforms:
+GhE supports multiple Git hosting platforms:
 
 #### GitHub
 
@@ -380,27 +380,27 @@ https://gitea.example.com/user/repo/src/branch/main/file.go
 
 ### URL Auto-Detection
 
-GhUx automatically detects the platform and converts URLs to raw download URLs:
+GhE automatically detects the platform and converts URLs to raw download URLs:
 
 ```bash
 # All these work the same:
-ghux dl https://github.com/user/repo/blob/main/README.md
-ghux dl https://raw.githubusercontent.com/user/repo/main/README.md
-ghux dl github.com/user/repo/blob/main/README.md
-ghux dl user/repo/README.md
+ghe dl https://github.com/user/repo/blob/main/README.md
+ghe dl https://raw.githubusercontent.com/user/repo/main/README.md
+ghe dl github.com/user/repo/blob/main/README.md
+ghe dl user/repo/README.md
 ```
 
 ---
 
 ## 📋 Command Reference
 
-### `ghux dl` / `ghux get` / `ghux fetch-file`
+### `ghe dl` / `ghe get` / `ghe fetch-file`
 
 Download single or multiple files.
 
 **Usage:**
 ```bash
-ghux dl <url> [url2] [url3] [...] [options]
+ghe dl <url> [url2] [url3] [...] [options]
 ```
 
 **Options:**
@@ -420,22 +420,22 @@ ghux dl <url> [url2] [url3] [...] [options]
 
 **Examples:**
 ```bash
-ghux dl https://github.com/user/repo/blob/main/config.json
-ghux dl <url> -o custom.json -d ~/configs/
-ghux dl <url1> <url2> <url3> -d ./downloads/
-ghux dl -f urls.txt --branch develop
-ghux dl github.com/user/repo --pattern "*.md"
+ghe dl https://github.com/user/repo/blob/main/config.json
+ghe dl <url> -o custom.json -d ~/configs/
+ghe dl <url1> <url2> <url3> -d ./downloads/
+ghe dl -f urls.txt --branch develop
+ghe dl github.com/user/repo --pattern "*.md"
 ```
 
 ---
 
-### `ghux dl-dir`
+### `ghe dl-dir`
 
 Download entire directory or files matching pattern.
 
 **Usage:**
 ```bash
-ghux dl-dir <url> [options]
+ghe dl-dir <url> [options]
 ```
 
 **Options:**
@@ -448,21 +448,21 @@ ghux dl-dir <url> [options]
 
 **Examples:**
 ```bash
-ghux dl-dir https://github.com/user/repo/tree/main/src
-ghux dl-dir user/repo/docs --depth 2
-ghux dl-dir github.com/user/repo/src --pattern "*.ts"
-ghux dl-dir <url> --pattern "*.js" --exclude "test/*"
+ghe dl-dir https://github.com/user/repo/tree/main/src
+ghe dl-dir user/repo/docs --depth 2
+ghe dl-dir github.com/user/repo/src --pattern "*.ts"
+ghe dl-dir <url> --pattern "*.js" --exclude "test/*"
 ```
 
 ---
 
-### `ghux dl-release`
+### `ghe dl-release`
 
 Download assets from GitHub releases.
 
 **Usage:**
 ```bash
-ghux dl-release <repo-url> [options]
+ghe dl-release <repo-url> [options]
 ```
 
 **Options:**
@@ -474,10 +474,10 @@ ghux dl-release <repo-url> [options]
 
 **Examples:**
 ```bash
-ghux dl-release github.com/user/repo
-ghux dl-release github.com/user/repo --version v2.0.0
-ghux dl-release github.com/user/repo --asset linux
-ghux dl-release github.com/user/repo --asset binary.tar.gz -d ~/Downloads/
+ghe dl-release github.com/user/repo
+ghe dl-release github.com/user/repo --version v2.0.0
+ghe dl-release github.com/user/repo --asset linux
+ghe dl-release github.com/user/repo --asset binary.tar.gz -d ~/Downloads/
 ```
 
 ---
@@ -488,10 +488,10 @@ ghux dl-release github.com/user/repo --asset binary.tar.gz -d ~/Downloads/
 
 ```bash
 # Download project config
-ghux dl user/repo/package.json -o my-package.json
+ghe dl user/repo/package.json -o my-package.json
 
 # Download multiple configs
-ghux dl \
+ghe dl \
   user/repo/.eslintrc.json \
   user/repo/.prettierrc.json \
   user/repo/tsconfig.json \
@@ -502,30 +502,30 @@ ghux dl \
 
 ```bash
 # Download all docs without cloning
-ghux dl-dir github.com/user/repo/docs
+ghe dl-dir github.com/user/repo/docs
 
 # Download only markdown files
-ghux dl github.com/user/repo --pattern "docs/**/*.md"
+ghe dl github.com/user/repo --pattern "docs/**/*.md"
 ```
 
 ### 3. Download Build Artifacts
 
 ```bash
 # Download latest release binaries
-ghux dl-release github.com/user/tool
+ghe dl-release github.com/user/tool
 
 # Download specific platform binary
-ghux dl-release github.com/user/tool --asset linux-x64
+ghe dl-release github.com/user/tool --asset linux-x64
 ```
 
 ### 4. Get Example Files
 
 ```bash
 # Download examples directory
-ghux dl-dir github.com/user/library/examples
+ghe dl-dir github.com/user/library/examples
 
 # Download specific examples
-ghux dl \
+ghe dl \
   user/library/examples/basic.js \
   user/library/examples/advanced.js
 ```
@@ -542,17 +542,17 @@ github.com/user/repo/docs/API.md
 EOF
 
 # Download all at once
-ghux dl -f important-files.txt -d ./project-docs/
+ghe dl -f important-files.txt -d ./project-docs/
 ```
 
 ### 6. Download Specific Version
 
 ```bash
 # Download from stable tag
-ghux dl user/repo/config.yml --tag v1.0.0
+ghe dl user/repo/config.yml --tag v1.0.0
 
 # Download from specific commit
-ghux dl user/repo/package.json --commit abc123
+ghe dl user/repo/package.json --commit abc123
 ```
 
 ---
@@ -573,10 +573,10 @@ By default, existing files are not overwritten:
 
 ```bash
 # Skip if file exists (default)
-ghux dl <url>
+ghe dl <url>
 
 # Force overwrite
-ghux dl <url> --overwrite
+ghe dl <url> --overwrite
 ```
 
 ### Unique Filenames
@@ -591,14 +591,14 @@ Multiple files are downloaded in parallel for better performance:
 
 ```bash
 # These download concurrently, not sequentially
-ghux dl file1.md file2.md file3.md file4.md file5.md
+ghe dl file1.md file2.md file3.md file4.md file5.md
 ```
 
 ### Directory Structure Preservation
 
 ```bash
 # Download with original structure
-ghux dl-dir user/repo/src --preserve-path
+ghe dl-dir user/repo/src --preserve-path
 
 # Results in:
 # ./repo/src/index.ts
@@ -625,11 +625,11 @@ ghux dl-dir user/repo/src --preserve-path
 Ensure URL follows supported format:
 ```bash
 # ✓ Good
-ghux dl github.com/user/repo/blob/main/file.md
-ghux dl user/repo/file.md
+ghe dl github.com/user/repo/blob/main/file.md
+ghe dl user/repo/file.md
 
 # ✗ Bad
-ghux dl github.com/user/repo  # Missing file path
+ghe dl github.com/user/repo  # Missing file path
 ```
 
 ### "HTTP 404: Not Found"
@@ -647,20 +647,20 @@ ghux dl github.com/user/repo  # Missing file path
 
 ```bash
 # Show file info to debug
-ghux dl <url> --info
+ghe dl <url> --info
 
 # Try raw URL directly
-ghux dl https://raw.githubusercontent.com/user/repo/main/file.md
+ghe dl https://raw.githubusercontent.com/user/repo/main/file.md
 ```
 
 ---
 
 ## 📚 Related Commands
 
-- `ghux` - Interactive menu
-- `ghux <repo-url>` - Clone repository with account selection
-- `ghux switch` - Switch account for current repo
-- `ghux --help` - Show all commands
+- `ghe` - Interactive menu
+- `ghe <repo-url>` - Clone repository with account selection
+- `ghe switch` - Switch account for current repo
+- `ghe --help` - Show all commands
 
 ---
 
@@ -668,7 +668,7 @@ ghux dl https://raw.githubusercontent.com/user/repo/main/file.md
 
 - [Main README](./README.md)
 - [Changelog](./CHANGELOG.md)
-- [GitHub Repository](https://github.com/dwirx/ghux)
+- [GitHub Repository](https://github.com/dwirx/ghe)
 
 ---
 

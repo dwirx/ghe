@@ -2,7 +2,7 @@
 
 ## Overview
 
-GhUx v1.0.1 introduces intelligent platform auto-detection that automatically identifies and configures the correct git hosting platform (GitHub, GitLab, Bitbucket, Gitea, or custom platforms) based on your repository's remote URL.
+GhE v1.0.1 introduces intelligent platform auto-detection that automatically identifies and configures the correct git hosting platform (GitHub, GitLab, Bitbucket, Gitea, or custom platforms) based on your repository's remote URL.
 
 ---
 
@@ -10,7 +10,7 @@ GhUx v1.0.1 introduces intelligent platform auto-detection that automatically id
 
 ### 🔍 Automatic Platform Detection
 
-GhUx automatically detects the platform when:
+GhE automatically detects the platform when:
 - Adding a new account (detects from current repository)
 - Switching accounts (uses account's configured platform)
 - Testing connections (platform-aware testing)
@@ -61,19 +61,19 @@ https://git.internal.org/user/repo.git
 
 ### 1. Adding New Account
 
-When you add a new account inside a git repository, GhUx automatically detects the platform:
+When you add a new account inside a git repository, GhE automatically detects the platform:
 
 ```bash
 cd ~/projects/company-repo  # GitLab repository
-ghux
+ghe
 
 # Select "➕ Add account"
-# GhUx shows: "📡 Detected platform from current repo: 🦊 GitLab"
+# GhE shows: "📡 Detected platform from current repo: 🦊 GitLab"
 # Platform is pre-selected in the menu
 ```
 
 **What happens:**
-1. GhUx reads the remote URL from `.git/config`
+1. GhE reads the remote URL from `.git/config`
 2. Analyzes URL pattern to identify platform
 3. Extracts custom domain if present
 4. Pre-selects the detected platform in account setup
@@ -81,10 +81,10 @@ ghux
 
 ### 2. Switching Accounts
 
-When switching accounts, GhUx uses the account's configured platform:
+When switching accounts, GhE uses the account's configured platform:
 
 ```bash
-ghux switch work-gitlab
+ghe switch work-gitlab
 ```
 
 **What happens:**
@@ -108,7 +108,7 @@ Account: work-gitlab
 Platform-aware connection testing with specific validation:
 
 ```bash
-ghux
+ghe
 # Select "🧪 Test connection"
 ```
 
@@ -135,7 +135,7 @@ Authenticated successfully to gitlab.company.com
 Health checks automatically use the correct platform:
 
 ```bash
-ghux health
+ghe health
 ```
 
 **For each account:**
@@ -149,7 +149,7 @@ ghux health
 View comprehensive repository information including platform:
 
 ```bash
-ghux status
+ghe status
 ```
 
 **Output:**
@@ -335,7 +335,7 @@ Platform-specific settings pages for SSH keys and tokens:
 
 ## 🔍 Detection Algorithm
 
-GhUx uses a multi-step detection process:
+GhE uses a multi-step detection process:
 
 ### 1. URL Pattern Matching
 ```
@@ -400,21 +400,21 @@ ssh://git@domain.com/path/repo.git → domain.com
 ```bash
 # Company uses GitLab
 cd ~/work/api-server
-ghux
+ghe
 # Add account → Auto-detects GitLab → work-gitlab
 
 # Personal projects on GitHub
 cd ~/personal/portfolio
-ghux
+ghe
 # Add account → Auto-detects GitHub → personal-github
 
 # Client project on Bitbucket
 cd ~/client/website
-ghux
+ghe
 # Add account → Auto-detects Bitbucket → client-bitbucket
 
 # Switch easily between them
-ghux quick  # Shows all with platform icons
+ghe quick  # Shows all with platform icons
 ```
 
 ### Case 2: Self-Hosted GitLab
@@ -425,8 +425,8 @@ git clone git@gitlab.company.com:team/project.git
 cd project
 
 # Add account
-ghux
-# GhUx detects:
+ghe
+# GhE detects:
 # - Platform: GitLab
 # - Domain: gitlab.company.com
 # Pre-selects GitLab and suggests custom domain
@@ -440,8 +440,8 @@ git clone git@github.enterprise.com:org/repo.git
 cd repo
 
 # Add account
-ghux
-# GhUx detects:
+ghe
+# GhE detects:
 # - Platform: GitHub
 # - Domain: github.enterprise.com
 # Works seamlessly with custom domain
@@ -466,7 +466,7 @@ ghux
 **Problem:** GitLab detected as GitHub (or vice versa).
 
 **Solution:**
-1. Edit account: `ghux` → "✏️ Edit account"
+1. Edit account: `ghe` → "✏️ Edit account"
 2. Update platform selection
 3. Set correct custom domain
 4. Test connection to verify
@@ -515,7 +515,7 @@ ghux
 
 2. **Verify platform before pushing:**
    ```bash
-   ghux status  # Check active platform
+   ghe status  # Check active platform
    ```
 
 3. **Use SSH over tokens when possible:**
@@ -525,7 +525,7 @@ ghux
 
 4. **Regular health checks:**
    ```bash
-   ghux health  # Weekly recommended
+   ghe health  # Weekly recommended
    ```
 
 ---
@@ -584,10 +584,10 @@ validatePlatformConfig(config: PlatformConfig): {
 - **Main Documentation:** See README.md
 - **New Features:** See FEATURES_v1.0.1.md
 - **Changelog:** See CHANGELOG.md
-- **GitHub Issues:** https://github.com/dwirx/ghux/issues
+- **GitHub Issues:** https://github.com/dwirx/ghe/issues
 
 ---
 
-**Platform Auto-Detection makes GhUx truly multi-platform! 🚀**
+**Platform Auto-Detection makes GhE truly multi-platform! 🚀**
 
-*No more manual configuration - GhUx adapts to your workflow automatically.*
+*No more manual configuration - GhE adapts to your workflow automatically.*

@@ -1,14 +1,14 @@
 # Debug Instructions for SSH Test Issues
 
 ## Problem
-Bitbucket SSH test succeeds manually but GhUx reports failure.
+Bitbucket SSH test succeeds manually but GhE reports failure.
 
 ## Steps to Debug
 
-### 1. Run GhUx with Debug Output
+### 1. Run GhE with Debug Output
 
 ```bash
-cd ~/experiment/ghux
+cd ~/experiment/ghe
 bun run index.ts
 ```
 
@@ -100,7 +100,7 @@ chmod +x test_ssh.sh
 ## What I Need
 
 Please send me the output from:
-1. Running GhUx test (with `[DEBUG SSH Test]` lines)
+1. Running GhE test (with `[DEBUG SSH Test]` lines)
 2. Running the manual `test_ssh.sh` script above
 
 This will help me identify if:
@@ -128,7 +128,7 @@ If you want Gitea to work, you need to:
    # Should show success message
    ```
 
-4. Test in GhUx again
+4. Test in GhE again
 
 ## Temporary Debug Build
 

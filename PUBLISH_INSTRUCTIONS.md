@@ -1,4 +1,4 @@
-# 🚀 Cara Publish GhUx ke NPM via GitHub Workflow
+# 🚀 Cara Publish GhE ke NPM via GitHub Workflow
 
 ## Metode 1: Auto Publish (Recommended) - Via VERSION File
 
@@ -25,8 +25,8 @@ Workflow `publish-npm.yml` akan otomatis:
 ## Metode 2: Manual Trigger - Via GitHub UI
 
 1. **Buka GitHub Actions**
-   - https://github.com/dwirx/ghux/actions
-   - Pilih workflow "Publish ghux to npm"
+   - https://github.com/dwirx/ghe/actions
+   - Pilih workflow "Publish ghe to npm"
 
 2. **Klik "Run workflow"**
    - Klik tombol "Run workflow" (kanan atas)
@@ -51,7 +51,7 @@ gh auth login
 
 # Trigger workflow
 gh workflow run "publish-npm.yml" \
-  --repo dwirx/ghux \
+  --repo dwirx/ghe \
   --ref main
 ```
 
@@ -75,15 +75,15 @@ Ini akan trigger:
 
 ```bash
 # Cek di NPM registry
-npm view ghux
+npm view ghe
 
 # Install dan test
-npm install -g ghux
-ghux --version
+npm install -g ghe
+ghe --version
 
 # Atau dengan bun
-bun install -g ghux
-ghux --version
+bun install -g ghe
+ghe --version
 ```
 
 ---
@@ -98,7 +98,7 @@ Error: Unable to authenticate with npm
 
 ### Version Already Exists
 ```
-Error: ghux@1.0.0 already exists on npm
+Error: ghe@1.0.0 already exists on npm
 ```
 **Solusi**: Bump version di VERSION file (misal 1.0.1)
 
@@ -112,7 +112,7 @@ Error: Build failed
 
 ## Status Workflows
 
-Cek status di: https://github.com/dwirx/ghux/actions
+Cek status di: https://github.com/dwirx/ghe/actions
 
 - ✅ Hijau = Sukses
 - ❌ Merah = Gagal (klik untuk lihat logs)

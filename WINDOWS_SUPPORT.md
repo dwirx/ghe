@@ -2,7 +2,7 @@
 
 ## Overview
 
-GhSwitch (ghux) is fully compatible with Windows and supports multiple shell environments:
+GhSwitch (ghe) is fully compatible with Windows and supports multiple shell environments:
 - **PowerShell** (recommended)
 - **Command Prompt (CMD)**
 - **Git Bash**
@@ -12,18 +12,18 @@ GhSwitch (ghux) is fully compatible with Windows and supports multiple shell env
 
 ### Option 1: Using npm (Recommended)
 ```powershell
-npm install -g ghux
+npm install -g ghe
 ```
 
 ### Option 2: Using Bun
 ```powershell
-bun install -g ghux
+bun install -g ghe
 ```
 
 ### Option 3: Manual Installation
 ```powershell
-git clone https://github.com/dwirx/ghux.git
-cd ghux
+git clone https://github.com/dwirx/ghe.git
+cd ghe
 bun install
 bun run build
 ```
@@ -37,7 +37,7 @@ GhSwitch automatically detects your shell environment:
 
 To verify detection:
 ```powershell
-ghux info
+ghe info
 ```
 
 ## Windows-Specific Features
@@ -110,7 +110,7 @@ mkdir -Force $env:APPDATA\github-switch
 **Solution:** Run the fix command in PowerShell:
 ```powershell
 # Fix SSH key permissions
-ghux health --fix
+ghe health --fix
 ```
 
 Or manually:
@@ -153,16 +153,16 @@ git --version
 **Run as Administrator (if needed):**
 ```powershell
 # Right-click PowerShell -> "Run as Administrator"
-ghux dl <url>
+ghe dl <url>
 ```
 
 Or change download directory:
 ```powershell
 # Download to current directory
-ghux dl <url> --output ./filename
+ghe dl <url> --output ./filename
 
 # Download to specific folder
-ghux dl <url> --dir D:\Downloads
+ghe dl <url> --dir D:\Downloads
 ```
 
 ## Shell-Specific Tips
@@ -175,7 +175,7 @@ ghux dl <url> --dir D:\Downloads
 notepad $PROFILE
 
 # Add alias (optional)
-Set-Alias -Name gs -Value ghux
+Set-Alias -Name gs -Value ghe
 ```
 
 **Execution Policy:**
@@ -188,23 +188,23 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 **Basic Usage:**
 ```cmd
-ghux add
-ghux switch
-ghux ls
+ghe add
+ghe switch
+ghe ls
 ```
 
 **Creating Aliases:**
 ```cmd
-doskey gs=ghux $*
+doskey gs=ghe $*
 ```
 
 ### Git Bash
 
 **Usage (Unix-like):**
 ```bash
-ghux add
-ghux switch
-ghux ls
+ghe add
+ghe switch
+ghe ls
 ```
 
 Git Bash provides the most Unix-like experience on Windows.
@@ -215,14 +215,14 @@ Git Bash provides the most Unix-like experience on Windows.
 ```bash
 # Use Linux installation method
 curl -fsSL https://bun.sh/install | bash
-bun install -g ghux
+bun install -g ghe
 ```
 
 **Accessing Windows Files:**
 ```bash
 # Windows files are under /mnt/c/
 cd /mnt/c/Users/YourName/projects
-ghux switch
+ghe switch
 ```
 
 ## Environment Variables
@@ -245,16 +245,16 @@ $env:HOME
 
 ### Check Platform Info
 ```powershell
-ghux info
+ghe info
 ```
 
 ### Health Check
 ```powershell
 # Check all accounts
-ghux health
+ghe health
 
 # Detailed output
-ghux health --verbose
+ghe health --verbose
 ```
 
 ### View Logs
@@ -317,7 +317,7 @@ del "$env:APPDATA\github-switch\config.json"
 
 3. **Rotate tokens regularly**: Check expiry with health check
    ```powershell
-   ghux health
+   ghe health
    ```
 
 ## Integration with Windows Tools
@@ -338,7 +338,7 @@ del "$env:APPDATA\github-switch\config.json"
 // settings.json - Add profile
 {
   "name": "PowerShell (GhSwitch)",
-  "commandline": "pwsh.exe -NoExit -Command \"& {ghux ls}\"",
+  "commandline": "pwsh.exe -NoExit -Command \"& {ghe ls}\"",
   "startingDirectory": "%USERPROFILE%"
 }
 ```
@@ -367,14 +367,14 @@ A: Yes, fully compatible with Windows Server 2016+.
 
 If you encounter issues:
 
-1. **Check health**: `ghux health`
-2. **View platform info**: `ghux info`
-3. **Enable verbose logging**: `ghux --verbose`
-4. **Report issues**: https://github.com/dwirx/ghux/issues
+1. **Check health**: `ghe health`
+2. **View platform info**: `ghe info`
+3. **Enable verbose logging**: `ghe --verbose`
+4. **Report issues**: https://github.com/dwirx/ghe/issues
 
 Include this information when reporting bugs:
 ```powershell
-ghux info
+ghe info
 $PSVersionTable.PSVersion
 git --version
 ssh -V

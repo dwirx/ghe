@@ -1,4 +1,4 @@
-# Troubleshooting Guide - GhUx
+# Troubleshooting Guide - GhE
 
 ## SSH Connection Issues
 
@@ -171,7 +171,7 @@ Look for lines like:
 
 If SSH continues to fail, switch to HTTPS with Personal Access Token:
 
-1. In GhUx menu, choose "Add new account"
+1. In GhE menu, choose "Add new account"
 2. Select "Token (HTTPS)"
 3. Generate a Personal Access Token from your Git platform:
    - GitHub: https://github.com/settings/tokens
@@ -187,7 +187,7 @@ HTTPS tokens don't require SSH configuration and often work behind corporate fir
 
 ### Wrong Platform Detected
 
-If GhUx detects the wrong Git platform:
+If GhE detects the wrong Git platform:
 
 1. **Manual Override:** When adding/editing account, select the correct platform from the list
 2. **Custom Domain:** For self-hosted instances (e.g., `gitlab.company.com`), select the platform type and enter custom domain
@@ -200,7 +200,7 @@ If GhUx detects the wrong Git platform:
 
 For GitLab CE/EE, Gitea, or other self-hosted servers:
 
-1. Add account in GhUx
+1. Add account in GhE
 2. When prompted for platform, select the correct type (GitLab, Gitea, etc)
 3. When asked "Is this a custom domain?", select **Yes**
 4. Enter your domain (e.g., `gitlab.company.com`)
@@ -220,7 +220,7 @@ If HTTPS token authentication fails:
    - Bitbucket: Needs repository read/write access
 
 2. **Check token expiration:**
-   - Run `ghux health` to check token status
+   - Run `ghe health` to check token status
    - Regenerate expired tokens on your Git platform
 
 3. **Check credential store:**
@@ -250,27 +250,27 @@ git config --global credential.helper store
 
 ## General Troubleshooting
 
-### Reset GhUx Configuration
+### Reset GhE Configuration
 
 If everything is broken, start fresh:
 
 ```bash
 # Backup first
-cp ~/.config/ghux/config.json ~/.config/ghux/config.json.backup
+cp ~/.config/ghe/config.json ~/.config/ghe/config.json.backup
 
 # Remove config
-rm ~/.config/ghux/config.json
+rm ~/.config/ghe/config.json
 
-# Restart GhUx
-ghux
+# Restart GhE
+ghe
 ```
 
 ### View Activity Log
 
-Check what GhUx has been doing:
+Check what GhE has been doing:
 
 ```bash
-ghux log
+ghe log
 ```
 
 This shows history of account switches, tests, and errors.
@@ -280,9 +280,9 @@ This shows history of account switches, tests, and errors.
 For more detailed output:
 
 ```bash
-# Run GhUx commands and check any error messages carefully
-ghux health    # Check all accounts
-ghux status    # Check current repo status
+# Run GhE commands and check any error messages carefully
+ghe health    # Check all accounts
+ghe status    # Check current repo status
 ```
 
 ---
@@ -291,10 +291,10 @@ ghux status    # Check current repo status
 
 If you're still stuck:
 
-1. **Check Issues:** https://github.com/YOUR_REPO/ghux/issues
+1. **Check Issues:** https://github.com/YOUR_REPO/ghe/issues
 2. **Create Issue:** Provide:
-   - Output of `ghux status`
-   - Output of `ghux health`
+   - Output of `ghe status`
+   - Output of `ghe health`
    - Platform you're using (GitHub/GitLab/etc)
    - Error messages
    - OS and shell (`echo $SHELL`)
@@ -310,7 +310,7 @@ Before reporting an issue, verify:
 - [ ] SSH key is added to Git platform account
 - [ ] Can connect manually: `ssh -T git@github.com`
 - [ ] `~/.ssh/config` has correct Host entry
-- [ ] Platform is correctly detected in GhUx
+- [ ] Platform is correctly detected in GhE
 - [ ] For tokens: token is valid and not expired
 - [ ] For tokens: credential helper is set to "store"
-- [ ] Running latest version: `ghux --version`
+- [ ] Running latest version: `ghe --version`

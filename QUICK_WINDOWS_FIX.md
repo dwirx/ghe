@@ -12,11 +12,11 @@
 **Quick Fix:**
 ```powershell
 # Update to latest version
-npm update -g ghux
+npm update -g ghe
 
 # Or reinstall
-npm uninstall -g ghux
-npm install -g ghux
+npm uninstall -g ghe
+npm install -g ghe
 ```
 
 **Why it happened:** Old version didn't handle Windows paths correctly.
@@ -33,7 +33,7 @@ npm install -g ghux
 **Quick Fix:**
 ```powershell
 # Run health check
-ghux health
+ghe health
 
 # When prompted, answer "Yes" to fix permissions automatically
 ```
@@ -56,16 +56,16 @@ icacls "$env:USERPROFILE\.ssh" /grant:r "$env:USERNAME`:(OI)(CI)F"
 
 **What happened:**
 ```
-'ghux' is not recognized as an internal or external command
+'ghe' is not recognized as an internal or external command
 ```
 
 **Quick Fix:**
 ```powershell
 # Check if installed
-npm list -g ghux
+npm list -g ghe
 
 # Install if missing
-npm install -g ghux
+npm install -g ghe
 
 # Restart terminal
 ```
@@ -121,40 +121,40 @@ winget install Git.Git
 ### For PowerShell Users (Recommended)
 
 ```powershell
-# 1. Install ghux
-npm install -g ghux
+# 1. Install ghe
+npm install -g ghe
 
 # 2. Run compatibility test
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/dwirx/ghux/main/test-windows.ps1" -OutFile "test-windows.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/dwirx/ghe/main/test-windows.ps1" -OutFile "test-windows.ps1"
 powershell -File test-windows.ps1
 
 # 3. Setup first account
-ghux
+ghe
 # Choose: ➕ Add account
 ```
 
 ### For CMD Users
 
 ```cmd
-REM 1. Install ghux
-npm install -g ghux
+REM 1. Install ghe
+npm install -g ghe
 
 REM 2. Run compatibility test
-curl -o test-windows.cmd https://raw.githubusercontent.com/dwirx/ghux/main/test-windows.cmd
+curl -o test-windows.cmd https://raw.githubusercontent.com/dwirx/ghe/main/test-windows.cmd
 test-windows.cmd
 
 REM 3. Setup first account
-ghux
+ghe
 ```
 
 ### For Git Bash Users
 
 ```bash
-# 1. Install ghux
-npm install -g ghux
+# 1. Install ghe
+npm install -g ghe
 
 # 2. Setup first account
-ghux
+ghe
 ```
 
 ---
@@ -164,7 +164,7 @@ ghux
 **Run this anytime you have issues:**
 
 ```powershell
-ghux health
+ghe health
 ```
 
 This will:
@@ -189,11 +189,11 @@ git --version
 # Check SSH
 ssh -V
 
-# Check ghux
-ghux --version
+# Check ghe
+ghe --version
 
 # View platform info
-ghux info
+ghe info
 ```
 
 ---
@@ -202,7 +202,7 @@ ghux info
 
 ### Step 1: Update Everything
 ```powershell
-npm update -g ghux
+npm update -g ghe
 git --version  # Should be 2.x or higher
 node --version # Should be 16.x or higher
 ```
@@ -221,7 +221,7 @@ dir "$env:USERPROFILE\.git-credentials"
 
 ### Step 3: Fix Permissions
 ```powershell
-ghux health
+ghe health
 # Answer "Yes" to fix permissions
 ```
 
@@ -231,14 +231,14 @@ ghux health
 ssh -T git@github.com
 
 # Test HTTPS
-git ls-remote https://github.com/dwirx/ghux
+git ls-remote https://github.com/dwirx/ghe
 ```
 
 ### Step 5: Reinstall (Last Resort)
 ```powershell
-npm uninstall -g ghux
+npm uninstall -g ghe
 npm cache clean --force
-npm install -g ghux
+npm install -g ghe
 ```
 
 ---
@@ -256,7 +256,7 @@ pwsh --version
 
 ### Tip 2: Add to PATH
 ```powershell
-# If ghux not found, check npm global path
+# If ghe not found, check npm global path
 npm config get prefix
 
 # Add to PATH if needed (as Administrator)
@@ -267,7 +267,7 @@ $path = npm config get prefix
 ### Tip 3: Use Aliases
 ```powershell
 # Add to PowerShell profile
-echo "Set-Alias -Name gs -Value ghux" | Out-File -Append $PROFILE
+echo "Set-Alias -Name gs -Value ghe" | Out-File -Append $PROFILE
 
 # Reload profile
 . $PROFILE
@@ -278,7 +278,7 @@ echo "Set-Alias -Name gs -Value ghux" | Out-File -Append $PROFILE
 ### Tip 4: Run as Administrator (if needed)
 ```powershell
 # Right-click PowerShell → "Run as Administrator"
-# Then run ghux commands
+# Then run ghe commands
 ```
 
 ---
@@ -301,13 +301,13 @@ echo "Set-Alias -Name gs -Value ghux" | Out-File -Append $PROFILE
 
 2. **Check version:**
    ```powershell
-   ghux --version
+   ghe --version
    # Should be 1.0.7 or higher
    ```
 
 3. **Report bug:**
-   - Go to: https://github.com/dwirx/ghux/issues
-   - Include output from: `ghux info`
+   - Go to: https://github.com/dwirx/ghe/issues
+   - Include output from: `ghe info`
    - Include error message
    - Mention your Windows version
 
@@ -315,9 +315,9 @@ echo "Set-Alias -Name gs -Value ghux" | Out-File -Append $PROFILE
 
 ## ✅ Success Checklist
 
-- [ ] `ghux --version` works
-- [ ] `ghux info` shows correct platform
-- [ ] `ghux health` shows no errors
+- [ ] `ghe --version` works
+- [ ] `ghe info` shows correct platform
+- [ ] `ghe health` shows no errors
 - [ ] SSH connection test passes
 - [ ] Can switch accounts successfully
 

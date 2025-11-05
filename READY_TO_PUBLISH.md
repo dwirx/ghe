@@ -1,13 +1,13 @@
-# ✅ GhUx v1.0.0 - Ready to Publish!
+# ✅ GhE v1.0.0 - Ready to Publish!
 
 ## 📋 Pre-Publish Checklist
 
 All checks have passed! ✅
 
-- ✅ Package name: `ghux`
+- ✅ Package name: `ghe`
 - ✅ Version: `1.0.0` (consistent across all files)
-- ✅ Repository: `https://github.com/dwirx/ghux`
-- ✅ Binary name: `ghux`
+- ✅ Repository: `https://github.com/dwirx/ghe`
+- ✅ Binary name: `ghe`
 - ✅ No TypeScript errors
 - ✅ Test connection fixed (hostname resolution)
 - ✅ All workflows updated
@@ -28,7 +28,7 @@ All checks have passed! ✅
    - Copy the generated token
 
 2. **Add Token to GitHub Secrets**
-   - Go to: https://github.com/dwirx/ghux/settings/secrets/actions
+   - Go to: https://github.com/dwirx/ghe/settings/secrets/actions
    - Click "New repository secret"
    - Name: `NPM_TOKEN`
    - Value: Paste your NPM token
@@ -52,7 +52,7 @@ git push origin main
 - Syncs version across all files
 - Builds project
 - Publishes to NPM
-- Monitor at: https://github.com/dwirx/ghux/actions
+- Monitor at: https://github.com/dwirx/ghe/actions
 
 ---
 
@@ -70,14 +70,14 @@ git push origin v1.0.0
 - Workflow `release.yml` → Builds binaries for all platforms
 - Workflow `npm-publish.yml` → Publishes to NPM
 - Creates GitHub Release with binaries and checksums
-- Monitor at: https://github.com/dwirx/ghux/actions
+- Monitor at: https://github.com/dwirx/ghe/actions
 
 ---
 
 #### 🖱️ Method 3: Manual Trigger via GitHub UI
 
-1. Go to: https://github.com/dwirx/ghux/actions
-2. Click on "Publish ghux to npm" workflow
+1. Go to: https://github.com/dwirx/ghe/actions
+2. Click on "Publish ghe to npm" workflow
 3. Click "Run workflow" button (top right)
 4. Select branch: `main`
 5. Leave version blank (uses VERSION file)
@@ -97,11 +97,11 @@ gh auth login
 
 # Trigger publish workflow
 gh workflow run "publish-npm.yml" \
-  --repo dwirx/ghux \
+  --repo dwirx/ghe \
   --ref main
 
 # Check status
-gh run list --repo dwirx/ghux
+gh run list --repo dwirx/ghe
 ```
 
 ---
@@ -110,7 +110,7 @@ gh run list --repo dwirx/ghux
 
 ### Check Workflow Status
 
-1. Go to: https://github.com/dwirx/ghux/actions
+1. Go to: https://github.com/dwirx/ghe/actions
 2. Look for the latest workflow run
 3. Click on it to see detailed logs
 4. Wait for green checkmark ✅
@@ -140,43 +140,43 @@ The workflow will:
 
 ```bash
 # View package info
-npm view ghux
+npm view ghe
 
 # Check specific version
-npm view ghux@1.0.0
+npm view ghe@1.0.0
 
 # Check latest version
-npm view ghux version
+npm view ghe version
 ```
 
 ### 2. Test Installation
 
 ```bash
 # Install globally with npm
-npm install -g ghux
+npm install -g ghe
 
 # Or with yarn
-yarn global add ghux
+yarn global add ghe
 
 # Or with bun
-bun install -g ghux
+bun install -g ghe
 
 # Verify installation
-ghux --version
-# Should output: ghux v1.0.0
+ghe --version
+# Should output: ghe v1.0.0
 
 # Test help
-ghux --help
+ghe --help
 
 # Test interactive mode
-ghux
+ghe
 ```
 
 ### 3. Check Package Page
 
-- NPM: https://www.npmjs.com/package/ghux
-- Unpkg: https://unpkg.com/ghux@1.0.0/
-- GitHub: https://github.com/dwirx/ghux
+- NPM: https://www.npmjs.com/package/ghe
+- Unpkg: https://unpkg.com/ghe@1.0.0/
+- GitHub: https://github.com/dwirx/ghe
 
 ---
 
@@ -187,7 +187,7 @@ ghux
 **Cause**: NPM_TOKEN not set or invalid
 
 **Solution**:
-1. Verify token exists: https://github.com/dwirx/ghux/settings/secrets/actions
+1. Verify token exists: https://github.com/dwirx/ghe/settings/secrets/actions
 2. Check token is still valid on NPM
 3. Regenerate token if expired
 
@@ -235,7 +235,7 @@ echo "1.0.1" > VERSION
 Files included in NPM package (via .npmignore):
 - ✅ `index.ts` - Entry point
 - ✅ `src/` - All source code
-- ✅ `ghux.sh` - Shell wrapper
+- ✅ `ghe.sh` - Shell wrapper
 - ✅ `README.md` - Documentation
 - ✅ `CHANGELOG.md` - Version history
 - ✅ `package.json` - Package metadata
@@ -275,14 +275,14 @@ Create announcement post with:
 docker run -it node:20 bash
 
 # Install and test
-npm install -g ghux
-ghux --version
-ghux --help
+npm install -g ghe
+ghe --version
+ghe --help
 ```
 
 ### 4. Monitor Issues
 
-- Watch GitHub issues: https://github.com/dwirx/ghux/issues
+- Watch GitHub issues: https://github.com/dwirx/ghe/issues
 - Check NPM package page for feedback
 - Monitor download stats
 
@@ -327,11 +327,11 @@ git push origin main
 
 ## 🔗 Important Links
 
-- **NPM Package**: https://www.npmjs.com/package/ghux
-- **GitHub Repo**: https://github.com/dwirx/ghux
-- **GitHub Actions**: https://github.com/dwirx/ghux/actions
-- **GitHub Releases**: https://github.com/dwirx/ghux/releases
-- **Issues**: https://github.com/dwirx/ghux/issues
+- **NPM Package**: https://www.npmjs.com/package/ghe
+- **GitHub Repo**: https://github.com/dwirx/ghe
+- **GitHub Actions**: https://github.com/dwirx/ghe/actions
+- **GitHub Releases**: https://github.com/dwirx/ghe/releases
+- **Issues**: https://github.com/dwirx/ghe/issues
 - **NPM Token Management**: https://www.npmjs.com/settings/YOUR_USERNAME/tokens
 
 ---
@@ -340,8 +340,8 @@ git push origin main
 
 - [x] Version set to 1.0.0
 - [x] All files synced (package.json, VERSION, cli.ts)
-- [x] Repository URL updated to dwirx/ghux
-- [x] Package name is ghux
+- [x] Repository URL updated to dwirx/ghe
+- [x] Package name is ghe
 - [x] Test connection fixed
 - [x] No TypeScript errors
 - [x] Workflows updated
@@ -355,6 +355,6 @@ git push origin main
 
 Everything is prepared and ready for publishing!
 
-**Choose your preferred method from above and publish GhUx v1.0.0 to NPM! 🎉**
+**Choose your preferred method from above and publish GhE v1.0.0 to NPM! 🎉**
 
 Good luck with the launch! 🍀

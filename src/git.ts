@@ -193,3 +193,45 @@ export async function cloneRepository(
             ?.replace(/\.git$/, "");
     return dirName;
 }
+
+/**
+ * Set global git user name
+ */
+export async function setGlobalGitName(name: string) {
+    await run(["git", "config", "--global", "user.name", name]);
+}
+
+/**
+ * Set global git user email
+ */
+export async function setGlobalGitEmail(email: string) {
+    await run(["git", "config", "--global", "user.email", email]);
+}
+
+/**
+ * Get global git config
+ */
+export async function getGlobalGitConfig() {
+    try {
+        const userName = await run(["git", "config", "--global", "user.name"]);
+        const userEmail = await run(["git", "config", "--global", "user.email"]);
+        return {
+            userName: userName.trim(),
+            userEmail: userEmail.trim()
+        };
+    } catch {
+        return { userName: "", userEmail: "" };
+    }
+}
+
+/**
+ * Get all git config (global, system, local)
+ */
+export async function getAllGitConfig() {
+    try {
+        const config = await run(["git", "config", "--list"]);
+        return config;
+    } catch (err) {
+        throw new Error(`Failed to get git config: ${err}`);
+    }
+}

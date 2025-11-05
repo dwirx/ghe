@@ -2,13 +2,13 @@
 
 ## Overview
 
-GhUx now includes an automatic update checker that notifies you when a new version is available. This ensures you're always using the latest features and bug fixes.
+GhE now includes an automatic update checker that notifies you when a new version is available. This ensures you're always using the latest features and bug fixes.
 
 ## How It Works
 
 ### Automatic Check on Startup
 
-Every time you run `ghux`, the application automatically checks for updates in the background:
+Every time you run `ghe`, the application automatically checks for updates in the background:
 
 - **Check Interval**: Once every 24 hours (cached)
 - **Non-blocking**: Doesn't slow down the application startup
@@ -34,14 +34,14 @@ When a new version is available, you'll see a beautiful notification box with:
 │  🚀 Update available: 1.0.0 → 2.0.0                   │
 │                                                         │
 │  Run to update:                                         │
-│  npm install -g ghux                                    │
+│  npm install -g ghe                                    │
 │                                                         │
 │  Or with specific package manager:                      │
-│  yarn global add ghux                                   │
-│  pnpm add -g ghux                                       │
-│  bun install -g ghux                                    │
+│  yarn global add ghe                                   │
+│  pnpm add -g ghe                                       │
+│  bun install -g ghe                                    │
 │                                                         │
-│  Changelog: https://github.com/dwirx/ghux/releases     │
+│  Changelog: https://github.com/dwirx/ghe/releases     │
 │                                                         │
 ╰─────────────────────────────────────────────────────────╯
 ```
@@ -50,34 +50,34 @@ When a new version is available, you'll see a beautiful notification box with:
 
 You can manually check for updates at any time using the interactive menu:
 
-1. Run `ghux`
+1. Run `ghe`
 2. Select "🔄 Check for updates" from the main menu
 3. The app will force check (ignoring cache) and show results
 
-## Updating GhUx
+## Updating GhE
 
 ### Using npm (recommended)
 
 ```bash
-npm install -g ghux
+npm install -g ghe
 ```
 
 ### Using yarn
 
 ```bash
-yarn global add ghux
+yarn global add ghe
 ```
 
 ### Using pnpm
 
 ```bash
-pnpm add -g ghux
+pnpm add -g ghe
 ```
 
 ### Using bun
 
 ```bash
-bun install -g ghux
+bun install -g ghe
 ```
 
 ## Configuration
@@ -85,7 +85,7 @@ bun install -g ghux
 The update checker uses these default settings:
 
 - **Update Check Interval**: 24 hours
-- **Cache Location**: `~/.config/configstore/update-notifier-ghux.json`
+- **Cache Location**: `~/.config/configstore/update-notifier-ghe.json`
 - **Network Timeout**: 5 seconds
 - **Show Notification**: Enabled by default
 
@@ -114,7 +114,7 @@ Add this to your `~/.bashrc`, `~/.zshrc`, or equivalent shell config file.
 
 ```bash
 cd ~/.config/configstore/
-rm update-notifier-ghux.json
+rm update-notifier-ghe.json
 ```
 
 Note: The check will resume on next run.
@@ -154,14 +154,14 @@ Note: The check will resume on next run.
 
 - Check your internet connection
 - Verify firewall/proxy settings
-- Try accessing https://registry.npmjs.org/ghux manually
+- Try accessing https://registry.npmjs.org/ghe manually
 
 ### Cache issues
 
 Clear the cache file:
 
 ```bash
-rm ~/.config/configstore/update-notifier-ghux.json
+rm ~/.config/configstore/update-notifier-ghe.json
 ```
 
 ## Related Files
@@ -173,5 +173,5 @@ rm ~/.config/configstore/update-notifier-ghux.json
 ## See Also
 
 - [Changelog](./CHANGELOG.md) - Version history
-- [Installation Guide](./README.md#installation) - How to install GhUx
-- [GitHub Releases](https://github.com/dwirx/ghux/releases) - Release notes
+- [Installation Guide](./README.md#installation) - How to install GhE
+- [GitHub Releases](https://github.com/dwirx/ghe/releases) - Release notes

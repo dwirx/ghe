@@ -1,4 +1,4 @@
-# ✅ GhUx v1.0.6 - Success Report
+# ✅ GhE v1.0.6 - Success Report
 
 ## 🎉 Deployment Successful!
 
@@ -35,7 +35,7 @@
 
 ### 1. Universal Download System
 
-#### Main Command: `ghux dl`
+#### Main Command: `ghe dl`
 - ✅ Download ANY file from ANY URL
 - ✅ Smart auto-detection (Git repos vs regular URLs)
 - ✅ No thinking required - just paste URL!
@@ -231,31 +231,31 @@ URL Input → Auto-Detection → Appropriate Handler
 ### Basic Usage
 ```bash
 # Download any file
-ghux dl https://example.com/document.pdf
+ghe dl https://example.com/document.pdf
 
 # Download with custom name
-ghux dl https://example.com/file.pdf -o my-file.pdf
+ghe dl https://example.com/file.pdf -o my-file.pdf
 
 # Download to directory
-ghux dl https://example.com/ubuntu.iso -d ~/ISOs/
+ghe dl https://example.com/ubuntu.iso -d ~/ISOs/
 ```
 
 ### Real-World Examples
 ```bash
 # Download Linux ISO
-ghux dl https://releases.ubuntu.com/22.04/ubuntu.iso
+ghe dl https://releases.ubuntu.com/22.04/ubuntu.iso
 
 # Download installation script
-ghux dl https://omarchy.org/install -o install.sh
+ghe dl https://omarchy.org/install -o install.sh
 
 # Download PDF
-ghux dl https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf
+ghe dl https://hostnezt.com/cssfiles/general/the-psychology-of-money.pdf
 
 # Download from GitHub
-ghux dl https://github.com/user/repo/blob/main/README.md
+ghe dl https://github.com/user/repo/blob/main/README.md
 
 # Download with authentication
-ghux dl https://api.example.com/file.pdf -H "Authorization: Bearer TOKEN"
+ghe dl https://api.example.com/file.pdf -H "Authorization: Bearer TOKEN"
 ```
 
 ### Advanced Usage
@@ -267,13 +267,13 @@ https://example.com/document.pdf
 https://releases.ubuntu.com/ubuntu.iso
 EOF
 
-ghux dl -f downloads.txt -d ~/Downloads/
+ghe dl -f downloads.txt -d ~/Downloads/
 
 # Download with pattern
-ghux dl github.com/user/repo --pattern "*.md"
+ghe dl github.com/user/repo --pattern "*.md"
 
 # Download directory
-ghux dl-dir https://github.com/user/repo/tree/main/src
+ghe dl-dir https://github.com/user/repo/tree/main/src
 ```
 
 ---
@@ -429,15 +429,15 @@ ghux dl-dir https://github.com/user/repo/tree/main/src
 ## 💬 Feedback & Support
 
 ### GitHub Repository
-- **URL**: https://github.com/dwirx/ghux
+- **URL**: https://github.com/dwirx/ghe
 - **Status**: ✅ Updated to v1.0.6
 - **Commit**: 1bea192
 - **Branch**: main
 
 ### NPM Package
-- **Name**: ghux
+- **Name**: ghe
 - **Version**: 1.0.6 (ready to publish)
-- **URL**: https://www.npmjs.com/package/ghux
+- **URL**: https://www.npmjs.com/package/ghe
 
 ### Documentation
 - All guides available in repository
@@ -461,7 +461,7 @@ ghux dl-dir https://github.com/user/repo/tree/main/src
 
 ## 🎊 Conclusion
 
-**GhUx v1.0.6 has been successfully developed and deployed!**
+**GhE v1.0.6 has been successfully developed and deployed!**
 
 ### What We Built
 - 🚀 **Universal downloader** that replaces curl/wget
@@ -473,7 +473,7 @@ ghux dl-dir https://github.com/user/repo/tree/main/src
 ### What Users Can Do Now
 ```bash
 # Download ANYTHING from ANYWHERE
-ghux dl <any-url>
+ghe dl <any-url>
 
 # No thinking required!
 # - Paste GitHub URL → Downloads from Git repo
@@ -484,14 +484,14 @@ ghux dl <any-url>
 
 ### One Command. Everything. Better.
 
-**Thank you for using GhUx!** 🚀
+**Thank you for using GhE!** 🚀
 
 ---
 
-**GhUx Team**  
+**GhE Team**  
 Version 1.0.6  
 January 4, 2025
 
-**Repository**: https://github.com/dwirx/ghux  
+**Repository**: https://github.com/dwirx/ghe  
 **Commit**: 1bea192  
 **Status**: ✅ DEPLOYED

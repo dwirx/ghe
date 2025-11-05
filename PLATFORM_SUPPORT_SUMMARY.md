@@ -1,8 +1,8 @@
-# Platform Support Summary - GhUx v1.0.1
+# Platform Support Summary - GhE v1.0.1
 
 ## ✅ Fully Supported Platforms
 
-All major Git platforms are now **fully tested and working** with GhUx!
+All major Git platforms are now **fully tested and working** with GhE!
 
 | Platform | SSH Auth | Token Auth | Custom Domain | Status |
 |----------|----------|------------|---------------|--------|
@@ -77,7 +77,7 @@ All platforms have correct entries in `~/.ssh/config`:
 
 ### Success Pattern Recognition
 
-GhUx recognizes these patterns as successful SSH authentication:
+GhE recognizes these patterns as successful SSH authentication:
 
 ```regex
 /successfully authenticated|Hi\s+.+! You've successfully authenticated|Welcome to GitLab|logged in as|authenticated via|You can use git|Hi there,/i
@@ -92,7 +92,7 @@ This regex matches:
 
 ### Platform Detection
 
-GhUx auto-detects platform from git remote URL:
+GhE auto-detects platform from git remote URL:
 
 ```typescript
 // Examples:
@@ -129,7 +129,7 @@ Host gitlab.com
 
 ```bash
 # GitHub Account
-ghux
+ghe
 → Add new account
 → SSH
 → GitHub
@@ -137,7 +137,7 @@ ghux
 → Configure SSH key...
 
 # GitLab Account (gitlab.com)
-ghux
+ghe
 → Add new account
 → SSH
 → GitLab
@@ -145,7 +145,7 @@ ghux
 → Configure key...
 
 # GitLab Self-Hosted
-ghux
+ghe
 → Add new account
 → SSH
 → GitLab
@@ -154,14 +154,14 @@ ghux
 → Configure key...
 
 # Bitbucket Account
-ghux
+ghe
 → Add new account
 → SSH
 → Bitbucket
 → Configure key...
 
 # Gitea Self-Hosted
-ghux
+ghe
 → Add new account
 → SSH
 → Gitea
@@ -174,12 +174,12 @@ ghux
 
 ```bash
 # Test specific account
-ghux
+ghe
 → Test connection
 → Select account
 
 # Or use health check for all accounts
-ghux health
+ghe health
 ```
 
 ### Switching Between Platforms
@@ -187,13 +187,13 @@ ghux health
 ```bash
 # In a GitHub repo, switch to GitLab
 cd ~/my-project
-ghux
+ghe
 → Switch for current repo
 → Select GitLab account
 # Remote URL changed from github.com to gitlab.com
 
 # Set global default
-ghux
+ghe
 → Switch SSH globally
 → Select preferred account
 ```
@@ -249,7 +249,7 @@ Potential additions for future versions:
 Run the automated test script to verify all platforms:
 
 ```bash
-cd ~/experiment/ghux
+cd ~/experiment/ghe
 ./test_ssh_platforms.sh
 ```
 
@@ -272,19 +272,19 @@ If you encounter issues with any platform:
 
 2. **Run health check**:
    ```bash
-   ghux health
+   ghe health
    ```
 
 3. **Check troubleshooting guide**:
    ```bash
-   cat ~/experiment/ghux/TROUBLESHOOTING.md
+   cat ~/experiment/ghe/TROUBLESHOOTING.md
    ```
 
 4. **Report issue** with:
    - Platform name and URL
    - Output of manual SSH test
-   - Output of `ghux status`
-   - Output of `ghux health`
+   - Output of `ghe status`
+   - Output of `ghe health`
 
 ---
 
@@ -326,7 +326,7 @@ Use this checklist to verify platform support:
 
 ## 🎉 Summary
 
-**GhUx v1.0.1** now has **complete multi-platform support**!
+**GhE v1.0.1** now has **complete multi-platform support**!
 
 All major Git platforms work seamlessly:
 - ✅ GitHub
