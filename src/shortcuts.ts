@@ -410,3 +410,81 @@ export async function listAccounts(): Promise<void> {
 
     console.log("");
 }
+
+/**
+ * Launch lazygit - interactive terminal UI for git operations
+ * Built-in lazygit with auto-download for cross-platform support
+ */
+export async function lazyGit(): Promise<void> {
+    const cwd = process.cwd();
+
+    // Check if we're in a git repository
+    if (!(await isGitRepo(cwd))) {
+        showError("Not in a git repository");
+        showInfo("Navigate to a git repository first");
+        process.exit(1);
+    }
+
+    // Show current account info
+    const cfg = loadConfig();
+    const activeAccount = await detectActiveAccount(cfg.accounts, cwd);
+    const gitUser = await getCurrentGitUser(cwd);
+
+    if (activeAccount) {
+        console.log("");
+        console.log(colors.success(`🚀 Launching lazygit with account: ${activeAccount}`));
+        if (gitUser?.userName) {
+            console.log(colors.muted(`   User: ${gitUser.userName}`));
+        }
+        if (gitUser?.userEmail) {
+            console.log(colors.muted(`   Email: ${gitUser.userEmail}`));
+        }
+        console.log("");
+    } else {
+        console.log("");
+        console.log(colors.warning("⚠️  No GHE account detected for this repository"));
+        console.log(colors.muted("   Launching lazygit with current git config"));
+        console.log("");
+    }
+
+    // Get or download lazygit binary
+    let lazygitPath: string;
+
+    try {
+        const { ensureLazygit, getLazygitVersion } = await import("./lazygitManager");
+        lazygitPath = await ensureLazygit();
+
+        // Show version info
+        const version = await getLazygitVersion(lazygitPath);
+        if (version !== "unknown") {
+            console.log(colors.muted(`   lazygit version: ${version}`));
+        }
+        console.log("");
+    } catch (error: any) {
+        showError(`Failed to setup lazygit: ${error?.message || String(error)}`);
+        process.exit(1);
+    }
+
+    // Launch lazygit in interactive mode
+    const { spawn } = await import("child_process");
+
+    const lazygitProcess = spawn(lazygitPath, [], {
+        cwd,
+        stdio: "inherit",
+    });
+
+    // Wait for lazygit to exit
+    await new Promise<void>((resolve, reject) => {
+        lazygitProcess.on("exit", (code) => {
+            if (code === 0 || code === null) {
+                resolve();
+            } else {
+                reject(new Error(`lazygit exited with code ${code}`));
+            }
+        });
+
+        lazygitProcess.on("error", (err) => {
+            reject(err);
+        });
+    });
+}
