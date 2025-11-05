@@ -1,0 +1,82 @@
+{
+    "name": "ghux",
+    "version": "1.0.7",
+    "description": "Beautiful GitHub Account Switcher - Interactive CLI tool for managing multiple GitHub accounts per repository with health checks, activity logs, and multi-platform support",
+    "module": "index.ts",
+    "type": "module",
+    "keywords": [
+        "github",
+        "git",
+        "account",
+        "switcher",
+        "ssh",
+        "cli",
+        "terminal",
+        "bun"
+    ],
+    "author": "bangunx",
+    "license": "MIT",
+    "homepage": "https://github.com/dwirx/ghux",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dwirx/ghux.git"
+    },
+    "bugs": {
+        "url": "https://github.com/dwirx/ghux/issues"
+    },
+    "bin": {
+        "ghux": "./index.ts"
+    },
+    "files": [
+        "index.ts",
+        "src/**/*",
+        "README.md",
+        "CHANGELOG.md",
+        "ghux.sh"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "engines": {
+        "bun": ">=1.0.0",
+        "node": ">=18.0.0"
+    },
+    "preferGlobal": true,
+    "scripts": {
+        "start": "bun run index.ts",
+        "build": "mkdir -p build && bun build --compile --minify --sourcemap --outfile build/ghux ./index.ts",
+        "build:linux": "mkdir -p build && bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghux ./index.ts",
+        "build:linux-arm": "mkdir -p build && bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghux-linux-arm64 ./index.ts",
+        "build:windows": "mkdir -p build && bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghux.exe ./index.ts",
+        "build:macos": "mkdir -p build && bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghux-macos ./index.ts",
+        "build:macos-arm": "mkdir -p build && bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghux-macos-arm64 ./index.ts",
+        "build:all": "bun run build:linux && bun run build:linux-arm && bun run build:windows && bun run build:macos && bun run build:macos-arm",
+        "release": "./release.sh",
+        "release:draft": "./release.sh --draft",
+        "clean": "rm -f build/* checksums.txt",
+        "prepublishOnly": "chmod +x index.ts"
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "@types/update-notifier": "^6.0.8"
+    },
+    "peerDependencies": {
+        "typescript": "^5"
+    },
+    "optionalDependencies": {
+        "tsx": "^4.0.0"
+    },
+    "dependencies": {
+        "@types/figlet": "^1.7.0",
+        "@types/prompts": "^2.4.9",
+        "boxen": "^8.0.1",
+        "chalk": "^5.6.0",
+        "figlet": "^1.8.2",
+        "gradient-string": "^3.0.0",
+        "kleur": "^4.1.5",
+        "ora": "^8.2.0",
+        "prompts": "^2.4.2",
+        "update-notifier": "^7.3.1"
+    }
+}

@@ -1,0 +1,136 @@
+name: Publish ghux to npm
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'VERSION'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Override version to publish (defaults to VERSION file)'
+        required: false
+        default: ''
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.2.2'
+
+      - name: Determine release version
+        id: version
+        shell: bash
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION_INPUT="${{ github.event.inputs.version }}"
+          elif [ -f VERSION ]; then
+            VERSION_INPUT="$(cat VERSION)"
+          else
+            VERSION_INPUT=""
+          fi
+
+          VERSION_TRIMMED="$(echo "$VERSION_INPUT" | tr -d '\n' | xargs)"
+
+          if [ -z "$VERSION_TRIMMED" ]; then
+            echo "::error::VERSION is empty. Update the VERSION file or supply an input." >&2
+            exit 1
+          fi
+
+          if ! [[ "$VERSION_TRIMMED" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z\.-]+)?$ ]]; then
+            echo "::error::Invalid version format '$VERSION_TRIMMED'. Use semver (e.g. 1.2.3 or 1.2.3-beta.1)." >&2
+            exit 1
+          fi
+
+          echo "Resolved version: $VERSION_TRIMMED"
+          echo "version=$VERSION_TRIMMED" >> "$GITHUB_OUTPUT"
+
+      - name: Sync version metadata
+        shell: bash
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const version = process.env.VERSION;
+          if (!version) {
+            console.error('VERSION environment variable is not set.');
+            process.exit(1);
+          }
+
+          const pkgPath = 'package.json';
+          const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+          if (pkg.version !== version) {
+            pkg.version = version;
+            fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+            console.log(`Updated ${pkgPath} to ${version}`);
+          } else {
+            console.log(`${pkgPath} already at ${version}`);
+          }
+
+          const cliPath = 'src/cli.ts';
+          const cli = fs.readFileSync(cliPath, 'utf8');
+          const versionPattern = /const PACKAGE_VERSION = \"([^\"]+)\";/;
+          const match = versionPattern.exec(cli);
+          if (!match) {
+            console.error('Could not find PACKAGE_VERSION declaration in src/cli.ts');
+            process.exit(1);
+          }
+          if (match[1] === version) {
+            console.log(`${cliPath} already at ${version}`);
+          } else {
+            const updatedCli = cli.replace(versionPattern, `const PACKAGE_VERSION = "${version}";`);
+            fs.writeFileSync(cliPath, updatedCli);
+            console.log(`Updated ${cliPath} to ${version}`);
+          }
+
+          const versionPath = 'VERSION';
+          const currentVersionFile = fs.existsSync(versionPath) ? fs.readFileSync(versionPath, 'utf8').trim() : '';
+          if (currentVersionFile !== version) {
+            fs.writeFileSync(versionPath, version + '\n');
+            console.log(`Normalized ${versionPath}`);
+          }
+          NODE
+
+      - name: Ensure version not published
+        shell: bash
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if npm view ghux@$VERSION >/dev/null 2>&1; then
+            echo "::error::ghux@$VERSION already exists on npm" >&2
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build project
+        run: bun run build
+
+      - name: Publish package to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
+
+      - name: Post-publish summary
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          echo "ghux@$VERSION published to npm." >> $GITHUB_STEP_SUMMARY

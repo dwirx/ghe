@@ -1,0 +1,73 @@
+# Development files
+*.md
+!README.md
+!CHANGELOG.md
+.github/
+.git/
+.gitignore
+
+# Build artifacts
+build/
+*.log
+*.map
+
+# Test files
+test/
+tests/
+*.test.ts
+*.spec.ts
+test-*.sh
+test-*.md
+
+# Documentation (keep only essential)
+AGENTS.md
+BUILD_*.md
+DISTRIBUTION.md
+GITHUB_ACTIONS.md
+INSTALL.md
+RELEASE_*.md
+SETUP_*.md
+PERBAIKAN_*.md
+REBRANDING_*.md
+TEST_CONNECTION_*.md
+test-connection-example.md
+PUBLISH_GUIDE.md
+
+# Scripts
+build.sh
+release.sh
+setup-*.sh
+publish-npm.sh
+install.sh
+install-curl.sh
+test-installation.sh
+
+# Package manager files
+bun.lock
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Homebrew and package managers
+homebrew-formula.rb
+PKGBUILD
+scoop-manifest.json
+
+# Keep only essential files:
+# - index.ts (entry point)
+# - src/ (source code)
+# - ghux.sh (shell wrapper)
+# - README.md (documentation)
+# - CHANGELOG.md (version history)
+# - package.json (npm metadata)
