@@ -1126,11 +1126,27 @@ export async function switchGlobalSshFlow(cfg: AppConfig) {
     }
 
     // Ensure strict permissions and set global host to always use this key
-    ensureKeyPermissions(keyPath);
-    ensureSshConfigBlock(platformHost, keyPath, platformHost);
-    showSuccess(
-        `Updated ~/.ssh/config → Host ${platformIcon} ${platformName} (${platformHost}) using: ${keyPath}`,
-    );
+    try {
+        const permOk = ensureKeyPermissions(keyPath);
+        if (!permOk) {
+            showWarning("Warning: Could not set all file permissions correctly");
+            showInfo(
+                "This may cause SSH authentication issues. Check file permissions manually.",
+            );
+        }
+        ensureSshConfigBlock(platformHost, keyPath, platformHost);
+        showSuccess(
+            `Updated ~/.ssh/config → Host ${platformIcon} ${platformName} (${platformHost}) using: ${keyPath}`,
+        );
+    } catch (error) {
+        showError("Failed to configure SSH");
+        const errorMsg = error instanceof Error ? error.message : String(error);
+        console.log(colors.error(`Error: ${errorMsg}`));
+        showInfo(
+            "\nNote: If you're on Windows, permission setting may take a few seconds.",
+        );
+        return;
+    }
 
     const { doTest } = await prompts({
         type: "confirm",

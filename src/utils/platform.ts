@@ -14,6 +14,35 @@ export const platform = {
     release: os.release(),
 };
 
+// Permission cache to avoid repeated icacls calls on Windows (performance optimization)
+interface PermissionCacheEntry {
+    mode: number;
+    timestamp: number;
+}
+
+const permissionCache = new Map<string, PermissionCacheEntry>();
+const CACHE_TTL = 5000; // Cache for 5 seconds
+
+function getCachedPermission(filepath: string): number | null {
+    const cached = permissionCache.get(filepath);
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+        return cached.mode;
+    }
+    return null;
+}
+
+function setCachedPermission(filepath: string, mode: number): void {
+    permissionCache.set(filepath, { mode, timestamp: Date.now() });
+}
+
+export function clearPermissionCache(filepath?: string): void {
+    if (filepath) {
+        permissionCache.delete(filepath);
+    } else {
+        permissionCache.clear();
+    }
+}
+
 // Detect current shell environment
 export function detectShell(): string {
     if (platform.isWindows) {
@@ -200,44 +229,45 @@ export function setFilePermissions(filepath: string, mode: number): boolean {
     }
 }
 
-// Windows-specific permission handling using icacls
+// Windows-specific permission handling using icacls (optimized with timeout)
 function setWindowsFilePermissions(filepath: string, mode: number): boolean {
     try {
         const { execSync } = require("child_process");
+        const username =
+            process.env.USERNAME || process.env.USER || "Administrator";
+
+        // Timeout for icacls commands (3 seconds) to prevent hanging
+        const timeout = 3000;
 
         // For private keys (mode 0o600 or 0o400), restrict to current user only
         if (mode === 0o600 || mode === 0o400) {
-            // Remove inheritance
-            execSync(`icacls "${filepath}" /inheritance:r`, {
+            // Optimization: Batch both commands together with && to reduce overhead
+            const cmd = `icacls "${filepath}" /inheritance:r /grant:r "${username}:F"`;
+            execSync(cmd, {
                 stdio: "ignore",
+                timeout,
             });
 
-            // Grant full control to current user only
-            const username =
-                process.env.USERNAME || process.env.USER || "Administrator";
-            execSync(`icacls "${filepath}" /grant:r "${username}:F"`, {
-                stdio: "ignore",
-            });
-
+            // Update cache after successful operation
+            clearPermissionCache(filepath);
             return true;
         }
 
         // For public files (mode 0o644), allow read for others
         if (mode === 0o644) {
             // Keep default permissions, just ensure it's readable
+            clearPermissionCache(filepath);
             return true;
         }
 
         // For directories (mode 0o700)
         if (mode === 0o700) {
-            execSync(`icacls "${filepath}" /inheritance:r`, {
+            const cmd = `icacls "${filepath}" /inheritance:r /grant:r "${username}:(OI)(CI)F"`;
+            execSync(cmd, {
                 stdio: "ignore",
+                timeout,
             });
-            const username =
-                process.env.USERNAME || process.env.USER || "Administrator";
-            execSync(`icacls "${filepath}" /grant:r "${username}:(OI)(CI)F"`, {
-                stdio: "ignore",
-            });
+            clearPermissionCache(filepath);
             return true;
         }
 
@@ -247,11 +277,16 @@ function setWindowsFilePermissions(filepath: string, mode: number): boolean {
         try {
             const { execSync } = require("child_process");
             if (mode === 0o600 || mode === 0o400) {
-                // Set read-only attribute
-                execSync(`attrib +R "${filepath}"`, { stdio: "ignore" });
+                // Set read-only attribute with timeout
+                execSync(`attrib +R "${filepath}"`, {
+                    stdio: "ignore",
+                    timeout: 2000,
+                });
             }
+            clearPermissionCache(filepath);
             return true;
         } catch {
+            clearPermissionCache(filepath);
             return false;
         }
     }
@@ -265,8 +300,18 @@ export function getFilePermissions(filepath: string): number | null {
         }
 
         if (platform.isWindows) {
+            // Check cache first to avoid expensive icacls call
+            const cached = getCachedPermission(filepath);
+            if (cached !== null) {
+                return cached;
+            }
+
             // On Windows, check if file is restricted to current user
-            return getWindowsFilePermissions(filepath);
+            const mode = getWindowsFilePermissions(filepath);
+            if (mode !== null) {
+                setCachedPermission(filepath, mode);
+            }
+            return mode;
         } else {
             // Unix-like systems
             const stats = fs.statSync(filepath);
@@ -277,13 +322,14 @@ export function getFilePermissions(filepath: string): number | null {
     }
 }
 
-// Windows-specific permission checking
+// Windows-specific permission checking (optimized with timeout and better parsing)
 function getWindowsFilePermissions(filepath: string): number {
     try {
         const { execSync } = require("child_process");
         const output = execSync(`icacls "${filepath}"`, {
             encoding: "utf8",
             stdio: ["pipe", "pipe", "ignore"],
+            timeout: 3000, // 3 second timeout to prevent hanging
         });
 
         // If only current user has access, approximate as 0o600
@@ -295,12 +341,23 @@ function getWindowsFilePermissions(filepath: string): number {
         let hasOthers = false;
         let hasInheritance = false;
 
+        // Optimized parsing - break early if we find "others"
         for (const line of lines) {
             const trimmed = line.trim();
 
             // Check for inheritance - inherited permissions mean not restricted
             if (trimmed.includes("(I)")) {
                 hasInheritance = true;
+                break; // Early exit - we know it's not restricted
+            }
+
+            if (
+                trimmed.includes("Everyone") ||
+                trimmed.includes("BUILTIN\\Users") ||
+                trimmed.includes("NT AUTHORITY\\Authenticated Users")
+            ) {
+                hasOthers = true;
+                break; // Early exit - we know it's not restricted
             }
 
             if (
@@ -308,13 +365,6 @@ function getWindowsFilePermissions(filepath: string): number {
                 (trimmed.includes(":(F)") || trimmed.includes(":F"))
             ) {
                 hasUserOnly = true;
-            }
-            if (
-                trimmed.includes("Everyone") ||
-                trimmed.includes("BUILTIN\\Users") ||
-                trimmed.includes("NT AUTHORITY\\Authenticated Users")
-            ) {
-                hasOthers = true;
             }
         }
 
@@ -331,7 +381,7 @@ function getWindowsFilePermissions(filepath: string): number {
         // Default to assuming it's readable by others
         return 0o644;
     } catch {
-        // Default to assuming it's readable by others
+        // Default to assuming it's readable by others (safe default)
         return 0o644;
     }
 }

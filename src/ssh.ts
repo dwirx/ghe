@@ -129,13 +129,19 @@ export async function testSshConnection(hostAlias?: string, hostname?: string) {
     }
 
     try {
+        // Reduced timeout from 10s to 5s for faster feedback on Windows
+        // Added ServerAliveInterval to detect dead connections faster
         const { code, stdout, stderr } = await exec([
             "ssh",
             "-T",
             "-o",
             "StrictHostKeyChecking=no",
             "-o",
-            "ConnectTimeout=10",
+            "ConnectTimeout=5",
+            "-o",
+            "ServerAliveInterval=2",
+            "-o",
+            "ServerAliveCountMax=2",
             "-o",
             "BatchMode=yes",
             `git@${host}`,
@@ -187,20 +193,24 @@ export async function testSshConnection(hostAlias?: string, hostname?: string) {
     }
 }
 
-export function ensureKeyPermissions(privateKeyPath: string) {
-    setFilePermissions(privateKeyPath, 0o600);
+export function ensureKeyPermissions(privateKeyPath: string): boolean {
+    const privateOk = setFilePermissions(privateKeyPath, 0o600);
     const pub = privateKeyPath + ".pub";
+    let pubOk = true;
     if (fs.existsSync(pub)) {
-        setFilePermissions(pub, 0o644);
+        pubOk = setFilePermissions(pub, 0o644);
     }
-    ensureSshDirAndConfigPermissions();
+    const dirOk = ensureSshDirAndConfigPermissions();
+    return privateOk && pubOk && dirOk;
 }
 
-export function ensureSshDirAndConfigPermissions() {
-    setFilePermissions(SSH_DIR, 0o700);
+export function ensureSshDirAndConfigPermissions(): boolean {
+    const dirOk = setFilePermissions(SSH_DIR, 0o700);
+    let configOk = true;
     if (fs.existsSync(SSH_CONFIG_PATH)) {
-        setFilePermissions(SSH_CONFIG_PATH, 0o600);
+        configOk = setFilePermissions(SSH_CONFIG_PATH, 0o600);
     }
+    return dirOk && configOk;
 }
 
 export function listSshPrivateKeys() {
