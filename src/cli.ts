@@ -126,6 +126,17 @@ function showHelp() {
         "  ghe shovenc              Add, commit (empty msg), push with confirmation",
     );
     console.log("");
+    console.log("Git Config Commands:");
+    console.log(
+        "  ghe setname <name>       Set global git user.name",
+    );
+    console.log(
+        "  ghe setmail <email>      Set global git user.email",
+    );
+    console.log(
+        "  ghe showconfig           Show all git configuration",
+    );
+    console.log("");
     console.log("Interactive Commands:");
     console.log("  • Add account             Add a new GitHub account");
     console.log(
@@ -193,6 +204,15 @@ function showHelp() {
     );
     console.log(
         "  ghe health                                         # Check all accounts health",
+    );
+    console.log(
+        '  ghe setname "John Doe"                             # Set git user.name globally',
+    );
+    console.log(
+        "  ghe setmail john@example.com                       # Set git user.email globally",
+    );
+    console.log(
+        "  ghe showconfig                                     # Show all git configuration",
     );
     console.log("");
     console.log("Documentation: https://github.com/dwirx/ghe#readme");
