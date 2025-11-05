@@ -1595,7 +1595,7 @@ export async function cloneRepositoryFlow(
             if (clonedDir) {
                 showSuccess(`Repository cloned to: ${clonedDir}`);
                 showInfo(
-                    `Run ${colors.accent("ghux")} inside ${colors.accent(clonedDir)} to configure account`,
+                    `Run ${colors.accent("ghe")} inside ${colors.accent(clonedDir)} to configure account`,
                 );
             } else {
                 showSuccess("Repository cloned successfully");

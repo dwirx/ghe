@@ -3,7 +3,7 @@ import * as path from "path";
 import type { AppConfig } from "./types";
 import { getConfigDirectory, ensureDirectory } from "./utils/platform";
 
-const PRIMARY_CONFIG_DIR = getConfigDirectory("ghup");
+const PRIMARY_CONFIG_DIR = getConfigDirectory("ghe");
 const LEGACY_CONFIG_DIR = getConfigDirectory("github-switch");
 
 const PRIMARY_CONFIG_PATH = path.join(PRIMARY_CONFIG_DIR, "config.json");

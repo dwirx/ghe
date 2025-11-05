@@ -29,7 +29,7 @@ export async function quickSwitch(): Promise<void> {
     }
 
     if (cfg.accounts.length === 0) {
-        showError("No accounts configured. Run 'ghux' to add accounts.");
+        showError("No accounts configured. Run 'ghe' to add accounts.");
         process.exit(1);
     }
 
@@ -249,7 +249,7 @@ export async function shove(message: string): Promise<void> {
 
     if (!message || message.trim() === "") {
         showError("Commit message is required");
-        showInfo("Usage: ghux shove <commit message>");
+        showInfo("Usage: ghe shove <commit message>");
         process.exit(1);
     }
 
@@ -368,7 +368,7 @@ export async function listAccounts(): Promise<void> {
 
     if (cfg.accounts.length === 0) {
         showWarning("No accounts configured");
-        showInfo("Run 'ghux' to add accounts");
+        showInfo("Run 'ghe' to add accounts");
         process.exit(0);
     }
 

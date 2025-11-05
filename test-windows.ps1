@@ -1,8 +1,8 @@
-# Windows Compatibility Test Script for GhSwitch (ghux)
+# Windows Compatibility Test Script for GhSwitch (ghe)
 # This script tests all Windows-specific features and compatibility
 
 Write-Host "════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "  GhSwitch (ghux) - Windows Compatibility Test Suite" -ForegroundColor Yellow
+Write-Host "  GhSwitch (ghe) - Windows Compatibility Test Suite" -ForegroundColor Yellow
 Write-Host "════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
 Write-Host ""
 
@@ -150,7 +150,7 @@ Test-Item "icacls Command" {
 } -SuccessMessage "Available"
 
 # Create test file for permission testing
-$testFile = "$env:TEMP\ghux-test-permissions.txt"
+$testFile = "$env:TEMP\ghe-test-permissions.txt"
 "test" | Out-File -FilePath $testFile -Force
 
 Test-Item "Set User-Only Permissions" {
@@ -164,7 +164,7 @@ Test-Item "Set User-Only Permissions" {
 } -SuccessMessage "icacls works correctly"
 
 Test-Item "Read File Permissions" {
-    $testFile2 = "$env:TEMP\ghux-test-read.txt"
+    $testFile2 = "$env:TEMP\ghe-test-read.txt"
     try {
         "test" | Out-File -FilePath $testFile2 -Force
         $acl = Get-Acl $testFile2
@@ -208,8 +208,8 @@ Test-Item "Internet Connectivity" {
 
 Test-Item "HTTPS Download" {
     try {
-        $testUrl = "https://raw.githubusercontent.com/dwirx/ghux/main/README.md"
-        $testOutput = "$env:TEMP\ghux-test-download.txt"
+        $testUrl = "https://raw.githubusercontent.com/dwirx/ghe/main/README.md"
+        $testOutput = "$env:TEMP\ghe-test-download.txt"
         Invoke-WebRequest -Uri $testUrl -OutFile $testOutput -UseBasicParsing -TimeoutSec 10 -ErrorAction Stop
         $exists = Test-Path $testOutput
         Remove-Item $testOutput -Force -ErrorAction SilentlyContinue
@@ -267,8 +267,8 @@ Test-Item "SSH Config File" {
 
 Test-Item "SSH Key Generation" {
     try {
-        $testKey = "$env:TEMP\ghux-test-key"
-        ssh-keygen -t ed25519 -f $testKey -N '""' -C "test@ghux" 2>&1 | Out-Null
+        $testKey = "$env:TEMP\ghe-test-key"
+        ssh-keygen -t ed25519 -f $testKey -N '""' -C "test@ghe" 2>&1 | Out-Null
         $exists = Test-Path $testKey
         Remove-Item "$testKey*" -Force -ErrorAction SilentlyContinue
         $exists
@@ -291,14 +291,14 @@ Write-Host ""
 Write-Host "10. GhSwitch Installation" -ForegroundColor Yellow
 Write-Host "─────────────────────────────────────────────────────────" -ForegroundColor Gray
 
-Test-Item "ghux Command" {
-    $null -ne (Get-Command ghux -ErrorAction SilentlyContinue)
+Test-Item "ghe Command" {
+    $null -ne (Get-Command ghe -ErrorAction SilentlyContinue)
 } -SuccessMessage "Installed globally"
 
-Test-Item "ghux Version" {
+Test-Item "ghe Version" {
     try {
-        $version = ghux --version 2>&1
-        $version -match "ghux"
+        $version = ghe --version 2>&1
+        $version -match "ghe"
     } catch {
         $false
     }
@@ -355,8 +355,8 @@ if (-not (Get-Command ssh -ErrorAction SilentlyContinue)) {
     Write-Host "    Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0" -ForegroundColor Gray
 }
 
-if (-not (Get-Command ghux -ErrorAction SilentlyContinue)) {
-    Write-Host "  • Install GhSwitch: npm install -g ghux" -ForegroundColor Yellow
+if (-not (Get-Command ghe -ErrorAction SilentlyContinue)) {
+    Write-Host "  • Install GhSwitch: npm install -g ghe" -ForegroundColor Yellow
 }
 
 if ($successRate -ge 90) {

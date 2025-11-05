@@ -10,7 +10,7 @@
 
 ## Langkah 2: Tambahkan Token ke GitHub Secrets
 
-1. Buka repo: https://github.com/dwirx/ghux
+1. Buka repo: https://github.com/dwirx/ghe
 2. Klik "Settings" → "Secrets and variables" → "Actions"
 3. Klik "New repository secret"
 4. Name: `NPM_TOKEN`

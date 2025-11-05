@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Distribution Setup Script for GhUp
+# Distribution Setup Script for GHE
 # Sets up repositories and manifests for various package managers
 
 set -e
@@ -49,20 +49,20 @@ setup_homebrew() {
     print_header "🍺 Setting up Homebrew Tap"
     
     local version=$(get_version)
-    local repo_url="https://github.com/bangunx/homebrew-ghup"
+    local repo_url="https://github.com/bangunx/homebrew-ghe"
     
     print_status "Version: $version"
     print_status "Creating Homebrew formula..."
     
     # Calculate SHA256 for macOS binary
-    local macos_url="https://github.com/bangunx/ghup/releases/download/v${version}/ghup-macos"
+    local macos_url="https://github.com/bangunx/ghe/releases/download/v${version}/ghe-macos"
     local macos_sha256=""
     
     print_warning "Manual steps required for Homebrew:"
     echo "1. Create repository: $repo_url"
-    echo "2. Create Formula/ghup.rb with content from homebrew-formula.rb"
+    echo "2. Create Formula/ghe.rb with content from homebrew-formula.rb"
     echo "3. Update SHA256 hash for macOS binary"
-    echo "4. Test with: brew install bangunx/ghup/ghup"
+    echo "4. Test with: brew install bangunx/ghe/ghe"
     echo ""
 }
 
@@ -77,7 +77,7 @@ setup_aur() {
     
     print_warning "Manual steps required for AUR:"
     echo "1. Create AUR account and SSH key"
-    echo "2. git clone ssh://aur@aur.archlinux.org/ghup-bin.git"
+    echo "2. git clone ssh://aur@aur.archlinux.org/ghe-bin.git"
     echo "3. Copy PKGBUILD to the cloned directory"
     echo "4. Update SHA256 hashes for x86_64 and aarch64 binaries"
     echo "5. makepkg --printsrcinfo > .SRCINFO"
@@ -91,18 +91,18 @@ setup_scoop() {
     print_header "🪣 Setting up Scoop Bucket"
     
     local version=$(get_version)
-    local bucket_url="https://github.com/bangunx/scoop-ghup"
+    local bucket_url="https://github.com/bangunx/scoop-ghe"
     
     print_status "Version: $version"
     print_status "Creating Scoop manifest..."
     
     print_warning "Manual steps required for Scoop:"
     echo "1. Create repository: $bucket_url"
-    echo "2. Create ghup.json with content from scoop-manifest.json"
+    echo "2. Create ghe.json with content from scoop-manifest.json"
     echo "3. Update SHA256 hash for Windows binary"
     echo "4. Test with:"
     echo "   scoop bucket add bangunx $bucket_url"
-    echo "   scoop install ghup"
+    echo "   scoop install ghe"
     echo ""
 }
 
@@ -113,7 +113,7 @@ setup_npm() {
     local version=$(get_version)
     
     print_status "Version: $version"
-    print_status "Package name: ghup"
+    print_status "Package name: ghe"
     
     if npm whoami >/dev/null 2>&1; then
         print_success "Logged into npm as: $(npm whoami)"
@@ -136,7 +136,7 @@ setup_chocolatey() {
     echo "1. Create chocolatey package structure"
     echo "2. Create .nuspec file with metadata"
     echo "3. Create chocolateyinstall.ps1 script"
-    echo "4. Test locally: choco pack && choco install ghup -s ."
+    echo "4. Test locally: choco pack && choco install ghe -s ."
     echo "5. Submit to community repository"
     echo ""
 }
@@ -157,9 +157,9 @@ generate_checklist() {
     echo ""
     echo "Package Manager Setup:"
     echo "□ NPM: ./publish-npm.sh"
-    echo "□ Homebrew: Update Formula/ghup.rb"
+    echo "□ Homebrew: Update Formula/ghe.rb"
     echo "□ AUR: Update PKGBUILD and push to AUR"
-    echo "□ Scoop: Update ghup.json manifest"
+    echo "□ Scoop: Update ghe.json manifest"
     echo "□ Chocolatey: Create and submit package"
     echo ""
     echo "Post-release:"
@@ -215,7 +215,7 @@ main() {
 # Handle arguments
 case "${1:-}" in
     "--help"|"-h")
-        echo "GhUp Distribution Setup Script"
+        echo "GHE Distribution Setup Script"
         echo ""
         echo "Usage: $0 [option]"
         echo ""

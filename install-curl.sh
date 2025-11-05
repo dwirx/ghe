@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# GhUp - One-line Installation Script
-# Usage: curl -fsSL https://raw.githubusercontent.com/bangunx/ghup/main/install-curl.sh | bash
+# GHE - One-line Installation Script
+# Usage: curl -fsSL https://raw.githubusercontent.com/bangunx/ghe/main/install-curl.sh | bash
 
 set -e
 
@@ -15,7 +15,7 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # GitHub repository
-REPO="bangunx/ghup"
+REPO="bangunx/ghe"
 INSTALL_DIR="/usr/local/bin"
 LOCAL_INSTALL_DIR="$HOME/.local/bin"
 
@@ -45,10 +45,10 @@ detect_platform() {
         linux*)
             case "$arch" in
                 x86_64|amd64)
-                    echo "ghup"
+                    echo "ghe"
                     ;;
                 aarch64|arm64)
-                    echo "ghup-linux-arm64"
+                    echo "ghe-linux-arm64"
                     ;;
                 *)
                     print_error "Unsupported architecture: $arch"
@@ -59,10 +59,10 @@ detect_platform() {
         darwin*)
             case "$arch" in
                 x86_64|amd64)
-                    echo "ghup-macos"
+                    echo "ghe-macos"
                     ;;
                 arm64)
-                    echo "ghup-macos-arm64"
+                    echo "ghe-macos-arm64"
                     ;;
                 *)
                     print_error "Unsupported architecture: $arch"
@@ -71,7 +71,7 @@ detect_platform() {
             esac
             ;;
         msys*|mingw*|cygwin*)
-            echo "ghup.exe"
+            echo "ghe.exe"
             ;;
         *)
             print_error "Unsupported operating system: $os"
@@ -100,7 +100,7 @@ show_banner() {
 }
 
 # Main installation function
-install_ghup() {
+install_ghe() {
     show_banner
     
     # Detect platform
@@ -144,13 +144,13 @@ install_ghup() {
     if [ -w "$INSTALL_DIR" ] || [ "$(id -u)" = "0" ]; then
         final_install_dir="$INSTALL_DIR"
         print_status "Installing to $final_install_dir..."
-        cp "$temp_file" "$final_install_dir/ghup"
+        cp "$temp_file" "$final_install_dir/ghe"
     else
         # Fall back to local installation
         final_install_dir="$LOCAL_INSTALL_DIR"
         print_status "Installing to $final_install_dir..."
         mkdir -p "$final_install_dir"
-        cp "$temp_file" "$final_install_dir/ghup"
+        cp "$temp_file" "$final_install_dir/ghe"
         
         # Check if ~/.local/bin is in PATH
         if [[ ":$PATH:" != *":$LOCAL_INSTALL_DIR:"* ]]; then
@@ -167,17 +167,17 @@ install_ghup() {
     # Cleanup
     rm -f "$temp_file"
     
-    print_success "GhUp installed successfully!"
+    print_success "GHE installed successfully!"
     
     # Show usage info
     echo ""
     echo -e "${GREEN}🎉 Installation completed!${NC}"
     echo ""
     echo "Usage:"
-    echo "  ${CYAN}ghup${NC}          # Run from anywhere"
+    echo "  ${CYAN}ghe${NC}          # Run from anywhere"
     echo ""
     echo "Get started:"
-    echo "  1. Run: ${CYAN}ghup${NC}"
+    echo "  1. Run: ${CYAN}ghe${NC}"
     echo "  2. Add your GitHub accounts"
     echo "  3. Switch between accounts in your repositories"
     echo ""
@@ -207,22 +207,22 @@ check_dependencies() {
 # Main execution
 main() {
     check_dependencies
-    install_ghup
+    install_ghe
 }
 
 # Handle script arguments
 case "${1:-}" in
     --help|-h)
-        echo "GhUp One-line Installation Script"
+        echo "GHE One-line Installation Script"
         echo ""
-        echo "Usage: curl -fsSL https://raw.githubusercontent.com/bangunx/ghup/main/install-curl.sh | bash"
+        echo "Usage: curl -fsSL https://raw.githubusercontent.com/bangunx/ghe/main/install-curl.sh | bash"
         echo ""
         echo "This script automatically detects your platform and installs"
-        echo "the appropriate GhUp binary to /usr/local/bin or ~/.local/bin"
+        echo "the appropriate GHE binary to /usr/local/bin or ~/.local/bin"
         exit 0
         ;;
     --version|-v)
-        echo "GhUp Installation Script v2.0.0"
+        echo "GHE Installation Script v2.0.0"
         exit 0
         ;;
     *)

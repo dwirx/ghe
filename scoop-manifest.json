@@ -1,15 +1,15 @@
 {
     "version": "1.2.0",
     "description": "Beautiful GitHub Account Switcher - Interactive CLI tool for managing multiple GitHub accounts",
-    "homepage": "https://github.com/bangunx/ghup",
+    "homepage": "https://github.com/dwirx/ghe",
     "license": "MIT",
-    "url": "https://github.com/bangunx/ghup/releases/download/v1.2.0/ghup.exe",
+    "url": "https://github.com/dwirx/ghe/releases/download/v1.2.0/ghe.exe",
     "hash": "REPLACE_WITH_ACTUAL_SHA256",
-    "bin": "ghup.exe",
+    "bin": "ghe.exe",
     "checkver": {
-        "github": "https://github.com/bangunx/ghup"
+        "github": "https://github.com/dwirx/ghe"
     },
     "autoupdate": {
-        "url": "https://github.com/bangunx/ghup/releases/download/v$version/ghup.exe"
+        "url": "https://github.com/dwirx/ghe/releases/download/v$version/ghe.exe"
     }
 }

@@ -42,7 +42,7 @@ function loadFigletFont(text: string, preferredFont: string = "ANSI Shadow"): st
     }
   }
 
-  // Ultimate fallback - manual ASCII art for GhUx
+  // Ultimate fallback - manual ASCII art for GHE
   return `
   ██████╗ ██╗  ██╗██╗   ██╗██╗  ██╗
  ██╔════╝ ██║  ██║██║   ██║╚██╗██╔╝
@@ -53,7 +53,7 @@ function loadFigletFont(text: string, preferredFont: string = "ANSI Shadow"): st
 }
 
 // Enhanced title with figlet and gradient
-export function showTitle(text: string = "GhUx") {
+export function showTitle(text: string = "GHE") {
   const figletText = loadFigletFont(text);
   console.log(gradients.primary(figletText));
   console.log(colors.muted("✨ Beautiful GitHub Account Switcher ✨\n"));

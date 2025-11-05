@@ -32,28 +32,28 @@ jobs:
 
     - name: Build all platform binaries
       run: |
-        echo "🔨 Building GhUx standalone executables..."
+        echo "🔨 Building GHE standalone executables..."
         mkdir -p build
 
         # Build for Linux x64
         echo "🐧 Building for Linux x64..."
-        bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghux ./index.ts
+        bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghe ./index.ts
 
         # Build for Linux ARM64
         echo "🐧 Building for Linux ARM64..."
-        bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghux-linux-arm64 ./index.ts
+        bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghe-linux-arm64 ./index.ts
 
         # Build for Windows x64
         echo "🪟 Building for Windows x64..."
-        bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghux.exe ./index.ts
+        bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghe.exe ./index.ts
 
         # Build for macOS x64
         echo "🍎 Building for macOS x64..."
-        bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghux-macos ./index.ts
+        bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghe-macos ./index.ts
 
         # Build for macOS ARM64
         echo "🍎 Building for macOS ARM64..."
-        bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghux-macos-arm64 ./index.ts
+        bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghe-macos-arm64 ./index.ts
 
         echo "✅ All builds completed!"
 
@@ -70,10 +70,10 @@ jobs:
       run: |
         if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
           echo "tag_name=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
-          echo "release_name=GhUx ${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+          echo "release_name=GHE ${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
         else
           echo "tag_name=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-          echo "release_name=GhUx ${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          echo "release_name=GHE ${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
         fi
 
     - name: Repository metadata
@@ -91,7 +91,7 @@ jobs:
         tag_name: ${{ steps.release_info.outputs.tag_name }}
         name: ${{ steps.release_info.outputs.release_name }}
         body: |
-          # 🎉 GhUx Release - ${{ steps.release_info.outputs.tag_name }}
+          # 🎉 GHE Release - ${{ steps.release_info.outputs.tag_name }}
 
           **Beautiful GitHub Account Switcher - Standalone Binaries**
 
@@ -101,11 +101,11 @@ jobs:
 
           | Platform | Binary | Size |
           |----------|--------|------|
-          | 🐧 **Linux x64** | [`ghux`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux) | ~100MB |
-          | 🐧 **Linux ARM64** | [`ghux-linux-arm64`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux-linux-arm64) | ~93MB |
-          | 🪟 **Windows x64** | [`ghux.exe`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux.exe) | ~114MB |
-          | 🍎 **macOS Intel** | [`ghux-macos`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux-macos) | ~64MB |
-          | 🍎 **macOS Apple Silicon** | [`ghux-macos-arm64`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux-macos-arm64) | ~58MB |
+          | 🐧 **Linux x64** | [`ghe`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe) | ~100MB |
+          | 🐧 **Linux ARM64** | [`ghe-linux-arm64`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe-linux-arm64) | ~93MB |
+          | 🪟 **Windows x64** | [`ghe.exe`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe.exe) | ~114MB |
+          | 🍎 **macOS Intel** | [`ghe-macos`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe-macos) | ~64MB |
+          | 🍎 **macOS Apple Silicon** | [`ghe-macos-arm64`](https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe-macos-arm64) | ~58MB |
 
           ## 🚀 Quick Start
 
@@ -116,16 +116,16 @@ jobs:
 
           ### Manual installation:
           1. Download the binary for your platform
-          2. Make it executable: `chmod +x ghux` (Linux/macOS)
-          3. Run: `./ghux`
+          2. Make it executable: `chmod +x ghe` (Linux/macOS)
+          3. Run: `./ghe`
 
           ### Global installation:
           ```bash
           # Linux/macOS
-          sudo cp ghux /usr/local/bin/
+          sudo cp ghe /usr/local/bin/
 
           # Windows (as Administrator)
-          copy ghux.exe C:\Windows\System32\
+          copy ghe.exe C:\Windows\System32\
           ```
 
           ## ✨ Features
@@ -141,8 +141,8 @@ jobs:
           ## 📋 Usage Examples
 
           ```bash
-          # Start GhUx
-          ./ghux
+          # Start GHE
+          ./ghe
 
           # Add a new GitHub account
           # Choose: ➕ Add account
@@ -174,11 +174,11 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          build/ghux
-          build/ghux-linux-arm64
-          build/ghux.exe
-          build/ghux-macos
-          build/ghux-macos-arm64
+          build/ghe
+          build/ghe-linux-arm64
+          build/ghe.exe
+          build/ghe-macos
+          build/ghe-macos-arm64
           checksums.txt
         token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -188,8 +188,8 @@ jobs:
         echo "📦 Binaries uploaded to: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/tag/${{ steps.release_info.outputs.tag_name }}"
         echo ""
         echo "🔗 Download links:"
-        echo "- Linux x64: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux"
-        echo "- Linux ARM64: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux-linux-arm64"
-        echo "- Windows x64: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux.exe"
-        echo "- macOS Intel: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux-macos"
-        echo "- macOS Apple Silicon: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghux-macos-arm64"
+        echo "- Linux x64: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe"
+        echo "- Linux ARM64: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe-linux-arm64"
+        echo "- Windows x64: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe.exe"
+        echo "- macOS Intel: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe-macos"
+        echo "- macOS Apple Silicon: https://github.com/${{ steps.repo.outputs.owner }}/${{ steps.repo.outputs.name }}/releases/download/${{ steps.release_info.outputs.tag_name }}/ghe-macos-arm64"

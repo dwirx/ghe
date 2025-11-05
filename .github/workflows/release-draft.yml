@@ -41,28 +41,28 @@ jobs:
 
     - name: Build all platform binaries
       run: |
-        echo "🔨 Building GhUx v${{ github.event.inputs.version }} for all platforms..."
+        echo "🔨 Building GHE v${{ github.event.inputs.version }} for all platforms..."
         mkdir -p build
 
         # Build for Linux x64
         echo "🐧 Building for Linux x64..."
-        bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghux ./index.ts
+        bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghe ./index.ts
 
         # Build for Linux ARM64
         echo "🐧 Building for Linux ARM64..."
-        bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghux-linux-arm64 ./index.ts
+        bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghe-linux-arm64 ./index.ts
 
         # Build for Windows x64
         echo "🪟 Building for Windows x64..."
-        bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghux.exe ./index.ts
+        bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghe.exe ./index.ts
 
         # Build for macOS x64
         echo "🍎 Building for macOS x64..."
-        bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghux-macos ./index.ts
+        bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghe-macos ./index.ts
 
         # Build for macOS ARM64
         echo "🍎 Building for macOS ARM64..."
-        bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghux-macos-arm64 ./index.ts
+        bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghe-macos-arm64 ./index.ts
 
         echo "✅ All builds completed!"
 
@@ -82,9 +82,9 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: v${{ github.event.inputs.version }}
-        name: GhUx v${{ github.event.inputs.version }}
+        name: GHE v${{ github.event.inputs.version }}
         body: |
-          # 🎉 GhUx v${{ github.event.inputs.version }}
+          # 🎉 GHE v${{ github.event.inputs.version }}
 
           **Beautiful GitHub Account Switcher - Standalone Binaries**
 
@@ -96,38 +96,38 @@ jobs:
 
           | Platform | Binary | Size |
           |----------|--------|------|
-          | 🐧 **Linux x64** | [`ghux`](https://github.com/dwirx/ghux/releases/download/v${{ github.event.inputs.version }}/ghux) | ~100MB |
-          | 🐧 **Linux ARM64** | [`ghux-linux-arm64`](https://github.com/dwirx/ghux/releases/download/v${{ github.event.inputs.version }}/ghux-linux-arm64) | ~93MB |
-          | 🪟 **Windows x64** | [`ghux.exe`](https://github.com/dwirx/ghux/releases/download/v${{ github.event.inputs.version }}/ghux.exe) | ~114MB |
-          | 🍎 **macOS Intel** | [`ghux-macos`](https://github.com/dwirx/ghux/releases/download/v${{ github.event.inputs.version }}/ghux-macos) | ~64MB |
-          | 🍎 **macOS Apple Silicon** | [`ghux-macos-arm64`](https://github.com/dwirx/ghux/releases/download/v${{ github.event.inputs.version }}/ghux-macos-arm64) | ~58MB |
+          | 🐧 **Linux x64** | [`ghe`](https://github.com/dwirx/ghe/releases/download/v${{ github.event.inputs.version }}/ghe) | ~100MB |
+          | 🐧 **Linux ARM64** | [`ghe-linux-arm64`](https://github.com/dwirx/ghe/releases/download/v${{ github.event.inputs.version }}/ghe-linux-arm64) | ~93MB |
+          | 🪟 **Windows x64** | [`ghe.exe`](https://github.com/dwirx/ghe/releases/download/v${{ github.event.inputs.version }}/ghe.exe) | ~114MB |
+          | 🍎 **macOS Intel** | [`ghe-macos`](https://github.com/dwirx/ghe/releases/download/v${{ github.event.inputs.version }}/ghe-macos) | ~64MB |
+          | 🍎 **macOS Apple Silicon** | [`ghe-macos-arm64`](https://github.com/dwirx/ghe/releases/download/v${{ github.event.inputs.version }}/ghe-macos-arm64) | ~58MB |
 
           ## 🚀 Quick Installation
 
           ### One-line installation:
           ```bash
-          curl -fsSL https://raw.githubusercontent.com/dwirx/ghux/main/install.sh | bash
+          curl -fsSL https://raw.githubusercontent.com/dwirx/ghe/main/install.sh | bash
           ```
 
           ### Manual installation:
           ```bash
           # Download binary for your platform
-          wget https://github.com/dwirx/ghux/releases/download/v${{ github.event.inputs.version }}/ghux
+          wget https://github.com/dwirx/ghe/releases/download/v${{ github.event.inputs.version }}/ghe
 
           # Make executable
-          chmod +x ghux
+          chmod +x ghe
 
           # Run
-          ./ghux
+          ./ghe
           ```
 
           ### Global installation:
           ```bash
           # Linux/macOS
-          sudo cp ghux /usr/local/bin/
+          sudo cp ghe /usr/local/bin/
 
           # Windows (as Administrator)
-          copy ghux.exe C:\Windows\System32\
+          copy ghe.exe C:\Windows\System32\
           ```
 
           ## ✨ What's New in v${{ github.event.inputs.version }}
@@ -144,8 +144,8 @@ jobs:
           ## 📋 Usage Examples
 
           ```bash
-          # Start GhUx
-          ./ghux
+          # Start GHE
+          ./ghe
 
           # Navigate through the beautiful menu:
           # ➕ Add account       - Add new GitHub account
@@ -163,7 +163,7 @@ jobs:
           Verify download integrity using checksums:
           ```bash
           # Download checksums
-          wget https://github.com/dwirx/ghux/releases/download/v${{ github.event.inputs.version }}/checksums.txt
+          wget https://github.com/dwirx/ghe/releases/download/v${{ github.event.inputs.version }}/checksums.txt
 
           # Verify
           sha256sum -c checksums.txt
@@ -171,25 +171,25 @@ jobs:
 
           ## 📚 Documentation
 
-          - [📖 Complete Documentation](https://github.com/dwirx/ghux/blob/main/README.md)
-          - [📦 Distribution Guide](https://github.com/dwirx/ghux/blob/main/DISTRIBUTION.md)
-          - [🔧 Build Instructions](https://github.com/dwirx/ghux/blob/main/BUILD_SUMMARY.md)
+          - [📖 Complete Documentation](https://github.com/dwirx/ghe/blob/main/README.md)
+          - [📦 Distribution Guide](https://github.com/dwirx/ghe/blob/main/DISTRIBUTION.md)
+          - [🔧 Build Instructions](https://github.com/dwirx/ghe/blob/main/BUILD_SUMMARY.md)
 
           ## 🐛 Issues & Support
 
-          Found a bug or need help? [Open an issue](https://github.com/dwirx/ghux/issues)
+          Found a bug or need help? [Open an issue](https://github.com/dwirx/ghe/issues)
 
           ---
 
-          **Full Changelog**: https://github.com/dwirx/ghux/compare/v1.0.0...v${{ github.event.inputs.version }}
+          **Full Changelog**: https://github.com/dwirx/ghe/compare/v1.0.0...v${{ github.event.inputs.version }}
         draft: true
         prerelease: ${{ github.event.inputs.prerelease }}
         files: |
-          build/ghux
-          build/ghux-linux-arm64
-          build/ghux.exe
-          build/ghux-macos
-          build/ghux-macos-arm64
+          build/ghe
+          build/ghe-linux-arm64
+          build/ghe.exe
+          build/ghe-macos
+          build/ghe-macos-arm64
           checksums.txt
         token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -197,7 +197,7 @@ jobs:
       run: |
         echo "✅ Release draft created successfully!"
         echo "📦 Version: v${{ github.event.inputs.version }}"
-        echo "🔗 Release URL: https://github.com/dwirx/ghux/releases/tag/v${{ github.event.inputs.version }}"
+        echo "🔗 Release URL: https://github.com/dwirx/ghe/releases/tag/v${{ github.event.inputs.version }}"
         echo ""
         echo "📝 Next steps:"
         echo "1. Review the release draft on GitHub"

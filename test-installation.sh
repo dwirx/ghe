@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Test Installation Script for GhUp
+# Test Installation Script for GHE
 # Tests various installation methods
 
 set -e
@@ -46,19 +46,19 @@ test_curl_install() {
     
     # Download and run install script
     print_status "Downloading install script..."
-    if curl -fsSL https://raw.githubusercontent.com/bangunx/ghup/main/install-curl.sh -o install.sh; then
+    if curl -fsSL https://raw.githubusercontent.com/bangunx/ghe/main/install-curl.sh -o install.sh; then
         print_success "Download successful"
         
         print_status "Running installation..."
         if bash install.sh; then
             print_success "Installation successful"
             
-            # Test if ghup is available
-            if command -v ghup >/dev/null 2>&1; then
-                print_success "ghup command is available"
-                ghup --version || true
+            # Test if ghe is available
+            if command -v ghe >/dev/null 2>&1; then
+                print_success "ghe command is available"
+                ghe --version || true
             else
-                print_warning "ghup command not found in PATH"
+                print_warning "ghe command not found in PATH"
             fi
         else
             print_error "Installation failed"
@@ -97,12 +97,12 @@ test_local_install() {
         print_success "Local installation successful"
         
         # Test if binary works
-        if [ -f ~/.local/bin/ghup ]; then
-            print_success "Binary installed to ~/.local/bin/ghup"
-            ~/.local/bin/ghup --version || true
-        elif [ -f /usr/local/bin/ghup ]; then
-            print_success "Binary installed to /usr/local/bin/ghup"
-            /usr/local/bin/ghup --version || true
+        if [ -f ~/.local/bin/ghe ]; then
+            print_success "Binary installed to ~/.local/bin/ghe"
+            ~/.local/bin/ghe --version || true
+        elif [ -f /usr/local/bin/ghe ]; then
+            print_success "Binary installed to /usr/local/bin/ghe"
+            /usr/local/bin/ghe --version || true
         else
             print_warning "Binary not found in expected locations"
         fi
@@ -129,16 +129,16 @@ test_npm_package() {
     # Check if all required fields are present
     local name=$(node -p "require('./package.json').name" 2>/dev/null || echo "")
     local version=$(node -p "require('./package.json').version" 2>/dev/null || echo "")
-    local bin=$(node -p "require('./package.json').bin?.ghup" 2>/dev/null || echo "")
+    local bin=$(node -p "require('./package.json').bin?.ghe" 2>/dev/null || echo "")
     
     print_status "Package name: $name"
     print_status "Version: $version"
     print_status "Binary path: $bin"
     
-    if [ "$name" = "ghup" ]; then
+    if [ "$name" = "ghe" ]; then
         print_success "Package name is correct"
     else
-        print_error "Package name should be 'ghup'"
+        print_error "Package name should be 'ghe'"
     fi
     
     if [ -n "$version" ]; then
@@ -292,7 +292,7 @@ main() {
 # Handle arguments
 case "${1:-}" in
     "--help"|"-h")
-        echo "GhUp Installation Test Suite"
+        echo "GHE Installation Test Suite"
         echo ""
         echo "Usage: $0 [option]"
         echo ""

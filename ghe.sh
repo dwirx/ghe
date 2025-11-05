@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# GhUx - Cross-shell compatibility wrapper
-# This script ensures GhUx works in bash, zsh, and other shells
+# GHE - Cross-shell compatibility wrapper
+# This script ensures GHE works in bash, zsh, and other shells
 
 set -e
 
@@ -19,7 +19,7 @@ elif command -v node >/dev/null 2>&1; then
     elif command -v ts-node >/dev/null 2>&1; then
         exec ts-node "$SCRIPT_DIR/index.ts" "$@"
     else
-        echo "Error: GhUx requires either:"
+        echo "Error: GHE requires either:"
         echo "  1. Bun runtime (recommended): https://bun.sh"
         echo "  2. Node.js with tsx or ts-node for TypeScript support"
         echo ""
@@ -33,7 +33,7 @@ elif command -v node >/dev/null 2>&1; then
 else
     echo "Error: No compatible JavaScript runtime found."
     echo ""
-    echo "GhUx requires either:"
+    echo "GHE requires either:"
     echo "  1. Bun runtime (recommended): https://bun.sh"
     echo "  2. Node.js with npm/yarn/pnpm"
     echo ""

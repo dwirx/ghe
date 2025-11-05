@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# GhUp Release Script
+# GHE Release Script
 # Creates a new release with standalone binaries
 
 set -e
@@ -41,7 +41,7 @@ show_help() {
     echo "  ╚██████╔╝██║  ██║███████║╚███╔███╔╝██║   ██║   ╚██████╗██║  ██║"
     echo "  ╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝"
     echo ""
-    echo -e "${CYAN}GhUp Release Script${NC}"
+    echo -e "${CYAN}GHE Release Script${NC}"
     echo ""
     echo "Usage: $0 [VERSION] [OPTIONS]"
     echo ""
@@ -92,7 +92,7 @@ check_git_status() {
 build_binaries() {
     local version="$1"
     
-    print_status "Building GhUp v$version for all platforms..."
+    print_status "Building GHE v$version for all platforms..."
     echo ""
     
     # Create build directory
@@ -105,27 +105,27 @@ build_binaries() {
     
     # Build for Linux x64
     print_status "🐧 Building for Linux x64..."
-    bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghup ./index.ts
+    bun build --compile --target=bun-linux-x64 --minify --sourcemap --outfile build/ghe ./index.ts
     print_success "Linux x64 build complete"
     
     # Build for Linux ARM64
     print_status "🐧 Building for Linux ARM64..."
-    bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghup-linux-arm64 ./index.ts
+    bun build --compile --target=bun-linux-arm64 --minify --sourcemap --outfile build/ghe-linux-arm64 ./index.ts
     print_success "Linux ARM64 build complete"
     
     # Build for Windows x64
     print_status "🪟 Building for Windows x64..."
-    bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghup.exe ./index.ts
+    bun build --compile --target=bun-windows-x64 --minify --sourcemap --outfile build/ghe.exe ./index.ts
     print_success "Windows x64 build complete"
     
     # Build for macOS x64
     print_status "🍎 Building for macOS x64..."
-    bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghup-macos ./index.ts
+    bun build --compile --target=bun-darwin-x64 --minify --sourcemap --outfile build/ghe-macos ./index.ts
     print_success "macOS x64 build complete"
     
     # Build for macOS ARM64
     print_status "🍎 Building for macOS ARM64..."
-    bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghup-macos-arm64 ./index.ts
+    bun build --compile --target=bun-darwin-arm64 --minify --sourcemap --outfile build/ghe-macos-arm64 ./index.ts
     print_success "macOS ARM64 build complete"
     
     echo ""
@@ -165,7 +165,7 @@ create_release() {
     # Create release notes
     local release_notes="release_notes_v$version.md"
     cat > "$release_notes" << EOF
-# 🎉 GhUp v$version
+# 🎉 GHE v$version
 
 **Beautiful GitHub Account Switcher - Standalone Binaries**
 
@@ -175,29 +175,29 @@ Choose the appropriate binary for your platform:
 
 | Platform | Binary | Size |
 |----------|--------|------|
-| 🐧 **Linux x64** | \`ghup\` | ~100MB |
-| 🐧 **Linux ARM64** | \`ghup-linux-arm64\` | ~93MB |
-| 🪟 **Windows x64** | \`ghup.exe\` | ~114MB |
-| 🍎 **macOS Intel** | \`ghup-macos\` | ~64MB |
-| 🍎 **macOS Apple Silicon** | \`ghup-macos-arm64\` | ~58MB |
+| 🐧 **Linux x64** | \`ghe\` | ~100MB |
+| 🐧 **Linux ARM64** | \`ghe-linux-arm64\` | ~93MB |
+| 🪟 **Windows x64** | \`ghe.exe\` | ~114MB |
+| 🍎 **macOS Intel** | \`ghe-macos\` | ~64MB |
+| 🍎 **macOS Apple Silicon** | \`ghe-macos-arm64\` | ~58MB |
 
 ## 🚀 Quick Installation
 
 ### One-line installation:
 \`\`\`bash
-curl -fsSL https://raw.githubusercontent.com/bangunx/ghup/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/bangunx/ghe/main/install.sh | bash
 \`\`\`
 
 ### Manual installation:
 \`\`\`bash
 # Download binary for your platform
-wget https://github.com/bangunx/ghup/releases/download/v$version/ghup
+wget https://github.com/bangunx/ghe/releases/download/v$version/ghe
 
 # Make executable
-chmod +x ghup
+chmod +x ghe
 
 # Run
-./ghup
+./ghe
 \`\`\`
 
 ## ✨ Features
@@ -215,7 +215,7 @@ chmod +x ghup
 Verify the integrity of your download using checksums:
 \`\`\`bash
 # Download checksums
-wget https://github.com/bangunx/ghup/releases/download/v$version/checksums.txt
+wget https://github.com/bangunx/ghe/releases/download/v$version/checksums.txt
 
 # Verify
 sha256sum -c checksums.txt
@@ -223,22 +223,22 @@ sha256sum -c checksums.txt
 
 ## 📚 Documentation
 
-- [📖 Complete Documentation](https://github.com/bangunx/ghup/blob/main/README.md)
-- [📦 Distribution Guide](https://github.com/bangunx/ghup/blob/main/DISTRIBUTION.md)
+- [📖 Complete Documentation](https://github.com/bangunx/ghe/blob/main/README.md)
+- [📦 Distribution Guide](https://github.com/bangunx/ghe/blob/main/DISTRIBUTION.md)
 
 ---
 
-**Full Changelog**: https://github.com/bangunx/ghup/compare/v1.0.0...v$version
+**Full Changelog**: https://github.com/bangunx/ghe/compare/v1.0.0...v$version
 EOF
     
     # Build gh command
     local gh_cmd="gh release create v$version"
     
     # Add binaries from build directory
-    gh_cmd="$gh_cmd build/ghup build/ghup-linux-arm64 build/ghup.exe build/ghup-macos build/ghup-macos-arm64 checksums.txt"
+    gh_cmd="$gh_cmd build/ghe build/ghe-linux-arm64 build/ghe.exe build/ghe-macos build/ghe-macos-arm64 checksums.txt"
     
     # Add options
-    gh_cmd="$gh_cmd --title 'GhUp v$version'"
+    gh_cmd="$gh_cmd --title 'GHE v$version'"
     gh_cmd="$gh_cmd --notes-file '$release_notes'"
     
     if [ "$prerelease" = true ]; then
@@ -253,7 +253,7 @@ EOF
     if eval "$gh_cmd"; then
         print_success "GitHub release created successfully!"
         echo ""
-        print_status "Release URL: https://github.com/bangunx/ghup/releases/tag/v$version"
+        print_status "Release URL: https://github.com/bangunx/ghe/releases/tag/v$version"
         
         if [ "$draft" = true ]; then
             print_warning "Release created as DRAFT - don't forget to publish it!"
@@ -322,7 +322,7 @@ main() {
     
     # Show summary
     echo -e "${PURPLE}"
-    echo "🚀 Creating release for GhUp v$version"
+    echo "🚀 Creating release for GHE v$version"
     echo ""
     echo -e "${NC}Configuration:"
     echo "  Version: v$version"

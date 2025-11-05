@@ -3,7 +3,7 @@ import * as path from "path";
 import type { ActivityLogEntry, GitPlatform } from "./types";
 import { getConfigDirectory, ensureDirectory } from "./utils/platform";
 
-const LOG_DIR = getConfigDirectory("ghup");
+const LOG_DIR = getConfigDirectory("ghe");
 const LOG_FILE = path.join(LOG_DIR, "activity.log");
 const MAX_LOG_ENTRIES = 1000; // Keep last 1000 entries
 

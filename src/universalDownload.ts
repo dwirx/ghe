@@ -149,7 +149,7 @@ async function downloadWithProgress(
     try {
         const headers: Record<string, string> = {
             "User-Agent":
-                options.userAgent || "GhUx/1.0.5 (Universal Downloader)",
+                options.userAgent || "GHE/1.0.5 (Universal Downloader)",
             ...options.headers,
         };
 
@@ -254,7 +254,7 @@ async function getUrlInfo(
     try {
         const headers: Record<string, string> = {
             "User-Agent":
-                options.userAgent || "GhUx/1.0.5 (Universal Downloader)",
+                options.userAgent || "GHE/1.0.5 (Universal Downloader)",
             ...options.headers,
         };
 
