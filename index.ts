@@ -339,6 +339,25 @@ if (args.length > 0) {
         process.exit(0);
     }
 
+    if (command === "shortcuts" || command === "shortcut") {
+        // ghe shortcuts [search-query] - show all shortcuts or search
+        // ghe shortcuts -i / --interactive - interactive mode
+        const { showShortcuts } = await import("./src/shortcuts");
+
+        // Check for interactive flag
+        const hasInteractiveFlag = args.includes("-i") || args.includes("--interactive");
+
+        if (hasInteractiveFlag) {
+            // Interactive mode
+            await showShortcuts(undefined, true);
+        } else {
+            // Normal mode with optional search
+            const searchQuery = args.slice(1).filter(arg => !arg.startsWith("-")).join(" ");
+            await showShortcuts(searchQuery || undefined, false);
+        }
+        process.exit(0);
+    }
+
     if (command === "setname") {
         // ghe setname <name> - set global git user.name
         const { setGlobalUserName } = await import("./src/git");
@@ -400,6 +419,307 @@ if (args.length > 0) {
             showSuccess("Git configuration displayed successfully");
         } catch (e: any) {
             showError(`Failed to get git config: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Git Branch Viewing Commands
+    if (command === "gb") {
+        // ghe gb - git branch
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "branch"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to list branches: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gba") {
+        // ghe gba - git branch -a
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "branch", "-a"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to list all branches: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gbr") {
+        // ghe gbr - git branch -r
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "branch", "-r"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to list remote branches: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gsb") {
+        // ghe gsb - git show-branch
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "show-branch"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show branch comparison: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gs") {
+        // ghe gs - git status
+        const { run } = await import("./src/utils/shell");
+        const { showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "status"], { cwd: process.cwd() });
+        } catch (e: any) {
+            showError(`Failed to show status: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Git Branch Creation Commands
+    if (command === "gbn") {
+        // ghe gbn <branch-name> - git branch <branch-name>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe gbn <branch-name>");
+            console.log("Example: ghe gbn feature/new-feature");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "branch", branchName], { cwd: process.cwd() });
+            showSuccess(`Branch '${branchName}' created successfully`);
+        } catch (e: any) {
+            showError(`Failed to create branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gcb") {
+        // ghe gcb <branch-name> - git checkout -b <branch-name>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe gcb <branch-name>");
+            console.log("Example: ghe gcb feature/new-feature");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "checkout", "-b", branchName], { cwd: process.cwd() });
+            showSuccess(`Branch '${branchName}' created and switched to`);
+        } catch (e: any) {
+            showError(`Failed to create and checkout branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gsc") {
+        // ghe gsc <branch-name> - git switch -c <branch-name>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe gsc <branch-name>");
+            console.log("Example: ghe gsc feature/new-feature");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "switch", "-c", branchName], { cwd: process.cwd() });
+            showSuccess(`Branch '${branchName}' created and switched to`);
+        } catch (e: any) {
+            showError(`Failed to create and switch branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Git Branch Switching Commands
+    if (command === "gco") {
+        // ghe gco <branch-name> - git checkout <branch-name>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe gco <branch-name>");
+            console.log("Example: ghe gco main");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "checkout", branchName], { cwd: process.cwd() });
+            showSuccess(`Switched to branch '${branchName}'`);
+        } catch (e: any) {
+            showError(`Failed to checkout branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gsw") {
+        // ghe gsw <branch-name> - git switch <branch-name>
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        if (args.length < 2 || !args[1]) {
+            showError("Please provide a branch name");
+            console.log("Usage: ghe gsw <branch-name>");
+            console.log("Example: ghe gsw main");
+            process.exit(1);
+        }
+
+        try {
+            const branchName = args[1];
+            await run(["git", "switch", branchName], { cwd: process.cwd() });
+            showSuccess(`Switched to branch '${branchName}'`);
+        } catch (e: any) {
+            showError(`Failed to switch branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gback") {
+        // ghe gback - git checkout -
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            await run(["git", "checkout", "-"], { cwd: process.cwd() });
+            showSuccess("Switched to previous branch");
+        } catch (e: any) {
+            showError(`Failed to switch to previous branch: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    // Git Fetch/Pull Commands
+    if (command === "gf") {
+        // ghe gf - git fetch origin
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showInfo } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showInfo("Fetching from origin...");
+            await run(["git", "fetch", "origin"], { cwd: process.cwd() });
+            showSuccess("Fetch completed successfully");
+        } catch (e: any) {
+            showError(`Failed to fetch from origin: ${e?.message || String(e)}`);
+        }
+        process.exit(0);
+    }
+
+    if (command === "gp") {
+        // ghe gp - git pull
+        const { run } = await import("./src/utils/shell");
+        const { showSuccess, showError, showInfo } = await import("./src/utils/ui");
+        const { isGitRepo } = await import("./src/git");
+
+        if (!(await isGitRepo(process.cwd()))) {
+            showError("Not in a git repository");
+            process.exit(1);
+        }
+
+        try {
+            showInfo("Pulling from remote...");
+            await run(["git", "pull"], { cwd: process.cwd() });
+            showSuccess("Pull completed successfully");
+        } catch (e: any) {
+            showError(`Failed to pull from remote: ${e?.message || String(e)}`);
         }
         process.exit(0);
     }

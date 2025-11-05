@@ -53,6 +53,7 @@ function showHelp() {
     console.log("  ghe                      Start interactive mode");
     console.log("  ghe --version            Show version information");
     console.log("  ghe --help               Show this help message");
+    console.log("  ghe shortcuts [-i]       Interactive shortcuts browser with search & execute");
     console.log("");
     console.log("Clone Repository:");
     console.log(
@@ -119,6 +120,12 @@ function showHelp() {
     console.log("  ghe log                  View activity log");
     console.log("  ghe lazy                 Launch lazygit (auto-installs if needed)");
     console.log("");
+    console.log("Shortcuts Browser:");
+    console.log("  ghe shortcuts            Show all available shortcuts");
+    console.log("  ghe shortcuts <query>    Search shortcuts by keyword");
+    console.log("  ghe shortcuts -i         Interactive mode with autocomplete search");
+    console.log("  ghe shortcuts --interactive  Execute shortcuts directly");
+    console.log("");
     console.log("Git Shortcuts:");
     console.log(
         "  ghe shove <message>      Add, commit, and push with confirmation",
@@ -136,6 +143,53 @@ function showHelp() {
     );
     console.log(
         "  ghe showconfig           Show all git configuration",
+    );
+    console.log("");
+    console.log("Git Branch Aliases - View Branches:");
+    console.log(
+        "  ghe gb                   Show local branches (git branch)",
+    );
+    console.log(
+        "  ghe gba                  Show all branches, local + remote (git branch -a)",
+    );
+    console.log(
+        "  ghe gbr                  Show remote branches only (git branch -r)",
+    );
+    console.log(
+        "  ghe gsb                  Show branch comparison (git show-branch)",
+    );
+    console.log(
+        "  ghe gs                   Show git status with current branch",
+    );
+    console.log("");
+    console.log("Git Branch Aliases - Create Branches:");
+    console.log(
+        "  ghe gbn <name>           Create new branch without switching (git branch)",
+    );
+    console.log(
+        "  ghe gcb <name>           Create & switch to new branch (git checkout -b)",
+    );
+    console.log(
+        "  ghe gsc <name>           Create & switch to new branch (git switch -c)",
+    );
+    console.log("");
+    console.log("Git Branch Aliases - Switch Branches:");
+    console.log(
+        "  ghe gco <name>           Switch to branch (git checkout)",
+    );
+    console.log(
+        "  ghe gsw <name>           Switch to branch (git switch)",
+    );
+    console.log(
+        "  ghe gback                Switch to previous branch (git checkout -)",
+    );
+    console.log("");
+    console.log("Git Fetch/Pull Aliases:");
+    console.log(
+        "  ghe gf                   Fetch from origin (git fetch origin)",
+    );
+    console.log(
+        "  ghe gp                   Pull from remote (git pull)",
     );
     console.log("");
     console.log("Interactive Commands:");
@@ -214,6 +268,39 @@ function showHelp() {
     );
     console.log(
         "  ghe showconfig                                     # Show all git configuration",
+    );
+    console.log(
+        "  ghe gb                                             # List local branches",
+    );
+    console.log(
+        "  ghe gba                                            # List all branches (local + remote)",
+    );
+    console.log(
+        "  ghe gcb feature/new-feature                        # Create & switch to new branch",
+    );
+    console.log(
+        "  ghe gco main                                       # Switch to main branch",
+    );
+    console.log(
+        "  ghe gback                                          # Switch to previous branch",
+    );
+    console.log(
+        "  ghe gf                                             # Fetch from origin",
+    );
+    console.log(
+        "  ghe gp                                             # Pull from remote",
+    );
+    console.log(
+        "  ghe shortcuts                                      # Show all available shortcuts",
+    );
+    console.log(
+        "  ghe shortcuts branch                               # Search shortcuts for 'branch'",
+    );
+    console.log(
+        "  ghe shortcuts -i                                   # Interactive mode with search & execute",
+    );
+    console.log(
+        "  ghe shortcuts --interactive                        # Browse and run shortcuts interactively",
     );
     console.log("");
     console.log("Documentation: https://github.com/dwirx/ghe#readme");
