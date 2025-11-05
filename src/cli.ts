@@ -138,6 +138,53 @@ function showHelp() {
         "  ghe showconfig           Show all git configuration",
     );
     console.log("");
+    console.log("Git Branch Aliases - View Branches:");
+    console.log(
+        "  ghe gb                   Show local branches (git branch)",
+    );
+    console.log(
+        "  ghe gba                  Show all branches, local + remote (git branch -a)",
+    );
+    console.log(
+        "  ghe gbr                  Show remote branches only (git branch -r)",
+    );
+    console.log(
+        "  ghe gsb                  Show branch comparison (git show-branch)",
+    );
+    console.log(
+        "  ghe gs                   Show git status with current branch",
+    );
+    console.log("");
+    console.log("Git Branch Aliases - Create Branches:");
+    console.log(
+        "  ghe gbn <name>           Create new branch without switching (git branch)",
+    );
+    console.log(
+        "  ghe gcb <name>           Create & switch to new branch (git checkout -b)",
+    );
+    console.log(
+        "  ghe gsc <name>           Create & switch to new branch (git switch -c)",
+    );
+    console.log("");
+    console.log("Git Branch Aliases - Switch Branches:");
+    console.log(
+        "  ghe gco <name>           Switch to branch (git checkout)",
+    );
+    console.log(
+        "  ghe gsw <name>           Switch to branch (git switch)",
+    );
+    console.log(
+        "  ghe gback                Switch to previous branch (git checkout -)",
+    );
+    console.log("");
+    console.log("Git Fetch/Pull Aliases:");
+    console.log(
+        "  ghe gf                   Fetch from origin (git fetch origin)",
+    );
+    console.log(
+        "  ghe gp                   Pull from remote (git pull)",
+    );
+    console.log("");
     console.log("Interactive Commands:");
     console.log("  • Add account             Add a new GitHub account");
     console.log(
@@ -214,6 +261,27 @@ function showHelp() {
     );
     console.log(
         "  ghe showconfig                                     # Show all git configuration",
+    );
+    console.log(
+        "  ghe gb                                             # List local branches",
+    );
+    console.log(
+        "  ghe gba                                            # List all branches (local + remote)",
+    );
+    console.log(
+        "  ghe gcb feature/new-feature                        # Create & switch to new branch",
+    );
+    console.log(
+        "  ghe gco main                                       # Switch to main branch",
+    );
+    console.log(
+        "  ghe gback                                          # Switch to previous branch",
+    );
+    console.log(
+        "  ghe gf                                             # Fetch from origin",
+    );
+    console.log(
+        "  ghe gp                                             # Pull from remote",
     );
     console.log("");
     console.log("Documentation: https://github.com/dwirx/ghe#readme");
